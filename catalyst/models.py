@@ -101,9 +101,9 @@ class Poem(models.Model):
     emotion = models.CharField(
         max_length=50, default='', choices=EMOTION_CHOICES)
     input_sentiment = models.CharField(
-        max_length=50, default='', null=True, blank=True)
+        max_length=50, null=True, blank=True)
     input_emotion = models.CharField(
-        max_length=50, default='', null=True, blank=True)
+        max_length=50, null=True, blank=True)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='poems', blank=True, null=True)
 
