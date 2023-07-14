@@ -108,4 +108,4 @@ class Poem(models.Model):
         to=User, on_delete=models.CASCADE, related_name='poems', blank=True, null=True)
 
     def __str__(self):
-        return self.user
+        return str(self.id)
