@@ -108,4 +108,4 @@ class Poem(models.Model):
         to=User, on_delete=models.CASCADE, related_name='poems', blank=True, null=True)
 
     def __str__(self):
-        return str(self.id)
+        return f"Give a poet a prompt for writing poetry with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text"

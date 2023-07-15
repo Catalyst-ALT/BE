@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import environ
 import os
+import openai
+
+# import openai
+# openai.api_key = os.env("OPENAI_API_KEY")
 
 env = environ.Env(
     DEBUG=(bool, False),
@@ -34,6 +38,7 @@ DEBUG = env('DEBUG')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
+# OPENAI_API_KEY = env('OPENAI_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -53,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'catalyst',
     'rest_framework',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

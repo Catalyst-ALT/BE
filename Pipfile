@@ -9,6 +9,7 @@ whitenoise = "*"
 gunicorn = "*"
 django-environ = "*"
 psycopg2-binary = "*"
+requests = "*"
 
 [dev-packages]
 
