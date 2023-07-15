@@ -53,7 +53,7 @@ class Poem(models.Model):
     MAJESTY = 'majesty'
     SERENITY = 'serenity'
     WONDER = 'wonder'
-    TRANSIENCE = 'transcience'
+    TRANSIENCE = 'transience'
     CONNECTION = 'connection'
     SOLITUDE = 'solitude'
     RENEWAL = 'renewal'
