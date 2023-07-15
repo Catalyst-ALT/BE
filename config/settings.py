@@ -59,9 +59,11 @@ INSTALLED_APPS = [
     'catalyst',
     'rest_framework',
     'django_extensions',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -152,3 +154,6 @@ if not DEBUG:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'catalyst.User'
+
+
+CORS_ALLOW_ALL_ORIGINS = True
