@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import environ
 import os
-import openai
+
 
 # import openai
 # openai.api_key = os.env("OPENAI_API_KEY")

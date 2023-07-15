@@ -1,12 +1,12 @@
 from rest_framework import generics, permissions
-from django.shortcuts import render
+# from django.shortcuts import render
 from .models import User, Poem
 from .serializers import PoemSerializer
-import requests
-import openai
+# import requests
+# import openai
 # import environ
 # import os
-from django.conf import Settings
+# from django.conf import Settings
 # from django.http import HttpResponse
 # from django.http import JsonResponse
 # from rest_framework.decorators import api_view
