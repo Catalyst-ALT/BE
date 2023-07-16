@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+import openai
+import requests
+import json
+import environ
 
 
 class User(AbstractUser):
@@ -106,6 +110,33 @@ class Poem(models.Model):
         max_length=50, null=True, blank=True)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='poems', blank=True, null=True)
+    output = models.TextField(blank=True)
+
+    def send_prompt(self):
+        input = f'Give a poet a prompt for writing poetry with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text'
+        env = environ.Env()
+        environ.Env.read_env()
+        MODEL = "gpt-3.5-turbo"
+        openai.api_key = env('OPENAI_API_KEY')
+        response = openai.ChatCompletion.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": input}
+            ],
+            temperature=1.5,
+        )
+        self.output = response['choices'][0]['message']['content']
+        self.save()
+    
 
     def __str__(self):
-        return f"Give a poet a prompt for writing poetry with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text"
+        return str(self.id)
+
+
+class Prompt(models.Model):
+    poem = models.ForeignKey(
+        to=Poem, on_delete=models.CASCADE, related_name='prompts', blank=True, null=True)
+
+    def __str__(self):
+        return str(self.id)

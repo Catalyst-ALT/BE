@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Poem
+from .models import User, Poem, Prompt
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -13,3 +13,8 @@ class PoemSerializer(serializers.ModelSerializer):
         model = Poem
         fields = '__all__'
 
+
+class PoemOutputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Poem
+        fields = ['output']
