@@ -17,4 +17,4 @@ class PoemSerializer(serializers.ModelSerializer):
 class PoemOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Poem
-        fields = ['output']
+        fields = '__all__'

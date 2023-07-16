@@ -35,7 +35,7 @@ class PoemViewSet(generics.CreateAPIView):
         poem.send_prompt()
 
 
-class PoemOutputViewSet(generics.ListCreateAPIView):
+class PoemOutputViewSet(generics.RetrieveUpdateDestroyAPIView):
     '''
     METHODS: GET/POST
     '''
