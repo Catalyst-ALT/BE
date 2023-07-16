@@ -12,6 +12,7 @@ psycopg2-binary = "*"
 requests = "*"
 django-cors-headers = "*"
 django-extensions = "*"
+openai = "*"
 
 [dev-packages]
 
