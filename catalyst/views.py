@@ -1,8 +1,14 @@
 from rest_framework import generics, permissions
-# from django.shortcuts import render
-from .models import User, Poem
-from .serializers import PoemSerializer, ProfileSerializer
+# from django.shortcuts import render, get_object_or_404
+from .models import User, Poem, Prompt
+from .serializers import PoemSerializer, ProfileSerializer, PoemOutputSerializer
 from catalyst.permissions import IsProfileOwnerOrReadOnly
+from rest_framework.decorators import api_view
+# from rest_framework.response import Response
+# from rest_framework import status
+import openai
+import requests
+import json
 
 
 class ProfileViewSet(generics.RetrieveUpdateDestroyAPIView):
@@ -23,3 +29,15 @@ class PoemViewSet(generics.CreateAPIView):
     '''
     queryset = Poem.objects.all()
     serializer_class = PoemSerializer
+
+    def perform_create(self, serializer):
+        poem = serializer.save()
+        poem.send_prompt()
+
+
+class PoemOutputViewSet(generics.ListCreateAPIView):
+    '''
+    METHODS: GET/POST
+    '''
+    queryset = Poem.objects.all()
+    serializer_class = PoemOutputSerializer
