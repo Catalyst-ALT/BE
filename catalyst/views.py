@@ -1,14 +1,14 @@
 from rest_framework import generics, permissions
 # from django.shortcuts import render, get_object_or_404
 from .models import User, Poem, Prompt
-from .serializers import PoemSerializer, ProfileSerializer, PoemOutputSerializer
+from .serializers import PoemInputSerializer, ProfileSerializer, PoemOutputSerializer
 from catalyst.permissions import IsProfileOwnerOrReadOnly
-from rest_framework.decorators import api_view
+# from rest_framework.decorators import api_view
 # from rest_framework.response import Response
 # from rest_framework import status
-import openai
-import requests
-import json
+# import openai
+# import requests
+# import json
 
 
 class ProfileViewSet(generics.RetrieveUpdateDestroyAPIView):
@@ -23,21 +23,24 @@ class ProfileViewSet(generics.RetrieveUpdateDestroyAPIView):
         permissions.IsAuthenticatedOrReadOnly, IsProfileOwnerOrReadOnly]
 
 
-class PoemViewSet(generics.CreateAPIView):
+class PoemInputViewSet(generics.CreateAPIView):
     '''
     METHODS: POST
+    Creates user input/prompt instance to send to openai's api
+    Calls send_prompt() function to connect via a post request with openai's api
     '''
     queryset = Poem.objects.all()
-    serializer_class = PoemSerializer
+    serializer_class = PoemInputSerializer
 
     def perform_create(self, serializer):
         poem = serializer.save()
         poem.send_prompt()
 
 
-class PoemOutputViewSet(generics.RetrieveUpdateDestroyAPIView):
+class PoemOutputViewSet(generics.RetrieveAPIView):
     '''
-    METHODS: GET/POST
+    METHODS: GET
+    Retrieves Poem instance from the database (including 'output' which has now been supplied by openai's api)
     '''
     queryset = Poem.objects.all()
     serializer_class = PoemOutputSerializer

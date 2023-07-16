@@ -8,7 +8,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ['username']
 
 
-class PoemSerializer(serializers.ModelSerializer):
+class PoemInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Poem
         fields = '__all__'
