@@ -113,7 +113,6 @@ PATCH  api/profile/<username>/
 ```
 
 *response*
-> Any changes made to profile:
 ```json
     {
     "username": "superuser"
@@ -127,15 +126,15 @@ DELETE  api/profile/<username>/
 
 *response*
 ```json
-204_NO_CONTENT
+HTTP_204_NO_CONTENT
 ```
 
 </br>
 </br>
 
-**POEM GENERATE**
+**POEM PROMPT GENERATE POST**
 > https://catalyst-x226.onrender.com/api/poem/generate/
-> 
+
 *request*
 ```json
 POST api/poem/generate/
@@ -161,6 +160,32 @@ POST api/poem/generate/
 	"emotion": "joy",
 	"input_sentiment": null,
 	"input_emotion": null,
+	"user": 1
+    }
+```
+</br>
+</br>
+
+**POEM PROMPT GENERATE GET**
+> https://catalyst-x226.onrender.com/api/response/poem/id
+```json
+Output from openai api
+```
+
+```json
+GET api/response/poem/<id>
+```
+*response*
+```json
+    {
+	"id": 45,
+	"theme": "exploration",
+	"category": "advocacy",
+	"sentiment": "resilience",
+	"emotion": "grief",
+	"input_sentiment": null,
+	"input_emotion": null,
+	"output": "Uncharted horizons etch the undeniable path of your journey, as you champion for voices and navigate turmoil of crossed skies; poetry unfolds within your steadfast pilgrimage of sorrow and renewal.",
 	"user": 1
     }
 ```
