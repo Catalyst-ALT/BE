@@ -173,7 +173,7 @@ Output from openai api
 ```
 
 ```json
-GET api/response/poem/<id>
+GET api/response/write/<id>
 ```
 *response*
 ```json
