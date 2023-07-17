@@ -18,13 +18,13 @@ class Poem(models.Model):
     ASSOCIATION = 'association'
     EMOTION = 'emotion'
     EXPLORATION = 'exploration'
-    HISTORICAL_CULTURAL = 'historical/cultural'
+    HISTORICAL_CULTURAL = 'historical and cultural'
     CONCEPTUAL = 'conceptual'
     THEME_CHOICES = [
         (ASSOCIATION, 'association'),
         (EMOTION, 'emotion'),
         (EXPLORATION, 'exploration'),
-        (HISTORICAL_CULTURAL, 'historial/cultural'),
+        (HISTORICAL_CULTURAL, 'historical and cultural'),
         (CONCEPTUAL, 'conceptual'),
     ]
 
@@ -33,7 +33,7 @@ class Poem(models.Model):
     PERSONAL_GROWTH_AND_RELATIONSHIP = 'personal growth and relationship'
     SOCIAL_ISSUES_AND_ADVOCACY = 'social issues and advocacy'
     MYTHOLOGY_AND_FOLKLORE = 'mythology and folklore'
-    SURREALISM_AND_DREAMS = 'surrealism_and_dreams'
+    SURREALISM_AND_DREAMS = 'surrealism and dreams'
     HISTORY = 'history'
     IDENTITY_AND_DIVERSITY = 'identity and diversity'
     IMAGERY_AND_SYMBOLISM = 'imagery and symbolism'
@@ -117,7 +117,7 @@ class Poem(models.Model):
         Saves chat gpt response to output field on Poem model
         temperature 1.5 = very creative
         '''
-        input = f'Give a poet a prompt for writing poetry with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text'
+        input = f'Give a poet a prompt for writing poetry with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
