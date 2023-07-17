@@ -243,6 +243,8 @@ class VisualArt(models.Model):
     emotion = models.CharField(
         max_length=50, default='', choices=EMOTION_CHOICES)
     temperature = models.IntegerField(default=1)
+    user = user = models.ForeignKey(
+        to=User, on_delete=models.CASCADE, related_name='visualarts', blank=True, null=True)
     output = models.TextField(blank=True)
 
     def send_visual_art_prompt(self):

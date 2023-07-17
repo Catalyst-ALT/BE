@@ -194,6 +194,17 @@ GET api/response/poem/<id>
 ```json
 POST api/visual_art/generate/
 ```
+```json
+    {
+	"medium": "painting",
+	"theme": "texture",
+	"sentiment": "renewal",
+	"emotion": "joy",
+	"temperature": 1.0,
+	"user": 1, 
+	"output": ""
+    }
+```
 
 
 
@@ -205,4 +216,16 @@ Output from openai api
 
 ```json
 GET api/response/visual_art/id
+```
+```json
+    {
+	"id": 25,
+	"medium": "painting",
+	"theme": "texture",
+	"sentiment": "renewal",
+	"emotion": "joy",
+	"temperature": 1,
+	"output": "Create a vibrant masterpiece capturing the essence of transformation and delight, where layered brushstrokes evoke both tactile and emotional sensations.",
+	"user": 1
+    }
 ```
