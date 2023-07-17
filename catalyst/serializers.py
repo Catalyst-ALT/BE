@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Write, VisualArt, Movement
+from .models import User, Write, VisualArt, Movement, Music
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -44,13 +44,13 @@ class MovementOutputSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# class MusicInputSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Music
-#         fields = '__all__'
+class MusicInputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Music
+        fields = '__all__'
 
 
-# class MusicOutputSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Music
-#         fields = '__all__'
+class MusicOutputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Music
+        fields = '__all__'
