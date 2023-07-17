@@ -242,7 +242,7 @@ class VisualArt(models.Model):
         max_length=50, default='', choices=SENTIMENT_CHOICES)
     emotion = models.CharField(
         max_length=50, default='', choices=EMOTION_CHOICES)
-    temperature = models.IntegerField(default=1)
+    temperature = models.IntegerField(default=1.0)
     output = models.TextField(blank=True)
 
     def send_visual_art_prompt(self):
@@ -263,7 +263,7 @@ class VisualArt(models.Model):
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": input}
             ],
-            temperature={self.temperature}
+            temperature=(self.temperature)
         )
         self.output = response['choices'][0]['message']['content']
         self.save()
