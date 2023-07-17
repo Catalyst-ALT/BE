@@ -229,3 +229,40 @@ GET api/response/visual_art/id
 	"user": 1
     }
 ```
+
+**MOVEMENT PROMPT GENERATE POST**
+> https://catalyst-x226.onrender.com/api/movement/generate/
+
+```json
+POST api/movement/generate/
+```
+```json
+    {
+	"theme": "spatial awareness",
+	"somatic": "breath and movement",
+	"sentiment": "harmony",
+	"emotion": "joy",
+	"temperature": 1,
+	"user": 1
+    }
+```
+**MOVEMENT PROMPT GENERATE GET**
+> https://catalyst-x226.onrender.com/api/response/movement/id
+```json
+Output from openai api
+```
+```json
+GET api/response/movement/id
+```
+```json
+    {
+	"id": 5,
+	"theme": "spatial awareness",
+	"somatic": "spatial awareness",
+	"sentiment": "harmony",
+	"emotion": "joy",
+	"temperature": 1,
+	"output": "Explore the depths of emotion, capturing the essence of longing and vulnerability, through fluid movements that merge strength and delicacy in a captivating dance.",
+	"user": 1
+    }
+```
