@@ -117,7 +117,7 @@ class Poem(models.Model):
         Saves chat gpt response to output field on Poem model
         temperature 1.5 = very creative
         '''
-        input = f'Give a poet a prompt for writing poetry with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
+        write_input = f'Give a poet a prompt for writing poetry with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -126,7 +126,7 @@ class Poem(models.Model):
             model=MODEL,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": input}
+                {"role": "user", "content": write_input}
             ],
             temperature=1.5,
         )
@@ -242,7 +242,7 @@ class VisualArt(models.Model):
         max_length=50, default='', choices=SENTIMENT_CHOICES)
     emotion = models.CharField(
         max_length=50, default='', choices=EMOTION_CHOICES)
-    temperature = models.IntegerField(default=1.0)
+    temperature = models.IntegerField(default=1)
     output = models.TextField(blank=True)
 
     def send_visual_art_prompt(self):
@@ -250,9 +250,9 @@ class VisualArt(models.Model):
         Sends POST request to openai's API with user choices wrapped in a prompt with parameters for the gpt model
         Uses key/value pairing to access the gpt model's output (key='content')
         Saves chat gpt response to output field on Poem model
-        temperature 1.5 = very creative
         '''
-        input = f'Give an artist a {self.medium} prompt with the keywords: {self.theme}, {self.sentiment}, and {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
+        visual_art_input = f'Give an artist a {self.medium} prompt with the keywords: {self.theme}, {self.sentiment}, and {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
+        temperature = self.temperature
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -261,9 +261,9 @@ class VisualArt(models.Model):
             model=MODEL,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": input}
+                {"role": "user", "content": visual_art_input}
             ],
-            temperature=(self.temperature)
+            temperature=temperature,
         )
         self.output = response['choices'][0]['message']['content']
         self.save()
