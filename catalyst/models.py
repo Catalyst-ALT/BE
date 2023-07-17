@@ -172,20 +172,20 @@ class VisualArt(models.Model):
     MOVEMENT_AND_ENERGY = "movement and energy"
     HARMONY_AND_BALANCE = 'harmony and balance'
     THEME_CHOICES = [
-        ('PORTRAITURE', 'portraiture'),
-        ('TEXTURE', 'texture'),
-        ('SYMBOLISM', 'symbolism'),
-        ('NATURE_AND_LANDSCAPES', 'nature and landscapes'),
-        ('STORYTELLING_AND_NARRATIVE', 'storytelling and narrative'),
-        ('ABSTRACTION', 'abstraction'),
-        ('SOCIAL_COMMENTARY', 'social commentary'),
-        ('LIGHT_AND_SHADOW', 'light and shadow'),
-        ('COLLAGE_AND_MIXED_MEDIA', 'collage and mixed media'),
-        ('EXPERIMENTATION', 'experimentation'),
-        ('CONCEPTUAL', 'conceptual'),
-        ('MINIMALISM', 'minimalism'),
-        ('MOVEMENT_AND_ENERGY', 'movement and energy'),
-        ('HARMONY_AND_BALANCE', 'harmony and balance')
+        (PORTRAITURE, 'portraiture'),
+        (TEXTURE, 'texture'),
+        (SYMBOLISM, 'symbolism'),
+        (NATURE_AND_LANDSCAPES, 'nature and landscapes'),
+        (STORYTELLING_AND_NARRATIVE, 'storytelling and narrative'),
+        (ABSTRACTION, 'abstraction'),
+        (SOCIAL_COMMENTARY, 'social commentary'),
+        (LIGHT_AND_SHADOW, 'light and shadow'),
+        (COLLAGE_AND_MIXED_MEDIA, 'collage and mixed media'),
+        (EXPERIMENTATION, 'experimentation'),
+        (CONCEPTUAL, 'conceptual'),
+        (MINIMALISM, 'minimalism'),
+        (MOVEMENT_AND_ENERGY, 'movement and energy'),
+        (HARMONY_AND_BALANCE, 'harmony and balance')
     ]
 
     HARMONY = 'harmony'
@@ -199,16 +199,16 @@ class VisualArt(models.Model):
     TRANSIENCE = 'transience'
     CONNECTION = 'connection'
     SENTIMENT_CHOICES = [
-        ('HARMONY', 'harmony'),
-        ('SERENITY', 'serenity'),
-        ('SOLITUDE', 'solitude'),
-        ('RESILIENCE', 'resilience'),
-        ('WONDER', 'wonder'),
-        ('RENEWAL', 'renewal'),
-        ('FRAGILITY', 'fragility'),
-        ('MAJESTY', 'majesty'),
-        ('TRANSIENCE', 'transience'),
-        ('CONNECTION', 'connection')
+        (HARMONY, 'harmony'),
+        (SERENITY, 'serenity'),
+        (SOLITUDE, 'solitude'),
+        (RESILIENCE, 'resilience'),
+        (WONDER, 'wonder'),
+        (RENEWAL, 'renewal'),
+        (FRAGILITY, 'fragility'),
+        (MAJESTY, 'majesty'),
+        (TRANSIENCE, 'transience'),
+        (CONNECTION, 'connection')
     ]
 
     JOY = 'joy'
@@ -222,16 +222,16 @@ class VisualArt(models.Model):
     ANGUISH = 'anguish'
     GRIEF = 'grief'
     EMOTION_CHOICES = [
-        ('JOY', 'joy'),
-        ('COURAGE', 'courage'),
-        ('MELANCHOLY', 'melancholy'),
-        ('EUPHORIA', 'euphoria'),
-        ('LONGING', 'longing'),
-        ('HOPE', 'hope'),
-        ('AWE', 'awe'),
-        ('BLISS', 'bliss'),
-        ('ANGUISH', 'anguish'),
-        ('GRIEF', 'grief')
+        (JOY, 'joy'),
+        (COURAGE, 'courage'),
+        (MELANCHOLY, 'melancholy'),
+        (EUPHORIA, 'euphoria'),
+        (LONGING, 'longing'),
+        (HOPE, 'hope'),
+        (AWE, 'awe'),
+        (BLISS, 'bliss'),
+        (ANGUISH, 'anguish'),
+        (GRIEF, 'grief')
     ]
 
     medium = models.CharField(
