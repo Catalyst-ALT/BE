@@ -266,3 +266,40 @@ GET api/response/movement/id
 	"user": 1
     }
 ```
+**MUSIC PROMPT GENERATE POST**
+> https://catalyst-x226.onrender.com/api/music/generate/
+```json
+POST api/music/generate/
+```
+```json
+    {
+	"exploration": "musical time travel",
+	"concept": "tempo",
+	"element": "fire",
+	"emotion": "joy",
+	"temperature": 1,
+	"output": "",
+	"user": 1
+    }
+```
+
+**MUSIC PROMPT GENERATE GET**
+> https://catalyst-x226.onrender.com/api/response/music/id
+```json
+Output from openai api
+```
+```json
+GET api/response/music/id
+```
+```json
+    {
+	"id": 2,
+	"exploration": "musical time travel",
+	"concept": "tempo",
+	"element": "fire",
+	"emotion": "joy",
+	"temperature": 1,
+	"output": "Journey through melodic epochs fuelled by celebratory rhythms, kindling a passionate storm. Create harmonies that transport listeners through a timeless musical dimension.",
+	"user": 1
+    }
+```
