@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Write, VisualArt
+from .models import User, Write, VisualArt, Movement
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -29,4 +29,16 @@ class VisualArtInputSerializer(serializers.ModelSerializer):
 class VisualArtOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = VisualArt
+        fields = '__all__'
+
+
+class MovementInputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movement
+        fields = '__all__'
+
+
+class MovementOutputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movement
         fields = '__all__'

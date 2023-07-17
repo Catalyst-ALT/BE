@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions
 # from django.shortcuts import render, get_object_or_404
-from .models import User, Write, VisualArt
-from .serializers import WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer
+from .models import User, Write, VisualArt, Movement
+from .serializers import WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
 from catalyst.permissions import IsProfileOwnerOrReadOnly
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
@@ -34,7 +34,7 @@ class WriteInputViewSet(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         poem = serializer.save()
-        poem.send_prompt()
+        poem.send_write_prompt()
 
 
 class WriteOutputViewSet(generics.RetrieveAPIView):
@@ -67,3 +67,26 @@ class VisualArtOutputViewSet(generics.RetrieveAPIView):
     '''
     queryset = VisualArt.objects.all()
     serializer_class = VisualArtOutputSerializer
+
+
+class MovementInputViewSet(generics.CreateAPIView):
+    '''
+    METHODS: POST
+    Creates user input/prompt instance to send to openai's api
+    Calls send_prompt() function to connect via a post request with openai's api
+    '''
+    queryset = Movement.objects.all()
+    serializer_class = MovementInputSerializer
+
+    def perform_create(self, serializer):
+        visualart = serializer.save()
+        visualart.send_movement_prompt()
+
+
+class MovementOutputViewSet(generics.RetrieveAPIView):
+    '''
+    METHODS: GET
+    Retrieves Poem instance from the database (including 'output' which has now been supplied by openai's api)
+    '''
+    queryset = Movement.objects.all()
+    serializer_class = MovementOutputSerializer
