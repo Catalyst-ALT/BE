@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions
 # from django.shortcuts import render, get_object_or_404
-from .models import User, Write, VisualArt, Movement
-from .serializers import WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
+from .models import User, Write, VisualArt, Movement, Music
+from .serializers import MusicInputSerializer, MusicOutputSerializer, WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
 from catalyst.permissions import IsProfileOwnerOrReadOnly
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
@@ -92,24 +92,24 @@ class MovementOutputViewSet(generics.RetrieveAPIView):
     serializer_class = MovementOutputSerializer
 
 
-# class MusicInputViewSet(generics.CreateAPIView):
-#     '''
-#     METHODS: POST
-#     Creates user input/prompt instance to send to openai's api
-#     Calls send_prompt() function to connect via a post request with openai's api
-#     '''
-#     queryset = Music.objects.all()
-#     serializer_class = MusicInputSerializer
+class MusicInputViewSet(generics.CreateAPIView):
+    '''
+    METHODS: POST
+    Creates user input/prompt instance to send to openai's api
+    Calls send_prompt() function to connect via a post request with openai's api
+    '''
+    queryset = Music.objects.all()
+    serializer_class = MusicInputSerializer
 
-#     def perform_create(self, serializer):
-#         visualart = serializer.save()
-#         visualart.send_music_prompt()
+    def perform_create(self, serializer):
+        visualart = serializer.save()
+        visualart.send_music_prompt()
 
 
-# class MusicOutputViewSet(generics.RetrieveAPIView):
-#     '''
-#     METHODS: GET
-#     Retrieves Music instance from the database (including 'output' which has now been supplied by openai's api)
-#     '''
-#     queryset = Music.objects.all()
-#     serializer_class = MusicOutputSerializer
+class MusicOutputViewSet(generics.RetrieveAPIView):
+    '''
+    METHODS: GET
+    Retrieves Music instance from the database (including 'output' which has now been supplied by openai's api)
+    '''
+    queryset = Music.objects.all()
+    serializer_class = MusicOutputSerializer

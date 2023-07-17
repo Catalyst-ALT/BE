@@ -444,22 +444,22 @@ class Music(models.Model):
     MUSICAL_TIME_TRAVEL = 'musical time travel'
 
     EXPLORATION_CHOICES = [
-        ('MOOD_BASED_COMPOSITION', 'mood-based composition'),
-        ('GENRE_FUSION', 'genre fusion'),
-        ('MUSICAL_STORYTELLING', 'musical storytelling'),
-        ('NATURE_SOUNDSCAPE', 'nature soundscape'),
-        ('RHYTHMIC_EXPLORATION', 'rhythmic exploration'),
-        ('COLLABORATIVE_COMPOSITION', 'collaborative composition'),
-        ('MINIMALISM', 'minimalism'),
-        ('MASHUP_OR_REMIX', 'mashup or remix'),
-        ('MUSIC_FOR_VISUALS', 'music for visuals'),
-        ('CINEMATIC_SCORE', 'cinematic score'),
-        ('MUSICAL_HAIKU', 'musical haiku'),
-        ('ONE_NOTE_CHALLENGE', 'one-note challenge'),
-        ('INCORPORATE_UNCONVENTIONAL_INSTRUMENTS',
+        (MOOD_BASED_COMPOSITION, 'mood-based composition'),
+        (GENRE_FUSION, 'genre fusion'),
+        (MUSICAL_STORYTELLING, 'musical storytelling'),
+        (NATURE_SOUNDSCAPE, 'nature soundscape'),
+        (RHYTHMIC_EXPLORATION, 'rhythmic exploration'),
+        (COLLABORATIVE_COMPOSITION, 'collaborative composition'),
+        (MINIMALISM, 'minimalism'),
+        (MASHUP_OR_REMIX, 'mashup or remix'),
+        (MUSIC_FOR_VISUALS, 'music for visuals'),
+        (CINEMATIC_SCORE, 'cinematic score'),
+        (MUSICAL_HAIKU, 'musical haiku'),
+        (ONE_NOTE_CHALLENGE, 'one-note challenge'),
+        (INCORPORATE_UNCONVENTIONAL_INSTRUMENTS,
          'incorporate unconventional instruments'),
-        ('MUSIC_INSPIRED_BY_ART', 'music inspired by art'),
-        ('MUSICAL_TIME_TRAVEL', 'musical time travel')
+        (MUSIC_INSPIRED_BY_ART, 'music inspired by art'),
+        (MUSICAL_TIME_TRAVEL, 'musical time travel')
     ]
 
     DYNAMICS = 'dynamics'
@@ -473,15 +473,15 @@ class Music(models.Model):
     PITCH = 'pitch'
 
     CONCEPT_CHOICES = [
-        ('DYNAMICS', 'dynamics'),
-        ('TEMPO', 'tempo'),
-        ('TIMBRE', 'timbre'),
-        ('MELODY', 'melody'),
-        ('RHYTHM', 'rhythm'),
-        ('TEXTURE', 'texture'),
-        ('FORM', 'form'),
-        ('EXPRESSION', 'expression'),
-        ('PITCH', 'pitch')
+        (DYNAMICS, 'dynamics'),
+        (TEMPO, 'tempo'),
+        (TIMBRE, 'timbre'),
+        (MELODY, 'melody'),
+        (RHYTHM, 'rhythm'),
+        (TEXTURE, 'texture'),
+        (FORM, 'form'),
+        (EXPRESSION, 'expression'),
+        (PITCH, 'pitch')
     ]
 
     FIRE = 'fire'
@@ -496,16 +496,16 @@ class Music(models.Model):
     SPACE = 'space'
 
     ELEMENT_CHOICES = [
-        ('FIRE', 'fire'),
-        ('WATER', 'water'),
-        ('EARTH', 'earth'),
-        ('AIR', 'air'),
-        ('LIGHT', 'light'),
-        ('DARKNESS', 'darkness'),
-        ('SOUND', 'sound'),
-        ('MOVEMENT', 'movement'),
-        ('TIME', 'time'),
-        ('SPACE', 'space')
+        (FIRE, 'fire'),
+        (WATER, 'water'),
+        (EARTH, 'earth'),
+        (AIR, 'air'),
+        (LIGHT, 'light'),
+        (DARKNESS, 'darkness'),
+        (SOUND, 'sound'),
+        (MOVEMENT, 'movement'),
+        (TIME, 'time'),
+        (SPACE, 'space')
     ]
 
     JOY = 'joy'
