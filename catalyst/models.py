@@ -143,7 +143,7 @@ class Write(models.Model):
         write_input = f'Give a poet a prompt for writing poetry with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
         env = environ.Env()
         environ.Env.read_env()
-        MODEL = "ada"
+        MODEL = "gpt-3.5-turbo"
         openai.api_key = env('OPENAI_API_KEY')
         response = openai.ChatCompletion.create(
             model=MODEL,
