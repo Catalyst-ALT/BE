@@ -189,3 +189,20 @@ GET api/response/poem/<id>
 	"user": 1
     }
 ```
+**VISUAL ART PROMPT GENERATE POST**
+> https://catalyst-x226.onrender.com/api/visual_art/generate/
+```json
+POST api/visual_art/generate/
+```
+
+
+
+**VISUAL ART PROMPT GENERATE GET**
+> https://catalyst-x226.onrender.com/api/response/visual_art/id
+```json
+Output from openai api
+```
+
+```json
+GET api/response/visual_art/id
+```
