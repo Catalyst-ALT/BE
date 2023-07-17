@@ -140,7 +140,7 @@ class Write(models.Model):
         Saves chat gpt response to output field on Poem model
         temperature 1.5 = very creative
         '''
-        write_input = f'Give a poet a prompt for writing poetry with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
+        write_input = f'Give a writer a prompt for writing with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -148,7 +148,8 @@ class Write(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system",
+                    "content": "You are Emily Dickenson"},
                 {"role": "user", "content": write_input}
             ],
             temperature=1.5,
@@ -394,7 +395,7 @@ class Movement(models.Model):
         max_length=50, default='', choices=EMOTION_CHOICES)
     temperature = models.IntegerField(default=1)
     user = models.ForeignKey(
-        to=User, on_delete=models.CASCADE, related_name='movements', blank=True, null=True)
+        to=User, on_delete=models.CASCADE, related_name='music', blank=True, null=True)
     output = models.TextField(blank=True)
 
     def send_movement_prompt(self):
@@ -424,31 +425,147 @@ class Movement(models.Model):
         return str(self.id)
 
 
-# class Music(models.Model):
-#     pass
+class Music(models.Model):
 
-#     def send_music_prompt(self):
-#         '''
-#         Sends POST request to openai's API with user choices wrapped in a prompt with parameters for the gpt model
-#         Uses key/value pairing to access the gpt model's output (key='content')
-#         Saves chat gpt response to output field on Poem model
-#         temperature 1.5 = very creative
-#         '''
-#         write_input = f'Give a musician a prompt for music with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
-#         env = environ.Env()
-#         environ.Env.read_env()
-#         MODEL = "gpt-3.5-turbo"
-#         openai.api_key = env('OPENAI_API_KEY')
-#         response = openai.ChatCompletion.create(
-#         model=MODEL,
-#         messages=[
-#             {"role": "system", "content": "You are a helpful assistant."},
-#             {"role": "user", "content": write_input}
-#             ],
-#             temperature=1.5,
-#         )
-#         self.output = response['choices'][0]['message']['content']
-#         self.save()
+    MOOD_BASED_COMPOSITION = 'mood-based composition'
+    GENRE_FUSION = 'genre fusion'
+    MUSICAL_STORYTELLING = 'musical storytelling'
+    NATURE_SOUNDSCAPE = 'nature soundscape'
+    RHYTHMIC_EXPLORATION = 'rhythmic exploration'
+    COLLABORATIVE_COMPOSITION = 'collaborative composition'
+    MINIMALISM = 'minimalism'
+    MASHUP_OR_REMIX = 'mashup or remix'
+    MUSIC_FOR_VISUALS = 'music for visuals'
+    CINEMATIC_SCORE = 'cinematic score'
+    MUSICAL_HAIKU = 'musical haiku'
+    ONE_NOTE_CHALLENGE = 'one-note challenge'
+    INCORPORATE_UNCONVENTIONAL_INSTRUMENTS = 'incorporate unconventional instruments'
+    MUSIC_INSPIRED_BY_ART = 'music inspired by art'
+    MUSICAL_TIME_TRAVEL = 'musical time travel'
 
-#         def __str__(self):
-#             return str(self.id)
+    EXPLORATION_CHOICES = [
+        ('MOOD_BASED_COMPOSITION', 'mood-based composition'),
+        ('GENRE_FUSION', 'genre fusion'),
+        ('MUSICAL_STORYTELLING', 'musical storytelling'),
+        ('NATURE_SOUNDSCAPE', 'nature soundscape'),
+        ('RHYTHMIC_EXPLORATION', 'rhythmic exploration'),
+        ('COLLABORATIVE_COMPOSITION', 'collaborative composition'),
+        ('MINIMALISM', 'minimalism'),
+        ('MASHUP_OR_REMIX', 'mashup or remix'),
+        ('MUSIC_FOR_VISUALS', 'music for visuals'),
+        ('CINEMATIC_SCORE', 'cinematic score'),
+        ('MUSICAL_HAIKU', 'musical haiku'),
+        ('ONE_NOTE_CHALLENGE', 'one-note challenge'),
+        ('INCORPORATE_UNCONVENTIONAL_INSTRUMENTS',
+         'incorporate unconventional instruments'),
+        ('MUSIC_INSPIRED_BY_ART', 'music inspired by art'),
+        ('MUSICAL_TIME_TRAVEL', 'musical time travel')
+    ]
+
+    DYNAMICS = 'dynamics'
+    TEMPO = 'tempo'
+    TIMBRE = 'timbre'
+    MELODY = 'melody'
+    RHYTHM = 'rhythm'
+    TEXTURE = 'texture'
+    FORM = 'form'
+    EXPRESSION = 'expression'
+    PITCH = 'pitch'
+
+    CONCEPT_CHOICES = [
+        ('DYNAMICS', 'dynamics'),
+        ('TEMPO', 'tempo'),
+        ('TIMBRE', 'timbre'),
+        ('MELODY', 'melody'),
+        ('RHYTHM', 'rhythm'),
+        ('TEXTURE', 'texture'),
+        ('FORM', 'form'),
+        ('EXPRESSION', 'expression'),
+        ('PITCH', 'pitch')
+    ]
+
+    FIRE = 'fire'
+    WATER = 'water'
+    EARTH = 'earth'
+    AIR = 'air'
+    LIGHT = 'light'
+    DARKNESS = 'darkness'
+    SOUND = 'sound'
+    MOVEMENT = 'movement'
+    TIME = 'time'
+    SPACE = 'space'
+
+    ELEMENT_CHOICES = [
+        ('FIRE', 'fire'),
+        ('WATER', 'water'),
+        ('EARTH', 'earth'),
+        ('AIR', 'air'),
+        ('LIGHT', 'light'),
+        ('DARKNESS', 'darkness'),
+        ('SOUND', 'sound'),
+        ('MOVEMENT', 'movement'),
+        ('TIME', 'time'),
+        ('SPACE', 'space')
+    ]
+
+    JOY = 'joy'
+    COURAGE = 'courage'
+    MELANCHOLY = 'melancholy'
+    EUPHORIA = 'euphoria'
+    LONGING = 'longing'
+    HOPE = 'hope'
+    AWE = 'awe'
+    BLISS = 'bliss'
+    ANGUISH = 'anguish'
+    GRIEF = 'grief'
+    EMOTION_CHOICES = [
+        (JOY, 'joy'),
+        (COURAGE, 'courage'),
+        (MELANCHOLY, 'melancholy'),
+        (EUPHORIA, 'euphoria'),
+        (LONGING, 'longing'),
+        (HOPE, 'hope'),
+        (AWE, 'awe'),
+        (BLISS, 'bliss'),
+        (ANGUISH, 'anguish'),
+        (GRIEF, 'grief')
+    ]
+
+    exploration = models.CharField(
+        max_length=50, default='', choices=EXPLORATION_CHOICES)
+    concept = models.CharField(
+        max_length=50, default='', choices=CONCEPT_CHOICES)
+    element = models.CharField(
+        max_length=50, default='', choices=ELEMENT_CHOICES)
+    emotion = models.CharField(
+        max_length=50, default='', choices=EMOTION_CHOICES)
+    temperature = models.IntegerField(default=1)
+    user = models.ForeignKey(
+        to=User, on_delete=models.CASCADE, related_name='movements', blank=True, null=True)
+    output = models.TextField(blank=True)
+
+    def send_music_prompt(self):
+        '''
+        Sends POST request to openai's API with user choices wrapped in a prompt with parameters for the gpt model
+        Uses key/value pairing to access the gpt model's output (key='content')
+        Saves chat gpt response to output field on Poem model
+        temperature 1.5 = very creative
+        '''
+        music_input = f'Give a musician a prompt for music with the keywords: {self.exploration}, {self.concept}, {self.emotion}, {self.element}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
+        env = environ.Env()
+        environ.Env.read_env()
+        MODEL = "gpt-3.5-turbo"
+        openai.api_key = env('OPENAI_API_KEY')
+        response = openai.ChatCompletion.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": music_input}
+            ],
+            temperature=1.5,
+        )
+        self.output = response['choices'][0]['message']['content']
+        self.save()
+
+        def __str__(self):
+            return str(self.id)
