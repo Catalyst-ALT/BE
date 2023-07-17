@@ -132,12 +132,12 @@ HTTP_204_NO_CONTENT
 </br>
 </br>
 
-**POEM PROMPT GENERATE POST**
-> https://catalyst-x226.onrender.com/api/poem/generate/
+**WRITE PROMPT GENERATE POST**
+> https://catalyst-x226.onrender.com/api/write/generate/
 
 *request*
 ```json
-POST api/poem/generate/
+POST api/write/generate/
 ```
 ```json
     {
@@ -166,8 +166,8 @@ POST api/poem/generate/
 </br>
 </br>
 
-**POEM PROMPT GENERATE GET**
-> https://catalyst-x226.onrender.com/api/response/poem/id
+**WRITE PROMPT GENERATE GET**
+> https://catalyst-x226.onrender.com/api/response/write/id
 ```json
 Output from openai api
 ```

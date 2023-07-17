@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Poem, Prompt, VisualArt
+from .models import User, Write, VisualArt
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -8,15 +8,15 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ['username']
 
 
-class PoemInputSerializer(serializers.ModelSerializer):
+class WriteInputSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Poem
+        model = Write
         fields = '__all__'
 
 
-class PoemOutputSerializer(serializers.ModelSerializer):
+class WriteOutputSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Poem
+        model = Write
         fields = '__all__'
 
 

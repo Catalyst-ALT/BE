@@ -13,7 +13,7 @@ class User(AbstractUser):
         return self.username
 
 
-class Poem(models.Model):
+class Write(models.Model):
 
     ASSOCIATION = 'association'
     EMOTION = 'emotion'
@@ -102,15 +102,11 @@ class Poem(models.Model):
         max_length=50, default='', choices=SENTIMENT_CHOICES)
     emotion = models.CharField(
         max_length=50, default='', choices=EMOTION_CHOICES)
-    input_sentiment = models.CharField(
-        max_length=50, null=True, blank=True)
-    input_emotion = models.CharField(
-        max_length=50, null=True, blank=True)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='poems', blank=True, null=True)
     output = models.TextField(blank=True)
 
-    def send_prompt(self):
+    def send_write_prompt(self):
         '''
         Sends POST request to openai's API with user choices wrapped in a prompt with parameters for the gpt model
         Uses key/value pairing to access the gpt model's output (key='content')
@@ -269,14 +265,6 @@ class VisualArt(models.Model):
         )
         self.output = response['choices'][0]['message']['content']
         self.save()
-
-    def __str__(self):
-        return str(self.id)
-
-
-class Prompt(models.Model):
-    poem = models.ForeignKey(
-        to=Poem, on_delete=models.CASCADE, related_name='prompts', blank=True, null=True)
 
     def __str__(self):
         return str(self.id)

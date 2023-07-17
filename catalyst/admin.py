@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import User, Poem, Prompt, VisualArt
+from .models import User, Write, VisualArt
 # Register your models here.
 
 admin.site.register(User)
-admin.site.register(Poem)
+admin.site.register(Write)
 admin.site.register(VisualArt)
-admin.site.register(Prompt)
