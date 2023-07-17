@@ -268,3 +268,130 @@ class VisualArt(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+class Movement(models.Model):
+    SPATIAL_AWARENESS = 'spatial awareness'
+    EMOTIONAL_LANDSCAPE = 'emotional landscape'
+    EXPRESSIVE_GESTURES = 'expressive gestures'
+    RHYTHM_AND_FLOW = 'rhythm and flow'
+    ABSTRACT_AND_EXPRESSION = 'abstract and expression'
+    PERSONAL_NARRATIVES = 'personal narratives'
+    NATURE_IN_MOTION = 'nature in motion'
+    CULTURAL_FUSION = 'cultural fusion'
+    HUMAN_CONNECTION = 'human connection'
+    THEME_CHOICES = [
+        (SPATIAL_AWARENESS, 'spatial awareness'),
+        (EMOTIONAL_LANDSCAPE, 'emotional landscape'),
+        (EXPRESSIVE_GESTURES, 'expressive gestures'),
+        (RHYTHM_AND_FLOW, 'rhythm and flow'),
+        (ABSTRACT_AND_EXPRESSION, 'abstract and expression'),
+        (PERSONAL_NARRATIVES, 'personal narratives'),
+        (NATURE_IN_MOTION, 'nature in motion'),
+        (CULTURAL_FUSION, 'cultural fusion'),
+        (HUMAN_CONNECTION, 'human connection')
+    ]
+
+    EMBODIED_AWARENESS = 'embodied awareness'
+    BREATH_AND_MOVEMENT = 'breath and movement'
+    BODY_MIND_CONNECTION = 'body-mind connection'
+    ANATOMY = 'anatomy'
+    AUTHENTIC_MOVEMENT = 'authentic movement'
+    GROUNDING_AND_CENTERING = 'grounding and centering'
+    BODY_MAPPING = 'body mapping'
+    MINDFUL_MOVEMENT = 'mindful movement'
+    SOMATIC_IMAGINATION = 'somatic imagination'
+    SOMATIC_CHOICES = [
+        (EMBODIED_AWARENESS, 'embodied awareness'),
+        (BREATH_AND_MOVEMENT, 'breath and movement'),
+        (BODY_MIND_CONNECTION, 'body-mind connection'),
+        (ANATOMY, 'anatomy'),
+        (AUTHENTIC_MOVEMENT, 'authentic movement'),
+        (GROUNDING_AND_CENTERING, 'grounding and centering'),
+        (BODY_MAPPING, 'body mapping'),
+        (MINDFUL_MOVEMENT, 'mindful movement'),
+        (SOMATIC_IMAGINATION, 'somatic imagination')
+    ]
+
+    HARMONY = 'harmony'
+    SERENITY = 'serenity'
+    SOLITUDE = 'solitude'
+    RESILIENCE = 'resilience'
+    WONDER = 'wonder'
+    RENEWAL = 'renewal'
+    FRAGILITY = 'fragility'
+    MAJESTY = 'majesty'
+    TRANSIENCE = 'transience'
+    CONNECTION = 'connection'
+    SENTIMENT_CHOICES = [
+        (HARMONY, 'harmony'),
+        (SERENITY, 'serenity'),
+        (SOLITUDE, 'solitude'),
+        (RESILIENCE, 'resilience'),
+        (WONDER, 'wonder'),
+        (RENEWAL, 'renewal'),
+        (FRAGILITY, 'fragility'),
+        (MAJESTY, 'majesty'),
+        (TRANSIENCE, 'transience'),
+        (CONNECTION, 'connection')
+    ]
+
+    JOY = 'joy'
+    COURAGE = 'courage'
+    MELANCHOLY = 'melancholy'
+    EUPHORIA = 'euphoria'
+    LONGING = 'longing'
+    HOPE = 'hope'
+    AWE = 'awe'
+    BLISS = 'bliss'
+    ANGUISH = 'anguish'
+    GRIEF = 'grief'
+    EMOTION_CHOICES = [
+        (JOY, 'joy'),
+        (COURAGE, 'courage'),
+        (MELANCHOLY, 'melancholy'),
+        (EUPHORIA, 'euphoria'),
+        (LONGING, 'longing'),
+        (HOPE, 'hope'),
+        (AWE, 'awe'),
+        (BLISS, 'bliss'),
+        (ANGUISH, 'anguish'),
+        (GRIEF, 'grief')
+    ]
+    theme = models.CharField(max_length=50, default='', choices=THEME_CHOICES)
+    somatic = models.CharField(
+        max_length=50, default='', choices=SOMATIC_CHOICES)
+    sentiment = models.CharField(
+        max_length=50, default='', choices=SENTIMENT_CHOICES)
+    emotion = models.CharField(
+        max_length=50, default='', choices=EMOTION_CHOICES)
+    temperature = models.IntegerField(default=1)
+    user = models.ForeignKey(
+        to=User, on_delete=models.CASCADE, related_name='movements', blank=True, null=True)
+    output = models.TextField(blank=True)
+
+    def send_movement_prompt(self):
+        '''
+        Sends POST request to openai's API with user choices wrapped in a prompt with parameters for the gpt model
+        Uses key/value pairing to access the gpt model's output (key='content')
+        Saves chat gpt response to output field on Poem model
+        '''
+        movement_input = f'Give a movement artist a prompt with the keywords: {self.theme}, {self.somatic}, {self.emotion}, {self.sentiment}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
+        temperature = self.temperature
+        env = environ.Env()
+        environ.Env.read_env()
+        MODEL = "gpt-3.5-turbo"
+        openai.api_key = env('OPENAI_API_KEY')
+        response = openai.ChatCompletion.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": movement_input}
+            ],
+            temperature=temperature,
+        )
+        self.output = response['choices'][0]['message']['content']
+        self.save()
+
+    def __str__(self):
+        return str(self.id)
