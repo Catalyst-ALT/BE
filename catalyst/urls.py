@@ -12,5 +12,7 @@ urlpatterns = [
     path('api/movement/generate/', views.MovementInputViewSet.as_view()),
     path('api/response/movement/<int:pk>',
          views.MovementOutputViewSet.as_view()),
+    # path('api/music/generate/', views.MusicInputViewSet.as_view()), 
+    # path('api/response/movement/<int:pk>', views.MusicOutputViewSet.as_view()),
 ]
 # https://api.openai.com/v1/chat/completions

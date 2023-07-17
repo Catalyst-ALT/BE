@@ -15,6 +15,33 @@ class User(AbstractUser):
 
 class Write(models.Model):
 
+    STREAM_OF_CONCIOUSNESS = 'stream of conciousness'
+    TIME = 'time'
+    CHARACTER_DEVELOPMENT = 'character development'
+    POETRY = 'poetry'
+    WORD_PLAY = 'word play'
+    STORY_STARTER = 'story starter'
+    IMAGE = 'image'
+    STORYTELLING_THROUGH_OBJECTS = 'storytelling through objects'
+    FLASH = 'flash'
+    POINT_OF_VIEW_SHIFT = 'point of view shift'
+    MEMOIR = 'memoir'
+    DIALOGUE = 'dialogue'
+    STYLE_CHOICES = [
+        (STREAM_OF_CONCIOUSNESS, 'stream of consciousness'),
+        (TIME, 'time'),
+        (CHARACTER_DEVELOPMENT, 'character development'),
+        (POETRY, 'poetry'),
+        (WORD_PLAY, 'word play'),
+        (STORY_STARTER, 'story starter'),
+        (IMAGE, 'image'),
+        (STORYTELLING_THROUGH_OBJECTS, 'storytelling through objects'),
+        (FLASH, 'flash'),
+        (POINT_OF_VIEW_SHIFT, 'point of view shift'),
+        (MEMOIR, 'memoir'),
+        (DIALOGUE, 'dialogue')
+    ]
+
     ASSOCIATION = 'association'
     EMOTION = 'emotion'
     EXPLORATION = 'exploration'
@@ -94,7 +121,7 @@ class Write(models.Model):
         (ANGUISH, 'anguish'),
         (GRIEF, 'grief'),
     ]
-
+    style = models.CharField(max_length=50, default='', choices=STYLE_CHOICES)
     theme = models.CharField(max_length=50, default='', choices=THEME_CHOICES)
     category = models.CharField(
         max_length=50, default='', choices=CATEGORY_CHOICES)
@@ -395,3 +422,33 @@ class Movement(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+# class Music(models.Model):
+#     pass
+
+#     def send_music_prompt(self):
+#         '''
+#         Sends POST request to openai's API with user choices wrapped in a prompt with parameters for the gpt model
+#         Uses key/value pairing to access the gpt model's output (key='content')
+#         Saves chat gpt response to output field on Poem model
+#         temperature 1.5 = very creative
+#         '''
+#         write_input = f'Give a musician a prompt for music with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
+#         env = environ.Env()
+#         environ.Env.read_env()
+#         MODEL = "gpt-3.5-turbo"
+#         openai.api_key = env('OPENAI_API_KEY')
+#         response = openai.ChatCompletion.create(
+#         model=MODEL,
+#         messages=[
+#             {"role": "system", "content": "You are a helpful assistant."},
+#             {"role": "user", "content": write_input}
+#             ],
+#             temperature=1.5,
+#         )
+#         self.output = response['choices'][0]['message']['content']
+#         self.save()
+
+#         def __str__(self):
+#             return str(self.id)

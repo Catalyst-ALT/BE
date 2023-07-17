@@ -42,3 +42,15 @@ class MovementOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movement
         fields = '__all__'
+
+
+# class MusicInputSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Music
+#         fields = '__all__'
+
+
+# class MusicOutputSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Music
+#         fields = '__all__'

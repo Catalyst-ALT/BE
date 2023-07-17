@@ -5,3 +5,4 @@ from .models import User, Write, VisualArt
 admin.site.register(User)
 admin.site.register(Write)
 admin.site.register(VisualArt)
+# admin.site.register(Music)
