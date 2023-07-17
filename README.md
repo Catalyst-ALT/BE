@@ -258,7 +258,7 @@ GET api/response/movement/id
     {
 	"id": 5,
 	"theme": "spatial awareness",
-	"somatic": "spatial awareness",
+	"somatic": "breath and movement",
 	"sentiment": "harmony",
 	"emotion": "joy",
 	"temperature": 1,
