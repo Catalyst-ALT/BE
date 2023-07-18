@@ -145,7 +145,7 @@ POST api/write/generate/
 	"category": "relationships and love",
 	"sentiment": "harmony",
 	"emotion": "joy",
-	"length": "prompt", 
+	"prompt_length": "prompt", 
         "temperature": 1,
 	"user": 1
     }
@@ -170,7 +170,7 @@ GET api/response/write/<id>
 	"category": "advocacy",
 	"sentiment": "resilience",
 	"emotion": "grief",
-	"length": "prompt", 
+	"prompt_length": "prompt", 
         "temperature": 1,
 	"output": "Uncharted horizons etch the undeniable path of your journey, as you champion for voices and navigate turmoil of crossed skies; poetry unfolds within your steadfast pilgrimage of sorrow and renewal.",
 	"user": 1
