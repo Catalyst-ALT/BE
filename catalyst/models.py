@@ -148,28 +148,28 @@ class Write(models.Model):
     def send_write_prompt(self):
 
         if self.length == 'one word':
-            word_number = "Let the prompt be only 1 word"
+            word_write = "Let the prompt be only 1 word"
         elif self.length == 'three words':
-            word_number = 'Let the prompt be only 3 words'
+            word_write = 'Let the prompt be only 3 words'
         elif self.length == 'prompt':
-            word_number = "Let the prompt be 20-25 words"
+            word_write = "Let the prompt be 20-25 words"
 
-        write_input = f'Give a writer a prompt for writing with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. {word_number}. Do not use the keywords in the prompt. Return only text.'
-        env = environ.Env()
-        environ.Env.read_env()
-        MODEL = "gpt-3.5-turbo"
-        openai.api_key = env('OPENAI_API_KEY')
-        response = openai.ChatCompletion.create(
-            model=MODEL,
-            messages=[
-                {"role": "system",
-                    "content": "You are Emily Dickenson"},
-                {"role": "user", "content": write_input}
-            ],
-            temperature=1.5,
-        )
-        self.output = response['choices'][0]['message']['content']
-        self.save()
+            write_input = f'Give a writer a prompt for writing with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. {word_write}. Do not use the keywords in the prompt. Return only text.'
+            env = environ.Env()
+            environ.Env.read_env()
+            MODEL = "gpt-3.5-turbo"
+            openai.api_key = env('OPENAI_API_KEY')
+            response = openai.ChatCompletion.create(
+                model=MODEL,
+                messages=[
+                    {"role": "system",
+                        "content": "You are J.K. Rowling"},
+                    {"role": "user", "content": write_input}
+                ],
+                temperature=1.5,
+            )
+            self.output = response['choices'][0]['message']['content']
+            self.save()
 
     def __str__(self):
         return str(self.id)
@@ -295,22 +295,22 @@ class VisualArt(models.Model):
         elif self.length == 'prompt':
             word_number = "Let the prompt be 20-25 words"
 
-        visual_art_input = f'Give an artist a {self.medium} prompt with the keywords: {self.theme}, {self.sentiment}, and {self.emotion}. {word_number}. Do not use the keywords in the prompt. Return only text.'
-        temperature = self.temperature
-        env = environ.Env()
-        environ.Env.read_env()
-        MODEL = "gpt-3.5-turbo"
-        openai.api_key = env('OPENAI_API_KEY')
-        response = openai.ChatCompletion.create(
-            model=MODEL,
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": visual_art_input}
-            ],
-            temperature=temperature,
-        )
-        self.output = response['choices'][0]['message']['content']
-        self.save()
+            visual_art_input = f'Give an artist a {self.medium} prompt with the keywords: {self.theme}, {self.sentiment}, and {self.emotion}. {word_number}. Do not use the keywords in the prompt. Return only text.'
+            temperature = self.temperature
+            env = environ.Env()
+            environ.Env.read_env()
+            MODEL = "gpt-3.5-turbo"
+            openai.api_key = env('OPENAI_API_KEY')
+            response = openai.ChatCompletion.create(
+                model=MODEL,
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": visual_art_input}
+                ],
+                temperature=temperature,
+            )
+            self.output = response['choices'][0]['message']['content']
+            self.save()
 
     def __str__(self):
         return str(self.id)
@@ -426,22 +426,22 @@ class Movement(models.Model):
         elif self.length == 'prompt':
             word_number = "Let the prompt be 20-25 words"
 
-        movement_input = f'Give a movement artist a prompt with the keywords: {self.theme}, {self.somatic}, {self.emotion}, {self.sentiment}. {word_number}. Do not use the keywords in the prompt. Return only text.'
-        temperature = self.temperature
-        env = environ.Env()
-        environ.Env.read_env()
-        MODEL = "gpt-3.5-turbo"
-        openai.api_key = env('OPENAI_API_KEY')
-        response = openai.ChatCompletion.create(
-            model=MODEL,
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": movement_input}
-            ],
-            temperature=temperature,
-        )
-        self.output = response['choices'][0]['message']['content']
-        self.save()
+            movement_input = f'Give a movement artist a prompt with the keywords: {self.theme}, {self.somatic}, {self.emotion}, {self.sentiment}. {word_number}. Do not use the keywords in the prompt. Return only text.'
+            temperature = self.temperature
+            env = environ.Env()
+            environ.Env.read_env()
+            MODEL = "gpt-3.5-turbo"
+            openai.api_key = env('OPENAI_API_KEY')
+            response = openai.ChatCompletion.create(
+                model=MODEL,
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": movement_input}
+                ],
+                temperature=temperature,
+            )
+            self.output = response['choices'][0]['message']['content']
+            self.save()
 
     def __str__(self):
         return str(self.id)
@@ -576,21 +576,21 @@ class Music(models.Model):
         elif self.length == 'prompt':
             word_number = "Let the prompt be 20-25 words"
 
-        music_input = f'Give a musician a prompt for music with the keywords: "{self.exploration}", "{self.concept}", "{self.emotion}", "{self.element}". {word_number}. Do not use the keywords in the prompt. Return only text.'
-        env = environ.Env()
-        environ.Env.read_env()
-        MODEL = "gpt-3.5-turbo"
-        openai.api_key = env('OPENAI_API_KEY')
-        response = openai.ChatCompletion.create(
-            model=MODEL,
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": music_input}
-            ],
-            temperature=1.5,
-        )
-        self.output = response['choices'][0]['message']['content']
-        self.save()
+            music_input = f'Give a musician a prompt for music with the keywords: "{self.exploration}", "{self.concept}", "{self.emotion}", "{self.element}". {word_number}. Do not use the keywords in the prompt. Return only text.'
+            env = environ.Env()
+            environ.Env.read_env()
+            MODEL = "gpt-3.5-turbo"
+            openai.api_key = env('OPENAI_API_KEY')
+            response = openai.ChatCompletion.create(
+                model=MODEL,
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": music_input}
+                ],
+                temperature=1.5,
+            )
+            self.output = response['choices'][0]['message']['content']
+            self.save()
 
         def __str__(self):
             return str(self.id)
