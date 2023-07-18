@@ -139,6 +139,7 @@ class Write(models.Model):
         max_length=50, default='', choices=SENTIMENT_CHOICES)
     emotion = models.CharField(
         max_length=50, default='', choices=EMOTION_CHOICES)
+    temperature = models.IntegerField(default=1)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='poems', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
@@ -158,6 +159,7 @@ class Write(models.Model):
 
     def send_write_prompt(self):
         write_input = f'Give a writer a prompt for writing with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. {self.input_length}. Do not use the keywords in the prompt. Return only text.'
+        input_temperature = self.temperature
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -169,7 +171,7 @@ class Write(models.Model):
                     "content": "You are a helpful assistant"},
                 {"role": "user", "content": write_input}
             ],
-            temperature=1.5,
+            temperature=input_temperature,
         )
         self.output = response['choices'][0]['message']['content']
         self.save()
@@ -303,7 +305,6 @@ class VisualArt(models.Model):
 
     def send_visual_art_prompt(self):
         visual_art_input = f'Give an artist a {self.medium} prompt with the keywords: {self.theme}, {self.sentiment}, and {self.emotion}. {self.input_length}. Do not use the keywords in the prompt. Return only text.'
-
         input_temperature = self.temperature
         env = environ.Env()
         environ.Env.read_env()
@@ -439,7 +440,7 @@ class Movement(models.Model):
 
     def send_movement_prompt(self):
         movement_input = f'Give a movement artist a prompt with the keywords: {self.theme}, {self.somatic}, {self.emotion}, {self.sentiment}. {self.input_length}. Do not use the keywords in the prompt. Return only text.'
-        temperature = self.temperature
+        input_temperature = self.temperature
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -450,7 +451,7 @@ class Movement(models.Model):
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": movement_input}
             ],
-            temperature=temperature,
+            temperature=input_temperature,
         )
         self.output = response['choices'][0]['message']['content']
         self.save()
@@ -505,6 +506,7 @@ class Music(models.Model):
     FORM = 'form'
     EXPRESSION = 'expression'
     PITCH = 'pitch'
+    NOTATION = 'notation'
 
     CONCEPT_CHOICES = [
         (DYNAMICS, 'dynamics'),
@@ -515,7 +517,8 @@ class Music(models.Model):
         (TEXTURE, 'texture'),
         (FORM, 'form'),
         (EXPRESSION, 'expression'),
-        (PITCH, 'pitch')
+        (PITCH, 'pitch'),
+        (NOTATION, 'notation'),
     ]
 
     FIRE = 'fire'
@@ -593,6 +596,7 @@ class Music(models.Model):
 
     def send_music_prompt(self):
         music_input = f'Give a musician a prompt for music with the keywords: "{self.exploration}", "{self.concept}", "{self.emotion}", "{self.element}". {self.input_length}. Do not use the keywords in the prompt. Return only text.'
+        input_temperature = self.temperature
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -603,7 +607,7 @@ class Music(models.Model):
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": music_input}
             ],
-            temperature=1.5,
+            temperature=input_temperature,
         )
         self.output = response['choices'][0]['message']['content']
         self.save()

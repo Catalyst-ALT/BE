@@ -191,7 +191,7 @@ POST api/visual_art/generate/
 	"sentiment": "renewal",
 	"emotion": "joy",
 	"temperature": 1.0,
-        "length": "prompt", 
+        "prompt_length": "prompt", 
 	"user": 1, 
 	"output": ""
     }
@@ -214,7 +214,7 @@ GET api/response/visual_art/id
 	"sentiment": "renewal",
 	"emotion": "joy",
 	"temperature": 1,
-        "length": "prompt", 
+        "prompt_length": "prompt", 
 	"output": "Create a vibrant masterpiece capturing the essence of transformation and delight, where layered brushstrokes evoke both tactile and emotional sensations.",
 	"user": 1
     }
@@ -235,7 +235,7 @@ POST api/movement/generate/
 	"sentiment": "harmony",
 	"emotion": "joy",
 	"temperature": 1,
-        "length": "prompt", 
+        "prompt_length": "prompt", 
 	"user": 1
     }
 ```
@@ -255,7 +255,7 @@ GET api/response/movement/id
 	"sentiment": "harmony",
 	"emotion": "joy",
 	"temperature": 1,
-        "length": "prompt", 
+        "prompt_length": "prompt", 
 	"output": "Explore the depths of emotion, capturing the essence of longing and vulnerability, through fluid movements that merge strength and delicacy in a captivating dance.",
 	"user": 1
     }
@@ -275,7 +275,7 @@ POST api/music/generate/
 	"element": "fire",
 	"emotion": "joy",
 	"temperature": 1,
-        "length": "prompt", 
+        "prompt_length": "prompt", 
 	"output": "",
 	"user": 1
     }
@@ -297,7 +297,7 @@ GET api/response/music/id
 	"element": "fire",
 	"emotion": "joy",
 	"temperature": 1,
-        "length": "prompt",
+        "prompt_length": "prompt",
 	"output": "Journey through melodic epochs fuelled by celebratory rhythms, kindling a passionate storm. Create harmonies that transport listeners through a timeless musical dimension.",
 	"user": 1
     }
