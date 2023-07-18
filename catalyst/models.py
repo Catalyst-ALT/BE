@@ -141,7 +141,7 @@ class Write(models.Model):
         max_length=50, default='', choices=EMOTION_CHOICES)
     temperature = models.IntegerField(default=1)
     user = models.ForeignKey(
-        to=User, on_delete=models.CASCADE, related_name='poems', blank=True, null=True)
+        to=User, on_delete=models.CASCADE, related_name='writes', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
@@ -287,7 +287,7 @@ class VisualArt(models.Model):
         max_length=50, default='', choices=EMOTION_CHOICES)
     temperature = models.FloatField(default=0.8)
     user = user = models.ForeignKey(
-        to=User, on_delete=models.CASCADE, related_name='visualarts', blank=True, null=True)
+        to=User, on_delete=models.CASCADE, related_name='visual_arts', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
@@ -422,7 +422,7 @@ class Movement(models.Model):
         max_length=50, default='', choices=EMOTION_CHOICES)
     temperature = models.IntegerField(default=1)
     user = models.ForeignKey(
-        to=User, on_delete=models.CASCADE, related_name='music', blank=True, null=True)
+        to=User, on_delete=models.CASCADE, related_name='movements', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
@@ -578,7 +578,7 @@ class Music(models.Model):
         max_length=50, default='', choices=EMOTION_CHOICES)
     temperature = models.IntegerField(default=1)
     user = models.ForeignKey(
-        to=User, on_delete=models.CASCADE, related_name='movements', blank=True, null=True)
+        to=User, on_delete=models.CASCADE, related_name='music', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)

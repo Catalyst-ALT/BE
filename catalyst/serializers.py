@@ -54,3 +54,14 @@ class MusicOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Music
         fields = '__all__'
+
+
+class AllPromptsArchiveSerializer(serializers.ModelSerializer):
+    music = MusicOutputSerializer(many=True, read_only=True)
+    visual_arts = VisualArtOutputSerializer(many=True, read_only=True)
+    movements = MovementOutputSerializer(many=True, read_only=True)
+    writes = MusicOutputSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'music', 'visual_arts', 'movements', 'writes']

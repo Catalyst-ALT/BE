@@ -1,9 +1,9 @@
 from rest_framework import generics, permissions
-# from django.shortcuts import render, get_object_or_404
 from .models import User, Write, VisualArt, Movement, Music
-from .serializers import MusicInputSerializer, MusicOutputSerializer, WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
+from .serializers import AllPromptsArchiveSerializer, MusicInputSerializer, MusicOutputSerializer, WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
 from catalyst.permissions import IsProfileOwnerOrReadOnly
 import time
+from drf_multiple_model.views import ObjectMultipleModelAPIView
 
 
 class ProfileViewSet(generics.RetrieveUpdateDestroyAPIView):
@@ -132,3 +132,24 @@ class MusicOutputViewSet(generics.RetrieveAPIView):
     '''
     queryset = Music.objects.all()
     serializer_class = MusicOutputSerializer
+
+
+class AllPromptsArchiveViewSet(generics.ListAPIView):
+    '''
+    METHODS: GET list of all outputs/prompts user has received
+    '''
+    queryset = User.objects.all()
+    serializer_class = AllPromptsArchiveSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(writes=self.request.user)
+        serializer.save(visual_arts=self.request.user)
+        serializer.save(movements=self.request.user)
+        serializer.save(music=self.request.user)
+
+# querylist = [
+#     #     {'queryset': Write.objects.all()},
+#     #     {'queryset': VisualArt.objects.all()},
+#     #     {'queryset': Movement.objects.all()},
+#     #     {'queryset': Music.objects.all()},
+#     # ]
