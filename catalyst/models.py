@@ -6,6 +6,14 @@ import json
 import environ
 
 
+ONE_WORD = 'one word'
+PROMPT = 'prompt'
+LENGTH_CHOICES = [
+    (ONE_WORD, 'one word'),
+    (PROMPT, 'prompt')
+]
+
+
 class User(AbstractUser):
     pass
 
@@ -131,16 +139,16 @@ class Write(models.Model):
         max_length=50, default='', choices=EMOTION_CHOICES)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='poems', blank=True, null=True)
+    length = models.CharField(default='', choices=LENGTH_CHOICES)
     output = models.TextField(blank=True)
 
     def send_write_prompt(self):
-        '''
-        Sends POST request to openai's API with user choices wrapped in a prompt with parameters for the gpt model
-        Uses key/value pairing to access the gpt model's output (key='content')
-        Saves chat gpt response to output field on Poem model
-        temperature 1.5 = very creative
-        '''
-        write_input = f'Give a writer a prompt for writing with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
+        if self.length == 'one word':
+            word_number = "Let the prompt be only 3 words"
+        else:
+            word_number = "Let the prompt be 20-25 words"
+
+        write_input = f'Give a writer a prompt for writing with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. {word_number}. Do not use the keywords in the prompt. Return only text.'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -269,15 +277,16 @@ class VisualArt(models.Model):
     temperature = models.IntegerField(default=1)
     user = user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='visualarts', blank=True, null=True)
+    length = models.CharField(default='', choices=LENGTH_CHOICES)
     output = models.TextField(blank=True)
 
     def send_visual_art_prompt(self):
-        '''
-        Sends POST request to openai's API with user choices wrapped in a prompt with parameters for the gpt model
-        Uses key/value pairing to access the gpt model's output (key='content')
-        Saves chat gpt response to output field on Poem model
-        '''
-        visual_art_input = f'Give an artist a {self.medium} prompt with the keywords: {self.theme}, {self.sentiment}, and {self.emotion}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
+        if self.length == 'one word':
+            word_number = "Let the prompt be only 3 words"
+        else:
+            word_number = "Let the prompt be 20-25 words"
+
+        visual_art_input = f'Give an artist a {self.medium} prompt with the keywords: {self.theme}, {self.sentiment}, and {self.emotion}. {word_number}. Do not use the keywords in the prompt. Return only text.'
         temperature = self.temperature
         env = environ.Env()
         environ.Env.read_env()
@@ -396,15 +405,15 @@ class Movement(models.Model):
     temperature = models.IntegerField(default=1)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='music', blank=True, null=True)
+    length = models.CharField(default='', choices=LENGTH_CHOICES)
     output = models.TextField(blank=True)
 
     def send_movement_prompt(self):
-        '''
-        Sends POST request to openai's API with user choices wrapped in a prompt with parameters for the gpt model
-        Uses key/value pairing to access the gpt model's output (key='content')
-        Saves chat gpt response to output field on Poem model
-        '''
-        movement_input = f'Give a movement artist a prompt with the keywords: {self.theme}, {self.somatic}, {self.emotion}, {self.sentiment}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
+        if self.length == 'one word':
+            word_number = "Let the prompt be only 3 words"
+        else:
+            word_number = "Let the prompt be 20-25 words"
+        movement_input = f'Give a movement artist a prompt with the keywords: {self.theme}, {self.somatic}, {self.emotion}, {self.sentiment}. {word_number}. Do not use the keywords in the prompt. Return only text.'
         temperature = self.temperature
         env = environ.Env()
         environ.Env.read_env()
@@ -542,16 +551,17 @@ class Music(models.Model):
     temperature = models.IntegerField(default=1)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='movements', blank=True, null=True)
+    length = models.CharField(default='', choices=LENGTH_CHOICES)
     output = models.TextField(blank=True)
 
     def send_music_prompt(self):
-        '''
-        Sends POST request to openai's API with user choices wrapped in a prompt with parameters for the gpt model
-        Uses key/value pairing to access the gpt model's output (key='content')
-        Saves chat gpt response to output field on Poem model
-        temperature 1.5 = very creative
-        '''
-        music_input = f'Give a musician a prompt for music with the keywords: {self.exploration}, {self.concept}, {self.emotion}, {self.element}. Let the prompt be 20-25 words. Do not use the keywords in the prompt. Return only text.'
+
+        if self.length == 'one word':
+            word_number = "Let the prompt be only 3 words"
+        else:
+            word_number = "Let the prompt be 20-25 words"
+
+        music_input = f'Give a musician a prompt for music with the keywords: "{self.exploration}", "{self.concept}", "{self.emotion}", "{self.element}". {word_number}. Do not use the keywords in the prompt. Return only text.'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
