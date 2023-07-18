@@ -283,7 +283,7 @@ class VisualArt(models.Model):
         max_length=50, default='', choices=SENTIMENT_CHOICES)
     emotion = models.CharField(
         max_length=50, default='', choices=EMOTION_CHOICES)
-    temperature = models.IntegerField(default=1)
+    temperature = models.FloatField(default=0.8)
     user = user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='visualarts', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
@@ -303,7 +303,8 @@ class VisualArt(models.Model):
 
     def send_visual_art_prompt(self):
         visual_art_input = f'Give an artist a {self.medium} prompt with the keywords: {self.theme}, {self.sentiment}, and {self.emotion}. {self.input_length}. Do not use the keywords in the prompt. Return only text.'
-        temperature = self.temperature
+
+        input_temperature = self.temperature
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -314,7 +315,7 @@ class VisualArt(models.Model):
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": visual_art_input}
             ],
-            temperature=temperature,
+            temperature=input_temperature,
         )
         self.output = response['choices'][0]['message']['content']
         self.save()
