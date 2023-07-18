@@ -420,7 +420,7 @@ class Movement(models.Model):
         max_length=50, default='', choices=SENTIMENT_CHOICES)
     emotion = models.CharField(
         max_length=50, default='', choices=EMOTION_CHOICES)
-    temperature = models.IntegerField(default=1)
+    temperature = models.FloatField(default=0.8)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='movements', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
@@ -576,7 +576,7 @@ class Music(models.Model):
         max_length=50, default='', choices=ELEMENT_CHOICES)
     emotion = models.CharField(
         max_length=50, default='', choices=EMOTION_CHOICES)
-    temperature = models.IntegerField(default=1)
+    temperature = models.FloatField(default=0.8)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='music', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
