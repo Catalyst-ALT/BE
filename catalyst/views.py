@@ -3,12 +3,7 @@ from rest_framework import generics, permissions
 from .models import User, Write, VisualArt, Movement, Music
 from .serializers import MusicInputSerializer, MusicOutputSerializer, WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
 from catalyst.permissions import IsProfileOwnerOrReadOnly
-# from rest_framework.decorators import api_view
-# from rest_framework.response import Response
-# from rest_framework import status
-# import openai
-# import requests
-# import json
+import time
 
 
 class ProfileViewSet(generics.RetrieveUpdateDestroyAPIView):
@@ -34,6 +29,10 @@ class WriteInputViewSet(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         poem = serializer.save()
+        length = serializer.save()
+
+        length.get_write_length()
+        time.sleep(1)
         poem.send_write_prompt()
 
 
@@ -57,6 +56,10 @@ class VisualArtInputViewSet(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         visualart = serializer.save()
+        length = serializer.save()
+
+        length.get_visual_art_length()
+        time.sleep(1)
         visualart.send_visual_art_prompt()
 
 
