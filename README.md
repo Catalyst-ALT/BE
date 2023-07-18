@@ -145,21 +145,8 @@ POST api/write/generate/
 	"category": "relationships and love",
 	"sentiment": "harmony",
 	"emotion": "joy",
-	"input_sentiment": null,
-	"input_emotion": null,
-	"user": 1
-    }
-```
-*response*
-```json
-    {
-	"id": 12,
-	"theme": "emotion",
-	"category": "relationships and love",
-	"sentiment": "harmony",
-	"emotion": "joy",
-	"input_sentiment": null,
-	"input_emotion": null,
+	"length": "prompt", 
+    "temperature": 1,
 	"user": 1
     }
 ```
@@ -183,12 +170,15 @@ GET api/response/write/<id>
 	"category": "advocacy",
 	"sentiment": "resilience",
 	"emotion": "grief",
-	"input_sentiment": null,
-	"input_emotion": null,
+	"length": "prompt", 
+    "temperature": 1,
 	"output": "Uncharted horizons etch the undeniable path of your journey, as you champion for voices and navigate turmoil of crossed skies; poetry unfolds within your steadfast pilgrimage of sorrow and renewal.",
 	"user": 1
     }
 ```
+</br>
+</br>
+
 **VISUAL ART PROMPT GENERATE POST**
 > https://catalyst-x226.onrender.com/api/visual_art/generate/
 ```json
@@ -201,12 +191,11 @@ POST api/visual_art/generate/
 	"sentiment": "renewal",
 	"emotion": "joy",
 	"temperature": 1.0,
+    "length": "prompt", 
 	"user": 1, 
 	"output": ""
     }
 ```
-
-
 
 **VISUAL ART PROMPT GENERATE GET**
 > https://catalyst-x226.onrender.com/api/response/visual_art/id
@@ -225,10 +214,13 @@ GET api/response/visual_art/id
 	"sentiment": "renewal",
 	"emotion": "joy",
 	"temperature": 1,
+    "length": "prompt", 
 	"output": "Create a vibrant masterpiece capturing the essence of transformation and delight, where layered brushstrokes evoke both tactile and emotional sensations.",
 	"user": 1
     }
 ```
+</br>
+</br>
 
 **MOVEMENT PROMPT GENERATE POST**
 > https://catalyst-x226.onrender.com/api/movement/generate/
@@ -243,6 +235,7 @@ POST api/movement/generate/
 	"sentiment": "harmony",
 	"emotion": "joy",
 	"temperature": 1,
+    "length": "prompt", 
 	"user": 1
     }
 ```
@@ -262,10 +255,14 @@ GET api/response/movement/id
 	"sentiment": "harmony",
 	"emotion": "joy",
 	"temperature": 1,
+    "length": "prompt", 
 	"output": "Explore the depths of emotion, capturing the essence of longing and vulnerability, through fluid movements that merge strength and delicacy in a captivating dance.",
 	"user": 1
     }
 ```
+</br>
+</br>
+
 **MUSIC PROMPT GENERATE POST**
 > https://catalyst-x226.onrender.com/api/music/generate/
 ```json
@@ -278,6 +275,7 @@ POST api/music/generate/
 	"element": "fire",
 	"emotion": "joy",
 	"temperature": 1,
+    "length": "prompt", 
 	"output": "",
 	"user": 1
     }
@@ -299,6 +297,7 @@ GET api/response/music/id
 	"element": "fire",
 	"emotion": "joy",
 	"temperature": 1,
+    "length": "prompt",
 	"output": "Journey through melodic epochs fuelled by celebratory rhythms, kindling a passionate storm. Create harmonies that transport listeners through a timeless musical dimension.",
 	"user": 1
     }

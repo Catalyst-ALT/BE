@@ -7,10 +7,13 @@ import environ
 
 
 ONE_WORD = 'one word'
+THREE_WORDS = 'three words'
 PROMPT = 'prompt'
+
 LENGTH_CHOICES = [
     (ONE_WORD, 'one word'),
-    (PROMPT, 'prompt')
+    (THREE_WORDS, 'three words'),
+    (PROMPT, 'prompt'),
 ]
 
 
@@ -143,9 +146,12 @@ class Write(models.Model):
     output = models.TextField(blank=True)
 
     def send_write_prompt(self):
+
         if self.length == 'one word':
-            word_number = "Let the prompt be only 3 words"
-        else:
+            word_number = "Let the prompt be only 1 word"
+        elif self.length == 'three words':
+            word_number = 'Let the prompt be only 3 words'
+        elif self.length == 'prompt':
             word_number = "Let the prompt be 20-25 words"
 
         write_input = f'Give a writer a prompt for writing with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. {word_number}. Do not use the keywords in the prompt. Return only text.'
@@ -281,9 +287,12 @@ class VisualArt(models.Model):
     output = models.TextField(blank=True)
 
     def send_visual_art_prompt(self):
+
         if self.length == 'one word':
-            word_number = "Let the prompt be only 3 words"
-        else:
+            word_number = "Let the prompt be only 1 word"
+        elif self.length == 'three words':
+            word_number = 'Let the prompt be only 3 words'
+        elif self.length == 'prompt':
             word_number = "Let the prompt be 20-25 words"
 
         visual_art_input = f'Give an artist a {self.medium} prompt with the keywords: {self.theme}, {self.sentiment}, and {self.emotion}. {word_number}. Do not use the keywords in the prompt. Return only text.'
@@ -409,10 +418,14 @@ class Movement(models.Model):
     output = models.TextField(blank=True)
 
     def send_movement_prompt(self):
+
         if self.length == 'one word':
-            word_number = "Let the prompt be only 3 words"
-        else:
+            word_number = "Let the prompt be only 1 word"
+        elif self.length == 'three words':
+            word_number = 'Let the prompt be only 3 words'
+        elif self.length == 'prompt':
             word_number = "Let the prompt be 20-25 words"
+
         movement_input = f'Give a movement artist a prompt with the keywords: {self.theme}, {self.somatic}, {self.emotion}, {self.sentiment}. {word_number}. Do not use the keywords in the prompt. Return only text.'
         temperature = self.temperature
         env = environ.Env()
@@ -557,8 +570,10 @@ class Music(models.Model):
     def send_music_prompt(self):
 
         if self.length == 'one word':
-            word_number = "Let the prompt be only 3 words"
-        else:
+            word_number = "Let the prompt be only 1 word"
+        elif self.length == 'three words':
+            word_number = 'Let the prompt be only 3 words'
+        elif self.length == 'prompt':
             word_number = "Let the prompt be 20-25 words"
 
         music_input = f'Give a musician a prompt for music with the keywords: "{self.exploration}", "{self.concept}", "{self.emotion}", "{self.element}". {word_number}. Do not use the keywords in the prompt. Return only text.'
