@@ -13,6 +13,7 @@ requests = "*"
 django-cors-headers = "*"
 django-extensions = "*"
 openai = "*"
+django-rest-multiple-models = "*"
 
 [dev-packages]
 

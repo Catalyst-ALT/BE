@@ -302,3 +302,76 @@ GET api/response/music/id
 	"user": 1
     }
 ```
+</br>
+</br>
+
+**USER PROMPT ARCHIVE LIST**
+> https://catalyst-x226.onrender.com/api/prompt/archive/
+```json
+GET api/prompt/archive/
+```
+
+```json
+[
+    {
+    "username": "superuser",
+    }
+    "music": [
+        {
+        "id": 2,
+        "exploration": "musical time travel",
+        "concept": "tempo",
+        "element": "fire",
+        "emotion": "joy",
+	"temperature": 1,
+	"prompt_length": "prompt",
+	"input_length": "Let the prompt be 20-25 words",
+	"output": "Journey through melodic epochs fuelled by celebratory rhythms, kindling a passionate storm. Create harmonies that transport listeners through a timeless musical dimension.",
+        "user": 1
+	},
+    ],
+    "visual_arts": [
+	{
+	"id": 25,
+	"medium": "painting",
+	"theme": "texture",
+	"sentiment": "renewal",
+	"emotion": "joy",
+	"temperature": 1.,
+	"prompt_length": "prompt",
+	"input_length": "Let the prompt be 20-25 words",
+	"output": "Create a vibrant masterpiece capturing the essence of transformation and delight, where layered brushstrokes evoke both tactile and emotional sensations.",
+	"user": 1
+	},
+    ],
+    "movements": [
+	{
+	"id": 5,
+	"theme": "spatial awareness",
+	"somatic": "breath and movement",
+	"sentiment": "harmony",
+	"emotion": "joy",
+	"temperature": 1,
+	"prompt_length": "prompt",
+	"input_length": "Let the prompt be 20-25 words",
+	"output": "Create a dynamic dance piece that explores the seamless interplay of bodies in space, flowing breath, and expressive movements, evoking a sense of pure and radiant bliss.",
+	"user": 1
+        },	
+    ],
+    "writes": [
+	{
+        "id": 66,
+        "style": "word play",
+        "theme": "emotion",
+        "category": "relationships and love",
+        "sentiment": "renewal",
+        "emotion": "joy",
+        "temperature": 1,
+        "prompt_length": "one word",
+        "input_length": "Let the prompt be only 1 word",
+        "output": "Spark",
+        "user": 1
+        },
+    ]
+]
+```
