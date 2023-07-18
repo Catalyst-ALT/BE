@@ -22,7 +22,9 @@ class WriteInputViewSet(generics.CreateAPIView):
     '''
     METHODS: POST
     Creates user input/prompt instance to send to openai's api
-    Calls send_prompt() function to connect via a post request with openai's api
+    Calls get_write_length() function to get user inputted prompt length
+    Calls send_write_prompt() function to connect call openai's api
+    Asynch - 1 second delay between calling the 2 functions
     '''
     queryset = Write.objects.all()
     serializer_class = WriteInputSerializer
@@ -49,7 +51,9 @@ class VisualArtInputViewSet(generics.CreateAPIView):
     '''
     METHODS: POST
     Creates user input/prompt instance to send to openai's api
-    Calls send_prompt() function to connect via a post request with openai's api
+    Calls get_visual_art_length() function to get user inputted prompt length
+    Calls send_visual_art_prompt() function to connect call openai's api
+    Asynch - 1 second delay between calling the 2 functions
     '''
     queryset = VisualArt.objects.all()
     serializer_class = VisualArtInputSerializer
@@ -76,14 +80,20 @@ class MovementInputViewSet(generics.CreateAPIView):
     '''
     METHODS: POST
     Creates user input/prompt instance to send to openai's api
-    Calls send_prompt() function to connect via a post request with openai's api
+    Calls get_movement_length() function to get user inputted prompt length
+    Calls send_movement_prompt() function to connect call openai's api
+    Asynch - 1 second delay between calling the 2 functions
     '''
     queryset = Movement.objects.all()
     serializer_class = MovementInputSerializer
 
     def perform_create(self, serializer):
-        visualart = serializer.save()
-        visualart.send_movement_prompt()
+        movement = serializer.save()
+        length = serializer.save()
+
+        length.get_movement_length()
+        time.sleep(1)
+        movement.send_movement_prompt()
 
 
 class MovementOutputViewSet(generics.RetrieveAPIView):
@@ -99,14 +109,20 @@ class MusicInputViewSet(generics.CreateAPIView):
     '''
     METHODS: POST
     Creates user input/prompt instance to send to openai's api
-    Calls send_prompt() function to connect via a post request with openai's api
+    Calls get_music_length() function to get user inputted prompt length
+    Calls send_music_prompt() function to connect call openai's api
+    Asynch - 1 second delay between calling the 2 functions
     '''
     queryset = Music.objects.all()
     serializer_class = MusicInputSerializer
 
     def perform_create(self, serializer):
-        visualart = serializer.save()
-        visualart.send_music_prompt()
+        music = serializer.save()
+        length = serializer.save()
+
+        length.get_music_length()
+        time.sleep(1)
+        music.send_music_prompt()
 
 
 class MusicOutputViewSet(generics.RetrieveAPIView):
