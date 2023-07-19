@@ -15,6 +15,7 @@ django-extensions = "*"
 openai = "*"
 django-rest-multiple-models = "*"
 django-model-mixins = "*"
+sentry-sdk = "*"
 
 [dev-packages]
 

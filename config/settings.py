@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import environ
 import os
-
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # import openai
 # openai.api_key = os.env("OPENAI_API_KEY")
@@ -159,3 +160,17 @@ AUTH_USER_MODEL = 'catalyst.User'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+sentry_sdk.init(
+    dsn=env("SENTRY_DSN"),
+    integrations=[DjangoIntegration()],
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0,
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)

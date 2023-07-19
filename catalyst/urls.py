@@ -2,6 +2,7 @@ from catalyst.views import NoteRetrieveUpdateDestroyViewSet, NoteArchiveViewSet,
 from django.urls import path
 from catalyst import views
 
+
 urlpatterns = [
     # profile
     path('api/profile/<username>', views.ProfileViewSet.as_view()),
