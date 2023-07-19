@@ -32,124 +32,18 @@ class Note(models.Model):
 
 class Write(models.Model):
 
-    STREAM_OF_CONCIOUSNESS = 'stream of conciousness'
-    TIME = 'time'
-    CHARACTER_DEVELOPMENT = 'character development'
-    POETRY = 'poetry'
-    WORD_PLAY = 'word play'
-    STORY_STARTER = 'story starter'
-    IMAGE = 'image'
-    STORYTELLING_THROUGH_OBJECTS = 'storytelling through objects'
-    FLASH = 'flash'
-    POINT_OF_VIEW_SHIFT = 'point of view shift'
-    MEMOIR = 'memoir'
-    DIALOGUE = 'dialogue'
-    STYLE_CHOICES = [
-        (STREAM_OF_CONCIOUSNESS, 'stream of consciousness'),
-        (TIME, 'time'),
-        (CHARACTER_DEVELOPMENT, 'character development'),
-        (POETRY, 'poetry'),
-        (WORD_PLAY, 'word play'),
-        (STORY_STARTER, 'story starter'),
-        (IMAGE, 'image'),
-        (STORYTELLING_THROUGH_OBJECTS, 'storytelling through objects'),
-        (FLASH, 'flash'),
-        (POINT_OF_VIEW_SHIFT, 'point of view shift'),
-        (MEMOIR, 'memoir'),
-        (DIALOGUE, 'dialogue')
-    ]
-
-    ASSOCIATION = 'association'
-    EMOTION = 'emotion'
-    EXPLORATION = 'exploration'
-    HISTORICAL_CULTURAL = 'historical and cultural'
-    CONCEPTUAL = 'conceptual'
-    THEME_CHOICES = [
-        (ASSOCIATION, 'association'),
-        (EMOTION, 'emotion'),
-        (EXPLORATION, 'exploration'),
-        (HISTORICAL_CULTURAL, 'historical and cultural'),
-        (CONCEPTUAL, 'conceptual'),
-    ]
-
-    RELATIONSHIPS_AND_LOVE = 'relationships and love'
-    NATURE_AND_ENVIRONMENT = 'nature and environment'
-    PERSONAL_GROWTH_AND_REFLECTION = 'personal growth and reflection'
-    SOCIAL_ISSUES_AND_ADVOCACY = 'social issues and advocacy'
-    MYTHOLOGY_AND_FOLKLORE = 'mythology and folklore'
-    SURREALISM_AND_DREAMS = 'surrealism and dreams'
-    HISTORY = 'history'
-    IDENTITY_AND_DIVERSITY = 'identity and diversity'
-    IMAGERY_AND_SYMBOLISM = 'imagery and symbolism'
-    CATEGORY_CHOICES = [
-        (RELATIONSHIPS_AND_LOVE, 'relationships and love'),
-        (NATURE_AND_ENVIRONMENT, 'natural and environment'),
-        (PERSONAL_GROWTH_AND_REFLECTION, 'personal growth and REFLECTION'),
-        (SOCIAL_ISSUES_AND_ADVOCACY, 'social issues and advocacy'),
-        (MYTHOLOGY_AND_FOLKLORE, 'mythology and folklore'),
-        (SURREALISM_AND_DREAMS, 'surrealism and dreams'),
-        (HISTORY, 'history'),
-        (IDENTITY_AND_DIVERSITY, 'identity and diversity'),
-        (IMAGERY_AND_SYMBOLISM, 'imagery and symbolism'),
-    ]
-
-    HARMONY = 'harmony'
-    RESILIENCE = 'resilience'
-    FRAGILITY = 'fragility'
-    MAJESTY = 'majesty'
-    SERENITY = 'serenity'
-    WONDER = 'wonder'
-    TRANSIENCE = 'transience'
-    CONNECTION = 'connection'
-    SOLITUDE = 'solitude'
-    RENEWAL = 'renewal'
-    SENTIMENT_CHOICES = [
-        (HARMONY, 'harmony'),
-        (RESILIENCE, 'resilience'),
-        (FRAGILITY, 'fragility'),
-        (MAJESTY, 'majesty'),
-        (SERENITY, 'serenity'),
-        (WONDER, 'wonder'),
-        (TRANSIENCE, 'transience'),
-        (CONNECTION, 'connection'),
-        (SOLITUDE, 'solitude'),
-        (RENEWAL, 'renewal'),
-    ]
-
-    JOY = 'joy'
-    COURAGE = 'courage'
-    MELANCHOLY = 'melancholy'
-    EUPHORIA = 'euphoria'
-    LONGING = 'longing'
-    HOPE = 'hope'
-    AWE = 'awe'
-    BLISS = 'bliss'
-    ANGUISH = 'anguish'
-    GRIEF = 'grief'
-    EMOTION_CHOICES = [
-        (JOY, 'joy'),
-        (COURAGE, 'courage'),
-        (MELANCHOLY, 'melancholy'),
-        (EUPHORIA, 'euphoria'),
-        (LONGING, 'longing'),
-        (HOPE, 'hope'),
-        (AWE, 'awe'),
-        (BLISS, 'bliss'),
-        (ANGUISH, 'anguish'),
-        (GRIEF, 'grief'),
-    ]
-    style = models.CharField(max_length=50, default='', choices=STYLE_CHOICES)
-    theme = models.CharField(max_length=50, default='', choices=THEME_CHOICES)
+    style = models.CharField(max_length=50, blank=True)
+    theme = models.CharField(max_length=50, blank=True)
     category = models.CharField(
-        max_length=50, default='', choices=CATEGORY_CHOICES)
+        max_length=50, blank=True)
     sentiment = models.CharField(
-        max_length=50, default='', choices=SENTIMENT_CHOICES)
+        max_length=50, blank=True)
     emotion = models.CharField(
-        max_length=50, default='', choices=EMOTION_CHOICES)
+        max_length=50, blank=True)
     temperature = models.IntegerField(default=1)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='writes', blank=True, null=True)
-    prompt_length = models.CharField(choices=LENGTH_CHOICES)
+    prompt_length = models.CharField(max_length=50)
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

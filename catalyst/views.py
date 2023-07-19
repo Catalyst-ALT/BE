@@ -190,9 +190,11 @@ class AllMusicPromptViewSet(generics.ListAPIView):
     queryset = Music.objects.all()
     serializer_class = MusicOutputSerializer
 
-# class OnePromptViewSet(generics.RetrieveUpdateAPIView):
-#     '''
-#     METHODS: GET, PATCH
-#     Retrieve and update
-#     '''
-#     queryset =
+
+class NoteCreateViewSet(generics.CreateAPIView):
+    '''
+    METHODS: POST
+    Create Note instance
+    '''
+    queryset = Note.objects.all()
+    serializer_class = NotePostSerializer
