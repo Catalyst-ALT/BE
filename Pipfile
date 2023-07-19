@@ -14,6 +14,7 @@ django-cors-headers = "*"
 django-extensions = "*"
 openai = "*"
 django-rest-multiple-models = "*"
+django-model-mixins = "*"
 
 [dev-packages]
 

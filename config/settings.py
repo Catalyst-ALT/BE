@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'corsheaders',
     'drf_multiple_model',
+    'django_model_mixins',
 ]
 
 MIDDLEWARE = [
