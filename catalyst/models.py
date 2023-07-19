@@ -142,106 +142,23 @@ class VisualArt(models.Model):
 
 
 class Movement(models.Model):
-    SPATIAL_AWARENESS = 'spatial awareness'
-    EMOTIONAL_LANDSCAPE = 'emotional landscape'
-    EXPRESSIVE_GESTURES = 'expressive gestures'
-    RHYTHM_AND_FLOW = 'rhythm and flow'
-    ABSTRACT_AND_EXPRESSION = 'abstract and expression'
-    PERSONAL_NARRATIVES = 'personal narratives'
-    NATURE_IN_MOTION = 'nature in motion'
-    CULTURAL_FUSION = 'cultural fusion'
-    HUMAN_CONNECTION = 'human connection'
-    THEME_CHOICES = [
-        (SPATIAL_AWARENESS, 'spatial awareness'),
-        (EMOTIONAL_LANDSCAPE, 'emotional landscape'),
-        (EXPRESSIVE_GESTURES, 'expressive gestures'),
-        (RHYTHM_AND_FLOW, 'rhythm and flow'),
-        (ABSTRACT_AND_EXPRESSION, 'abstract and expression'),
-        (PERSONAL_NARRATIVES, 'personal narratives'),
-        (NATURE_IN_MOTION, 'nature in motion'),
-        (CULTURAL_FUSION, 'cultural fusion'),
-        (HUMAN_CONNECTION, 'human connection')
-    ]
 
-    EMBODIED_AWARENESS = 'embodied awareness'
-    BREATH_AND_MOVEMENT = 'breath and movement'
-    BODY_MIND_CONNECTION = 'body-mind connection'
-    ANATOMY = 'anatomy'
-    AUTHENTIC_MOVEMENT = 'authentic movement'
-    GROUNDING_AND_CENTERING = 'grounding and centering'
-    BODY_MAPPING = 'body mapping'
-    MINDFUL_MOVEMENT = 'mindful movement'
-    SOMATIC_IMAGINATION = 'somatic imagination'
-    SOMATIC_CHOICES = [
-        (EMBODIED_AWARENESS, 'embodied awareness'),
-        (BREATH_AND_MOVEMENT, 'breath and movement'),
-        (BODY_MIND_CONNECTION, 'body-mind connection'),
-        (ANATOMY, 'anatomy'),
-        (AUTHENTIC_MOVEMENT, 'authentic movement'),
-        (GROUNDING_AND_CENTERING, 'grounding and centering'),
-        (BODY_MAPPING, 'body mapping'),
-        (MINDFUL_MOVEMENT, 'mindful movement'),
-        (SOMATIC_IMAGINATION, 'somatic imagination')
-    ]
-
-    HARMONY = 'harmony'
-    SERENITY = 'serenity'
-    SOLITUDE = 'solitude'
-    RESILIENCE = 'resilience'
-    WONDER = 'wonder'
-    RENEWAL = 'renewal'
-    FRAGILITY = 'fragility'
-    MAJESTY = 'majesty'
-    TRANSIENCE = 'transience'
-    CONNECTION = 'connection'
-    SENTIMENT_CHOICES = [
-        (HARMONY, 'harmony'),
-        (SERENITY, 'serenity'),
-        (SOLITUDE, 'solitude'),
-        (RESILIENCE, 'resilience'),
-        (WONDER, 'wonder'),
-        (RENEWAL, 'renewal'),
-        (FRAGILITY, 'fragility'),
-        (MAJESTY, 'majesty'),
-        (TRANSIENCE, 'transience'),
-        (CONNECTION, 'connection')
-    ]
-
-    JOY = 'joy'
-    COURAGE = 'courage'
-    MELANCHOLY = 'melancholy'
-    EUPHORIA = 'euphoria'
-    LONGING = 'longing'
-    HOPE = 'hope'
-    AWE = 'awe'
-    BLISS = 'bliss'
-    ANGUISH = 'anguish'
-    GRIEF = 'grief'
-    EMOTION_CHOICES = [
-        (JOY, 'joy'),
-        (COURAGE, 'courage'),
-        (MELANCHOLY, 'melancholy'),
-        (EUPHORIA, 'euphoria'),
-        (LONGING, 'longing'),
-        (HOPE, 'hope'),
-        (AWE, 'awe'),
-        (BLISS, 'bliss'),
-        (ANGUISH, 'anguish'),
-        (GRIEF, 'grief')
-    ]
-    theme = models.CharField(max_length=50, default='', choices=THEME_CHOICES)
+    theme = models.CharField(max_length=50, blank=True)
     somatic = models.CharField(
-        max_length=50, default='', choices=SOMATIC_CHOICES)
+        max_length=50, blank=True)
     sentiment = models.CharField(
-        max_length=50, default='', choices=SENTIMENT_CHOICES)
+        max_length=50, blank=True)
     emotion = models.CharField(
-        max_length=50, default='', choices=EMOTION_CHOICES)
+        max_length=50, blank=True)
     temperature = models.FloatField(default=0.8)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='movements', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    note = models.ForeignKey(to=Note, on_delete=models.CASCADE,
+                             related_name='movement_notes', blank=True, null=True)
 
     def get_movement_length(self):
         if self.prompt_length == 'one word':
