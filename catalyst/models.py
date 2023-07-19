@@ -195,126 +195,23 @@ class Movement(models.Model):
 
 class Music(models.Model):
 
-    MOOD_BASED_COMPOSITION = 'mood-based composition'
-    GENRE_FUSION = 'genre fusion'
-    MUSICAL_STORYTELLING = 'musical storytelling'
-    NATURE_SOUNDSCAPE = 'nature soundscape'
-    RHYTHMIC_EXPLORATION = 'rhythmic exploration'
-    COLLABORATIVE_COMPOSITION = 'collaborative composition'
-    MINIMALISM = 'minimalism'
-    MASHUP_OR_REMIX = 'mashup or remix'
-    MUSIC_FOR_VISUALS = 'music for visuals'
-    CINEMATIC_SCORE = 'cinematic score'
-    MUSICAL_HAIKU = 'musical haiku'
-    ONE_NOTE_CHALLENGE = 'one-note challenge'
-    INCORPORATE_UNCONVENTIONAL_INSTRUMENTS = 'incorporate unconventional instruments'
-    MUSIC_INSPIRED_BY_ART = 'music inspired by art'
-    MUSICAL_TIME_TRAVEL = 'musical time travel'
-
-    EXPLORATION_CHOICES = [
-        (MOOD_BASED_COMPOSITION, 'mood-based composition'),
-        (GENRE_FUSION, 'genre fusion'),
-        (MUSICAL_STORYTELLING, 'musical storytelling'),
-        (NATURE_SOUNDSCAPE, 'nature soundscape'),
-        (RHYTHMIC_EXPLORATION, 'rhythmic exploration'),
-        (COLLABORATIVE_COMPOSITION, 'collaborative composition'),
-        (MINIMALISM, 'minimalism'),
-        (MASHUP_OR_REMIX, 'mashup or remix'),
-        (MUSIC_FOR_VISUALS, 'music for visuals'),
-        (CINEMATIC_SCORE, 'cinematic score'),
-        (MUSICAL_HAIKU, 'musical haiku'),
-        (ONE_NOTE_CHALLENGE, 'one-note challenge'),
-        (INCORPORATE_UNCONVENTIONAL_INSTRUMENTS,
-         'incorporate unconventional instruments'),
-        (MUSIC_INSPIRED_BY_ART, 'music inspired by art'),
-        (MUSICAL_TIME_TRAVEL, 'musical time travel')
-    ]
-
-    DYNAMICS = 'dynamics'
-    TEMPO = 'tempo'
-    TIMBRE = 'timbre'
-    MELODY = 'melody'
-    RHYTHM = 'rhythm'
-    TEXTURE = 'texture'
-    FORM = 'form'
-    EXPRESSION = 'expression'
-    PITCH = 'pitch'
-    NOTATION = 'notation'
-
-    CONCEPT_CHOICES = [
-        (DYNAMICS, 'dynamics'),
-        (TEMPO, 'tempo'),
-        (TIMBRE, 'timbre'),
-        (MELODY, 'melody'),
-        (RHYTHM, 'rhythm'),
-        (TEXTURE, 'texture'),
-        (FORM, 'form'),
-        (EXPRESSION, 'expression'),
-        (PITCH, 'pitch'),
-        (NOTATION, 'notation'),
-    ]
-
-    FIRE = 'fire'
-    WATER = 'water'
-    EARTH = 'earth'
-    AIR = 'air'
-    LIGHT = 'light'
-    DARKNESS = 'darkness'
-    SOUND = 'sound'
-    MOVEMENT = 'movement'
-    TIME = 'time'
-    SPACE = 'space'
-
-    ELEMENT_CHOICES = [
-        (FIRE, 'fire'),
-        (WATER, 'water'),
-        (EARTH, 'earth'),
-        (AIR, 'air'),
-        (LIGHT, 'light'),
-        (DARKNESS, 'darkness'),
-        (SOUND, 'sound'),
-        (MOVEMENT, 'movement'),
-        (TIME, 'time'),
-        (SPACE, 'space')
-    ]
-
-    JOY = 'joy'
-    COURAGE = 'courage'
-    MELANCHOLY = 'melancholy'
-    EUPHORIA = 'euphoria'
-    LONGING = 'longing'
-    HOPE = 'hope'
-    AWE = 'awe'
-    BLISS = 'bliss'
-    ANGUISH = 'anguish'
-    GRIEF = 'grief'
-    EMOTION_CHOICES = [
-        (JOY, 'joy'),
-        (COURAGE, 'courage'),
-        (MELANCHOLY, 'melancholy'),
-        (EUPHORIA, 'euphoria'),
-        (LONGING, 'longing'),
-        (HOPE, 'hope'),
-        (AWE, 'awe'),
-        (BLISS, 'bliss'),
-        (ANGUISH, 'anguish'),
-        (GRIEF, 'grief')
-    ]
-
     exploration = models.CharField(
-        max_length=50, default='', choices=EXPLORATION_CHOICES)
+        max_length=50, blank=True)
     concept = models.CharField(
-        max_length=50, default='', choices=CONCEPT_CHOICES)
+        max_length=50, blank=True)
     element = models.CharField(
-        max_length=50, default='', choices=ELEMENT_CHOICES)
+        max_length=50, blank=True)
     emotion = models.CharField(
-        max_length=50, default='', choices=EMOTION_CHOICES)
+        max_length=50, blank=True)
     temperature = models.FloatField(default=0.8)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='music', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    note = models.ForeignKey(to=Note, on_delete=models.CASCADE,
+                             related_name='music_notes', blank=True, null=True)
 
     def get_music_length(self):
         if self.prompt_length == 'one word':
