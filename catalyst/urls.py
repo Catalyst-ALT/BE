@@ -1,4 +1,4 @@
-from catalyst.views import NoteRetrieveUpdateDestroyViewSet, NoteArchiveViewSet, AllMusicPromptViewSet, AllWritePromptViewSet, AllMovementPromptViewSet, AllVisualArtPromptViewSet, AllPromptsArchiveViewSet, MusicInputViewSet, MusicOutputViewSet, MovementInputViewSet, MovementOutputViewSet, WriteInputViewSet, ProfileViewSet, WriteOutputViewSet, VisualArtInputViewSet, VisualArtOutputViewSet
+from catalyst.views import WelcomeOutputViewSet, WelcomeInputViewSet, NoteRetrieveUpdateDestroyViewSet, NoteArchiveViewSet, AllMusicPromptViewSet, AllWritePromptViewSet, AllMovementPromptViewSet, AllVisualArtPromptViewSet, AllPromptsArchiveViewSet, MusicInputViewSet, MusicOutputViewSet, MovementInputViewSet, MovementOutputViewSet, WriteInputViewSet, ProfileViewSet, WriteOutputViewSet, VisualArtInputViewSet, VisualArtOutputViewSet
 from django.urls import path
 from catalyst import views
 
@@ -37,5 +37,9 @@ urlpatterns = [
     # all user prompts
     path('api/prompt/archive/',
          views.AllPromptsArchiveViewSet.as_view()),
+
+    # welcome
+    path('api/welcome/generate/', views.WelcomeInputViewSet.as_view()),
+    path('api/welcome/<int:pk>', views.WelcomeOutputViewSet.as_view())
 ]
 # https://api.openai.com/v1/chat/completions

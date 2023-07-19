@@ -23,6 +23,31 @@ class User(AbstractUser):
         return self.username
 
 
+class Welcome(models.Model):
+    output_text = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.id
+
+    def send_welcome_prompt(self):
+        welcome_input = f'Give the user a welcome statement. Put a robot emoji. This is an app call catalyst. The app is for creatives and artist. Let the statement be 20-25 words long.'
+        env = environ.Env()
+        environ.Env.read_env()
+        MODEL = "gpt-3.5-turbo"
+        openai.api_key = env('OPENAI_API_KEY')
+        response = openai.ChatCompletion.create(
+            model=MODEL,
+            messages=[
+                {"role": "system",
+                    "content": "You are a helpful assistant"},
+                {"role": "user", "content": welcome_input}
+            ],
+            temperature=0.5,
+        )
+        self.output_text = response['choices'][0]['message']['content']
+        self.save()
+
+
 class Note(models.Model):
     text = models.TextField(blank=True)
 

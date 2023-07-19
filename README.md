@@ -132,7 +132,7 @@ HTTP_204_NO_CONTENT
 </br>
 </br>
 
-**WRITE PROMPT GENERATE POST**
+**WRITE PROMPT GENERATE**
 > https://catalyst-x226.onrender.com/api/write/generate/
 
 *request*
@@ -154,7 +154,7 @@ POST api/write/generate/
 </br>
 </br>
 
-**WRITE PROMPT GENERATE GET**
+**WRITE PROMPT GENERATE**
 > https://catalyst-x226.onrender.com/api/response/write/id
 ```json
 Output from openai api
@@ -180,7 +180,12 @@ GET api/response/write/<id>
 </br>
 </br>
 
-**VISUAL ART PROMPT GENERATE POST**
+**GET ALL WRITE PROMPTS**
+```json
+GET api/write/prompts
+```
+
+**VISUAL ART PROMPT GENERATE**
 > https://catalyst-x226.onrender.com/api/visual_art/generate/
 ```json
 POST api/visual_art/generate/
@@ -198,7 +203,7 @@ POST api/visual_art/generate/
     }
 ```
 
-**VISUAL ART PROMPT GENERATE GET**
+**VISUAL ART PROMPT GET**
 > https://catalyst-x226.onrender.com/api/response/visual_art/id
 ```json
 Output from openai api
@@ -223,7 +228,12 @@ GET api/response/visual_art/id
 </br>
 </br>
 
-**MOVEMENT PROMPT GENERATE POST**
+**GET ALL VISUAL ART PROMPTS**
+```json
+GET api/visual_art/prompts
+```
+
+**MOVEMENT PROMPT GENERATE**
 > https://catalyst-x226.onrender.com/api/movement/generate/
 
 ```json
@@ -240,7 +250,7 @@ POST api/movement/generate/
 	"user": 1
     }
 ```
-**MOVEMENT PROMPT GENERATE GET**
+**MOVEMENT PROMPT GET**
 > https://catalyst-x226.onrender.com/api/response/movement/id
 ```json
 Output from openai api
@@ -264,7 +274,12 @@ GET api/response/movement/id
 </br>
 </br>
 
-**MUSIC PROMPT GENERATE POST**
+**GET ALL MOVEMENT PROMPTS**
+```json
+GET api/movement/prompts/
+```
+
+**MUSIC PROMPT GENERATE**
 > https://catalyst-x226.onrender.com/api/music/generate/
 ```json
 POST api/music/generate/
@@ -282,7 +297,7 @@ POST api/music/generate/
     }
 ```
 
-**MUSIC PROMPT GENERATE GET**
+**MUSIC PROMPT GET**
 > https://catalyst-x226.onrender.com/api/response/music/id
 ```json
 Output from openai api
@@ -305,6 +320,11 @@ GET api/response/music/id
 ```
 </br>
 </br>
+
+**GET ALL MUSIC PROMPTS**
+```json
+GET api/music/prompts/
+```
 
 **USER PROMPT ARCHIVE LIST**
 > https://catalyst-x226.onrender.com/api/prompt/archive/
@@ -375,4 +395,25 @@ GET api/prompt/archive/
         },
     ]
 ]
+```
+
+**CREATE NOTE**
+```json
+POST api/note/create/
+```
+
+**RETRIEVE NOTE**
+```json
+GET api/note/id
+```
+
+
+**WELCOME PROMPT GENERATE**
+```json
+POST api/welcome/generate/
+```
+
+**RETRIEVE WELCOME PROMPT**
+```json
+GET api/welcome/id
 ```

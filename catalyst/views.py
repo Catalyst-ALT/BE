@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
-from .models import User, Write, VisualArt, Movement, Music, Note
-from .serializers import NoteSerializer, AllPromptsArchiveSerializer, MusicInputSerializer, MusicOutputSerializer, WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
+from .models import User, Write, VisualArt, Movement, Music, Note, Welcome
+from .serializers import WelcomeSerializer, NoteSerializer, AllPromptsArchiveSerializer, MusicInputSerializer, MusicOutputSerializer, WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
 from catalyst.permissions import IsProfileOwnerOrReadOnly
 import time
 from rest_framework.response import Response
@@ -217,3 +217,17 @@ class NoteArchiveViewSet(generics.ListAPIView):
     '''
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+
+
+class WelcomeInputViewSet(generics.CreateAPIView):
+    querset = Welcome.objects.all()
+    serializer_class = WelcomeSerializer
+
+    def perform_create(self, serializer):
+        hello = serializer.save()
+        hello.send_welcome_prompt()
+
+
+class WelcomeOutputViewSet(generics.RetrieveAPIView):
+    queryset = Welcome.objects.all()
+    serializer_class = WelcomeSerializer

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Write, VisualArt, Movement, Music, Note
+from .models import User, Write, VisualArt, Movement, Music, Note, Welcome
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -70,4 +70,10 @@ class AllPromptsArchiveSerializer(serializers.ModelSerializer):
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
+        fields = '__all__'
+
+
+class WelcomeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Welcome
         fields = '__all__'
