@@ -38,8 +38,10 @@ class WriteInputViewSet(generics.CreateAPIView):
     def perform_create(self, serializer):
         poem = serializer.save()
         length = serializer.save()
+        temp = serializer.save()
 
         length.get_write_length()
+        temp.format_write_temperature()
         time.sleep(1)
         poem.send_write_prompt()
 
