@@ -23,6 +23,13 @@ class User(AbstractUser):
         return self.username
 
 
+class Note(models.Model):
+    text = models.TextField(blank=True)
+
+    def __str__(self):
+        return str(self.id)
+
+
 class Write(models.Model):
 
     STREAM_OF_CONCIOUSNESS = 'stream of conciousness'
@@ -145,6 +152,13 @@ class Write(models.Model):
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    note = models.ForeignKey(to=Note, on_delete=models.CASCADE,
+                             related_name='writes_notes', blank=True, null=True)
+
+    class WriteManager(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset().order_by('-date')
 
     def get_write_length(self):
         if self.prompt_length == 'one word':
@@ -612,5 +626,5 @@ class Music(models.Model):
         self.output = response['choices'][0]['message']['content']
         self.save()
 
-        def __str__(self):
-            return str(self.id)
+    def __str__(self):
+        return str(self.id)

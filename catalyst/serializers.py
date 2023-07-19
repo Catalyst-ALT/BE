@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Write, VisualArt, Movement, Music
+from .models import User, Write, VisualArt, Movement, Music, Note
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -60,8 +60,14 @@ class AllPromptsArchiveSerializer(serializers.ModelSerializer):
     music = MusicOutputSerializer(many=True, read_only=True)
     visual_arts = VisualArtOutputSerializer(many=True, read_only=True)
     movements = MovementOutputSerializer(many=True, read_only=True)
-    writes = MusicOutputSerializer(many=True, read_only=True)
+    writes = WriteOutputSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
         fields = ['username', 'music', 'visual_arts', 'movements', 'writes']
+
+
+class NotePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Note
+        fields = '__all__'

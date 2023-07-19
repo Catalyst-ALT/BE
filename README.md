@@ -141,6 +141,7 @@ POST api/write/generate/
 ```
 ```json
     {
+    "style": "poem",   
 	"theme": "emotion",
 	"category": "relationships and love",
 	"sentiment": "harmony",

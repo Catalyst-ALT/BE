@@ -1,9 +1,15 @@
 from rest_framework import generics, permissions
-from .models import User, Write, VisualArt, Movement, Music
-from .serializers import AllPromptsArchiveSerializer, MusicInputSerializer, MusicOutputSerializer, WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
+from .models import User, Write, VisualArt, Movement, Music, Note
+from .serializers import NotePostSerializer, AllPromptsArchiveSerializer, MusicInputSerializer, MusicOutputSerializer, WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
 from catalyst.permissions import IsProfileOwnerOrReadOnly
 import time
+from rest_framework.response import Response
+from rest_framework import status
 from drf_multiple_model.views import ObjectMultipleModelAPIView
+from rest_framework.serializers import Serializer
+from rest_framework import request
+from rest_framework.views import APIView
+from rest_framework.decorators import action
 
 
 class ProfileViewSet(generics.RetrieveUpdateDestroyAPIView):
@@ -136,7 +142,8 @@ class MusicOutputViewSet(generics.RetrieveAPIView):
 
 class AllPromptsArchiveViewSet(generics.ListAPIView):
     '''
-    METHODS: GET list of all outputs/prompts user has received
+    METHODS: GET 
+    List of all outputs/prompts user has received
     '''
     queryset = User.objects.all()
     serializer_class = AllPromptsArchiveSerializer
@@ -147,9 +154,45 @@ class AllPromptsArchiveViewSet(generics.ListAPIView):
         serializer.save(movements=self.request.user)
         serializer.save(music=self.request.user)
 
-# querylist = [
-#     #     {'queryset': Write.objects.all()},
-#     #     {'queryset': VisualArt.objects.all()},
-#     #     {'queryset': Movement.objects.all()},
-#     #     {'queryset': Music.objects.all()},
-#     # ]
+
+class AllWritePromptViewSet(generics.ListAPIView):
+    '''
+    METHODS: GET
+    List all write outputs/prompts user has received
+    '''
+    queryset = Write.objects.all()
+    serializer_class = WriteOutputSerializer
+
+
+class AllVisualArtPromptViewSet(generics.ListAPIView):
+    '''
+    METHODS: GET
+    List all visual art outputs/prompts user has received
+    '''
+    queryset = VisualArt.objects.all()
+    serializer_class = VisualArtOutputSerializer
+
+
+class AllMovementPromptViewSet(generics.ListAPIView):
+    '''
+    METHODS: GET
+    List all movement outputs/prompts user has received
+    '''
+    queryset = Movement.objects.all()
+    serializer_class = MovementOutputSerializer
+
+
+class AllMusicPromptViewSet(generics.ListAPIView):
+    '''
+    METHODS: GET
+    List all music outputs/prompts user has received
+    '''
+    queryset = Music.objects.all()
+    serializer_class = MusicOutputSerializer
+
+# class OnePromptViewSet(generics.RetrieveUpdateAPIView):
+#     '''
+#     METHODS: GET, PATCH
+#     Retrieve and update
+#     '''
+#     queryset =
