@@ -40,7 +40,7 @@ class Write(models.Model):
         max_length=50, blank=True)
     emotion = models.CharField(
         max_length=50, blank=True)
-    temperature = models.IntegerField(default=1)
+    temperature = models.FloatField(default=0.8)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='writes', blank=True, null=True)
     prompt_length = models.CharField(max_length=50)
@@ -89,116 +89,24 @@ class Write(models.Model):
 
 
 class VisualArt(models.Model):
-    PAINTING = 'painting'
-    DRAWING = 'drawing'
-    SCULPTURE = 'sculpture'
-    PRINTMAKING = 'printmaking'
-    DIGITAL_ART = 'digital art'
-    ILLUSTRATION = 'illustration'
-    PHOTOGRAPHY = 'photography'
-    MIXED_MEDIA = 'mixed media'
-    MEDIUM_CHOICES = [
-        (PAINTING, 'painting'),
-        (DRAWING, 'drawing'),
-        (SCULPTURE, 'sculpture'),
-        (PRINTMAKING, 'printmaking'),
-        (DIGITAL_ART, 'digital art'),
-        (ILLUSTRATION, 'illustration'),
-        (PHOTOGRAPHY, 'photography'),
-        (MIXED_MEDIA, 'mixed media'),
-    ]
-
-    PORTRAITURE = 'portraiture'
-    TEXTURE = 'texture'
-    SYMBOLISM = 'symbolism'
-    NATURE_AND_LANDSCAPES = 'nature and landscapes'
-    STORYTELLING_AND_NARRATIVE = 'storytelling and narrative'
-    ABSTRACTION = 'abstraction'
-    SOCIAL_COMMENTARY = 'social commentary'
-    LIGHT_AND_SHADOW = 'light and shadow'
-    COLLAGE_AND_MIXED_MEDIA = 'collage and mixed media'
-    EXPERIMENTATION = 'experimentation'
-    CONCEPTUAL = 'conceptual'
-    MINIMALISM = 'minimalism'
-    MOVEMENT_AND_ENERGY = "movement and energy"
-    HARMONY_AND_BALANCE = 'harmony and balance'
-    THEME_CHOICES = [
-        (PORTRAITURE, 'portraiture'),
-        (TEXTURE, 'texture'),
-        (SYMBOLISM, 'symbolism'),
-        (NATURE_AND_LANDSCAPES, 'nature and landscapes'),
-        (STORYTELLING_AND_NARRATIVE, 'storytelling and narrative'),
-        (ABSTRACTION, 'abstraction'),
-        (SOCIAL_COMMENTARY, 'social commentary'),
-        (LIGHT_AND_SHADOW, 'light and shadow'),
-        (COLLAGE_AND_MIXED_MEDIA, 'collage and mixed media'),
-        (EXPERIMENTATION, 'experimentation'),
-        (CONCEPTUAL, 'conceptual'),
-        (MINIMALISM, 'minimalism'),
-        (MOVEMENT_AND_ENERGY, 'movement and energy'),
-        (HARMONY_AND_BALANCE, 'harmony and balance')
-    ]
-
-    HARMONY = 'harmony'
-    SERENITY = 'serenity'
-    SOLITUDE = 'solitude'
-    RESILIENCE = 'resilience'
-    WONDER = 'wonder'
-    RENEWAL = 'renewal'
-    FRAGILITY = 'fragility'
-    MAJESTY = 'majesty'
-    TRANSIENCE = 'transience'
-    CONNECTION = 'connection'
-    SENTIMENT_CHOICES = [
-        (HARMONY, 'harmony'),
-        (SERENITY, 'serenity'),
-        (SOLITUDE, 'solitude'),
-        (RESILIENCE, 'resilience'),
-        (WONDER, 'wonder'),
-        (RENEWAL, 'renewal'),
-        (FRAGILITY, 'fragility'),
-        (MAJESTY, 'majesty'),
-        (TRANSIENCE, 'transience'),
-        (CONNECTION, 'connection')
-    ]
-
-    JOY = 'joy'
-    COURAGE = 'courage'
-    MELANCHOLY = 'melancholy'
-    EUPHORIA = 'euphoria'
-    LONGING = 'longing'
-    HOPE = 'hope'
-    AWE = 'awe'
-    BLISS = 'bliss'
-    ANGUISH = 'anguish'
-    GRIEF = 'grief'
-    EMOTION_CHOICES = [
-        (JOY, 'joy'),
-        (COURAGE, 'courage'),
-        (MELANCHOLY, 'melancholy'),
-        (EUPHORIA, 'euphoria'),
-        (LONGING, 'longing'),
-        (HOPE, 'hope'),
-        (AWE, 'awe'),
-        (BLISS, 'bliss'),
-        (ANGUISH, 'anguish'),
-        (GRIEF, 'grief')
-    ]
 
     medium = models.CharField(
-        max_length=50, default='', choices=MEDIUM_CHOICES)
+        max_length=50, blank=True)
     theme = models.CharField(
-        max_length=50, default='', choices=THEME_CHOICES)
+        max_length=50, blank=True)
     sentiment = models.CharField(
-        max_length=50, default='', choices=SENTIMENT_CHOICES)
+        max_length=50, blank=True)
     emotion = models.CharField(
-        max_length=50, default='', choices=EMOTION_CHOICES)
+        max_length=50, blank=True)
     temperature = models.FloatField(default=0.8)
     user = user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='visual_arts', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    note = models.ForeignKey(to=Note, on_delete=models.CASCADE,
+                             related_name='visual_art_notes', blank=True, null=True)
 
     def get_visual_art_length(self):
         if self.prompt_length == 'one word':
