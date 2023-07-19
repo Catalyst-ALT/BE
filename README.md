@@ -17,6 +17,7 @@ https://catalyst-x226.onrender.com
 
 
 **CREATE USER**
+</br>
 https://catalyst-x226.onrender.com/auth/users/
 
 *request*
