@@ -15,7 +15,7 @@ urlpatterns = [
     path('api/visual_art/generate/', views.VisualArtInputViewSet.as_view()),
     path('api/response/visual_art/<int:pk>',
          views.VisualArtOutputViewSet.as_view()),
-    path('api/visual_art/prompts/', views. AllVisualArtPromptViewSet.as_view()),
+    path('api/visual_art/prompts/', views.AllVisualArtPromptViewSet.as_view()),
 
     # movement
     path('api/movement/generate/', views.MovementInputViewSet.as_view()),

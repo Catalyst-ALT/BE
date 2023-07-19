@@ -40,7 +40,8 @@ class Write(models.Model):
         max_length=50, blank=True)
     emotion = models.CharField(
         max_length=50, blank=True)
-    temperature = models.FloatField(default=0.8)
+    temperature = models.CharField(max_length=50, blank=True)
+    input_temperature = models.FloatField(blank=True)
     user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='writes', blank=True, null=True)
     prompt_length = models.CharField(max_length=50)
@@ -53,6 +54,31 @@ class Write(models.Model):
     class WriteManager(models.Manager):
         def get_queryset(self):
             return super().get_queryset().order_by('-date')
+
+    def format_write_temperature(self):
+        if self.temperature == "1":
+            temperature_change = 0.1
+        elif self.temperature == "2":
+            temperature_change = 0.2
+        elif self.temperature == "3":
+            temperature_change = 0.3
+        elif self.temperature == "4":
+            temperature_change = 0.4
+        elif self.temperature == "5":
+            temperature_change = 0.5
+        elif self.temperature == "6":
+            temperature_change = 0.6
+        elif self.temperature == "7":
+            temperature_change = 0.7
+        elif self.temperature == "8":
+            temperature_change = 0.8
+        elif self.temperature == "9":
+            temperature_change = 0.9
+        elif self.temperature == "10":
+            temperature_change = 1
+
+        self.input_temperature = temperature_change
+        self.save()
 
     def get_write_length(self):
         if self.prompt_length == 'one word':
@@ -67,7 +93,7 @@ class Write(models.Model):
 
     def send_write_prompt(self):
         write_input = f'Give a writer a prompt for writing with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. {self.input_length}. Do not use the keywords in the prompt. Return only text.'
-        input_temperature = self.temperature
+        api_temperature = self.input_temperature
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -79,7 +105,7 @@ class Write(models.Model):
                     "content": "You are a helpful assistant"},
                 {"role": "user", "content": write_input}
             ],
-            temperature=input_temperature,
+            temperature=api_temperature
         )
         self.output = response['choices'][0]['message']['content']
         self.save()
