@@ -1,4 +1,4 @@
-from catalyst.views import AllMusicPromptViewSet, AllWritePromptViewSet, AllMovementPromptViewSet, AllVisualArtPromptViewSet, AllPromptsArchiveViewSet, MusicInputViewSet, MusicOutputViewSet, MovementInputViewSet, MovementOutputViewSet, WriteInputViewSet, ProfileViewSet, WriteOutputViewSet, VisualArtInputViewSet, VisualArtOutputViewSet
+from catalyst.views import NoteRetrieveUpdateDestroyViewSet, NoteArchiveViewSet, AllMusicPromptViewSet, AllWritePromptViewSet, AllMovementPromptViewSet, AllVisualArtPromptViewSet, AllPromptsArchiveViewSet, MusicInputViewSet, MusicOutputViewSet, MovementInputViewSet, MovementOutputViewSet, WriteInputViewSet, ProfileViewSet, WriteOutputViewSet, VisualArtInputViewSet, VisualArtOutputViewSet
 from django.urls import path
 from catalyst import views
 
@@ -27,6 +27,11 @@ urlpatterns = [
     path('api/music/generate/', views.MusicInputViewSet.as_view()),
     path('api/response/music/<int:pk>', views.MusicOutputViewSet.as_view()),
     path('api/music/prompts/', views.AllMusicPromptViewSet.as_view()),
+
+    # note
+    path('api/note/create/', views.NoteCreateViewSet.as_view()),
+    path('api/note/<int:pk>', views.NoteRetrieveUpdateDestroyViewSet.as_view()),
+    path('api/note/archive/', views.NoteArchiveViewSet.as_view()),
 
     # all user prompts
     path('api/prompt/archive/',

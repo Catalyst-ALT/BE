@@ -67,7 +67,7 @@ class AllPromptsArchiveSerializer(serializers.ModelSerializer):
         fields = ['username', 'music', 'visual_arts', 'movements', 'writes']
 
 
-class NotePostSerializer(serializers.ModelSerializer):
+class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = '__all__'
