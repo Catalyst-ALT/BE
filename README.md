@@ -18,6 +18,7 @@ https://catalyst-x226.onrender.com
 
 **CREATE USER**
 </br>
+
 https://catalyst-x226.onrender.com/auth/users/
 
 *request*
@@ -45,6 +46,8 @@ HTTP_201_created
 </br>
 
 **LOGIN**
+</br>
+
 https://catalyst-x226.onrender.com/auth/token/login/
 
 *request*
@@ -75,6 +78,8 @@ HTTP_200_OK
 
 
 **LOGOUT**
+</br>
+
 https://catalyst-x226.onrender.com/auth/token/logout/
 
 *request*
@@ -94,6 +99,8 @@ HTTP_204_NO_CONTENT
 </br>
 
 **PROFILE**
+</br>
+
 https://catalyst-x226.onrender.com/api/profile/username/
 
 *request*
@@ -133,6 +140,8 @@ HTTP_204_NO_CONTENT
 </br>
 
 **WRITE PROMPT GENERATE**
+</br>
+
 https://catalyst-x226.onrender.com/api/write/generate/
 
 ```json
@@ -153,6 +162,8 @@ POST api/write/generate/
 </br>
 
 **WRITE PROMPT RETRIEVE**
+</br>
+
 https://catalyst-x226.onrender.com/api/response/write/id
 ```json
 GET api/response/write/id
@@ -183,6 +194,8 @@ Retrieves opeanai prompt output
 </br>
 
 **RETRIEVE ALL WRITE PROMPTS**
+</br>
+
 https://catalyst-x226.onrender.com/write/prompts/
 ```json
 GET api/write/prompts
@@ -225,6 +238,8 @@ Retrieves list of user write prompts
 ```
 
 **VISUAL ART PROMPT GENERATE**
+</br>
+
 https://catalyst-x226.onrender.com/api/visual_art/generate/
 ```json
 POST api/visual_art/generate/
@@ -242,6 +257,8 @@ POST api/visual_art/generate/
 ```
 
 **VISUAL ART PROMPT RETRIEVE**
+</br>
+
 https://catalyst-x226.onrender.com/api/response/visual_art/id
 ```json
 GET api/response/visual_art/id
@@ -271,6 +288,8 @@ Retrieves output/prompt from openai api
 </br>
 
 **RETRIEVE ALL VISUAL ART PROMPTS**
+</br>
+
 https://catalyst-x226.onrender.com/visual_art/prompts/
 ```json
 GET api/visual_art/prompts
@@ -310,6 +329,8 @@ Retrieves list of user visual art prompts
 ```
 
 **MOVEMENT PROMPT GENERATE**
+</br>
+
 https://catalyst-x226.onrender.com/api/movement/generate/
 
 ```json
@@ -326,6 +347,8 @@ POST api/movement/generate/
     }
 ```
 **MOVEMENT PROMPT RETREIVE**
+</br>
+
 https://catalyst-x226.onrender.com/api/response/movement/id
 ```json
 GET api/response/movement/id
@@ -355,6 +378,8 @@ Retrieves output/ prompt from openai api
 </br>
 
 **RETRIEVE ALL MOVEMENT PROMPTS**
+</br>
+
 https://catalyst-x226.onrender.com/movement/prompts/
 ```json
 GET api/movement/prompts/
@@ -394,6 +419,8 @@ Retrieve list of user's movement prompts
 ```
 
 **MUSIC PROMPT GENERATE**
+</br>
+
 https://catalyst-x226.onrender.com/api/music/generate/
 ```json
 POST api/music/generate/
@@ -411,6 +438,8 @@ POST api/music/generate/
 ```
 
 **MUSIC PROMPT RETRIEVE**
+</br>
+
 https://catalyst-x226.onrender.com/api/response/music/id
 ```json
 GET api/response/music/id
@@ -440,6 +469,8 @@ Output from openai api
 </br>
 
 **RETRIEVE ALL MUSIC PROMPTS**
+</br>
+
 https://catalyst-x226.onrender.com/music/prompts/
 ```json
 GET api/music/prompts/
@@ -478,6 +509,8 @@ Retrieves list of all user music prompts
 ]
 ```
 **USER PROMPT ARCHIVE LIST**
+</br>
+
 https://catalyst-x226.onrender.com/api/prompt/archive/
 ```json
 GET api/prompt/archive/
@@ -548,12 +581,16 @@ Retrieves list of all user prompts (write, music, visual art, movement)
 ```
 
 **CREATE NOTE**
+</br>
+
 https://catalyst-x226.onrender.com/api/note/create/
 ```json
 POST api/note/create/
 ```
 
 **RETRIEVE NOTE**
+</br>
+
 https://catalyst-x226.onrender.com/api/note/id
 ```json
 GET api/note/id
@@ -568,12 +605,16 @@ Retrieve Note instance
     }
 ```
 **UPDATE NOTE**
+</br>
+
 https://catalyst-x226.onrender.com/api/note/id
 ```json
 PATCH api/note/id
 ```
 
 **DELETE NOTE**
+</br>
+
 https://catalyst-x226.onrender.com/note/id
 ```json
 DESTROY api/note/id
@@ -581,12 +622,16 @@ DESTROY api/note/id
 
 
 **WELCOME PROMPT GENERATE**
+</br>
+
 https://catalyst-x226.onrender.com/api/welcome/generate/
 ```json
 POST api/welcome/generate/
 ```
 
 **RETRIEVE WELCOME PROMPT**
+</br>
+
 https://catalyst-x226.onrender.com/api/welcome/id
 ```json
 GET api/welcome/id
