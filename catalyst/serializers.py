@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Write, VisualArt, Movement, Music, Note, Welcome
+from .models import User, Write, VisualArt, Movement, Music, Note, Welcome, Definition
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -125,7 +125,7 @@ class MusicOutputSerializer(serializers.ModelSerializer):
             'element',
             'emotion',
             'prompt_length',
-            'input_length'
+            'input_length',
             'created_at',
             'output',
         ]
@@ -164,5 +164,25 @@ class WelcomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Welcome
         fields = [
+            'id',
             'output_text',
+        ]
+
+
+class DefinitionInputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Definition
+        fields = [
+            'id',
+            'word',
+        ]
+
+
+class DefinitionOutputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Definition
+        fields = [
+            'id',
+            'word',
+            'definition'
         ]

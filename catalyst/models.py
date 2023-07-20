@@ -262,3 +262,28 @@ class Note(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+class Definition(models.Model):
+    word = models.CharField(max_length=300)
+    definition = models.TextField(blank=True)
+
+    def send_definition_prompt(self):
+        definition_input = f'Define the word {self.word}. Let the definition be 1 to 3 sentences. Use basic vocabulary.'
+        env = environ.Env()
+        environ.Env.read_env()
+        MODEL = "gpt-3.5-turbo"
+        openai.api_key = env('OPENAI_API_KEY')
+        response = openai.ChatCompletion.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": definition_input}
+            ],
+            temperature=0.5,
+        )
+        self.definition = response['choices'][0]['message']['content']
+        self.save()
+
+    def __str__(self):
+        return str(self.id)

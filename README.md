@@ -236,6 +236,8 @@ Retrieves list of user write prompts
 	},
     ]
 ```
+</br>
+</br>
 
 **VISUAL ART PROMPT GENERATE**
 </br>
@@ -255,6 +257,8 @@ POST api/visual_art/generate/
     "user": 1
     }
 ```
+</br>
+</br>
 
 **VISUAL ART PROMPT RETRIEVE**
 </br>
@@ -327,6 +331,8 @@ Retrieves list of user visual art prompts
 	}
     ]
 ```
+</br>
+</br>
 
 **MOVEMENT PROMPT GENERATE**
 </br>
@@ -346,6 +352,9 @@ POST api/movement/generate/
     "user": 1
     }
 ```
+</br>
+</br>
+
 **MOVEMENT PROMPT RETREIVE**
 </br>
 
@@ -417,6 +426,8 @@ Retrieve list of user's movement prompts
 	}
     ]
 ```
+</br>
+</br>
 
 **MUSIC PROMPT GENERATE**
 </br>
@@ -436,6 +447,8 @@ POST api/music/generate/
     "user": 1
     }
 ```
+</br>
+</br>
 
 **MUSIC PROMPT RETRIEVE**
 </br>
@@ -508,6 +521,9 @@ Retrieves list of all user music prompts
     },
 ]
 ```
+</br>
+</br>
+
 **USER PROMPT ARCHIVE LIST**
 </br>
 
@@ -579,6 +595,8 @@ Retrieves list of all user prompts (write, music, visual art, movement)
     ]
 ]
 ```
+</br>
+</br>
 
 **CREATE NOTE**
 </br>
@@ -587,6 +605,8 @@ https://catalyst-x226.onrender.com/api/note/create/
 ```json
 POST api/note/create/
 ```
+</br>
+</br>
 
 **RETRIEVE NOTE**
 </br>
@@ -604,6 +624,9 @@ Retrieve Note instance
     "text": "This is a new note"
     }
 ```
+</br>
+</br>
+
 **UPDATE NOTE**
 </br>
 
@@ -611,6 +634,8 @@ https://catalyst-x226.onrender.com/api/note/id
 ```json
 PATCH api/note/id
 ```
+</br>
+</br>
 
 **DELETE NOTE**
 </br>
@@ -619,7 +644,8 @@ https://catalyst-x226.onrender.com/note/id
 ```json
 DESTROY api/note/id
 ```
-
+</br>
+</br>
 
 **WELCOME PROMPT GENERATE**
 </br>
@@ -628,6 +654,8 @@ https://catalyst-x226.onrender.com/api/welcome/generate/
 ```json
 POST api/welcome/generate/
 ```
+</br>
+</br>
 
 **RETRIEVE WELCOME PROMPT**
 </br>
@@ -643,5 +671,36 @@ Retrieve Welcome instance
     {
     "id": 3,
     "output_text": "Welcome to the app! How can I assist you today?"
+    }
+```
+</br>
+</br>
+
+
+**DEFINITION GENERATE**
+</br>
+https://catalyst-x226.onrender.com/api/definition/generate/
+```json
+POST api/definition/generate/
+```
+```json
+    {
+    "word": "gracious"
+    }
+```
+</br>
+</br>
+
+**RETRIEVE DEFINITION**
+</br>
+https://catalyst-x226.onrender.com/api/definition/id
+```json
+GET api/definition/id
+```
+```json
+    {
+    "id": 7,
+    "word": "gracious",
+    "definition": "Gracious means being kind, polite, and showing good manners towards others. It is when someone behaves in a considerate and generous way, making others feel valued and respected."
     }
 ```

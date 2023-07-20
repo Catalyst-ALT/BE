@@ -1,4 +1,4 @@
-from catalyst.views import WelcomeOutputViewSet, WelcomeInputViewSet, NoteRetrieveUpdateDestroyViewSet, NoteArchiveViewSet, AllMusicPromptViewSet, AllWritePromptViewSet, AllMovementPromptViewSet, AllVisualArtPromptViewSet, AllPromptsArchiveViewSet, MusicInputViewSet, MusicOutputViewSet, MovementInputViewSet, MovementOutputViewSet, WriteInputViewSet, ProfileViewSet, WriteOutputViewSet, VisualArtInputViewSet, VisualArtOutputViewSet
+from catalyst.views import DefinitionOutputViewSet, DefinitionInputViewSet, WelcomeOutputViewSet, WelcomeInputViewSet, NoteRetrieveUpdateDestroyViewSet, NoteArchiveViewSet, AllMusicPromptViewSet, AllWritePromptViewSet, AllMovementPromptViewSet, AllVisualArtPromptViewSet, AllPromptsArchiveViewSet, MusicInputViewSet, MusicOutputViewSet, MovementInputViewSet, MovementOutputViewSet, WriteInputViewSet, ProfileViewSet, WriteOutputViewSet, VisualArtInputViewSet, VisualArtOutputViewSet
 from django.urls import path
 from catalyst import views
 
@@ -40,6 +40,11 @@ urlpatterns = [
 
     # welcome
     path('api/welcome/generate/', views.WelcomeInputViewSet.as_view()),
-    path('api/welcome/<int:pk>', views.WelcomeOutputViewSet.as_view())
+    path('api/welcome/<int:pk>', views.WelcomeOutputViewSet.as_view()),
+
+    # definition
+    path('api/definition/generate/', views.DefinitionInputViewSet.as_view()),
+    path('api/definition/<int:pk>', views.DefinitionOutputViewSet.as_view()),
+
 ]
 # https://api.openai.com/v1/chat/completions
