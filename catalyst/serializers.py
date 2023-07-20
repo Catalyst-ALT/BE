@@ -6,6 +6,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
+            'id',
             'username'
         ]
 
@@ -14,6 +15,7 @@ class WriteInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Write
         fields = [
+            'id',
             'user',
             'style',
             'theme',
@@ -29,6 +31,7 @@ class WriteOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Write
         fields = [
+            'id',
             'user',
             'style',
             'theme',
@@ -46,6 +49,7 @@ class VisualArtInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = VisualArt
         fields = [
+            'id',
             'user',
             'medium',
             'theme',
@@ -60,6 +64,7 @@ class VisualArtOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = VisualArt
         fields = [
+            'id',
             'user',
             'medium',
             'theme',
@@ -75,6 +80,7 @@ class MovementInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movement
         fields = [
+            'id',
             'user',
             'theme',
             'somatic',
@@ -89,6 +95,7 @@ class MovementOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movement
         fields = [
+            'id',
             'user',
             'theme',
             'somatic',
@@ -105,6 +112,7 @@ class MusicInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Music
         fields = [
+            'id',
             'user',
             'exploration',
             'concept',
@@ -119,6 +127,7 @@ class MusicOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Music
         fields = [
+            'id',
             'user',
             'exploration',
             'concept',
@@ -140,6 +149,7 @@ class AllPromptsArchiveSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
+            'id',
             'username',
             'music',
             'visual_arts',

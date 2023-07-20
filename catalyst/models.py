@@ -96,14 +96,14 @@ class Write(models.Model):
             temperature=0.5,
             stream=True,
         )
-        collected_chunks = []
-        collected_messages = []
+        collect_chunks = []
+        collect_messages = []
         for chunk in response:
-            collected_chunks.append(chunk)
+            collect_chunks.append(chunk)
             chunk_message = chunk['choices'][0]['delta']
-            collected_messages.append(chunk_message)
+            collect_messages.append(chunk_message)
             full_reply_content = ''.join(
-                [m.get('content', '') for m in collected_messages])
+                [message.get('content', '') for message in collect_messages])
             print(full_reply_content)
             self.output = full_reply_content
             self.save()
