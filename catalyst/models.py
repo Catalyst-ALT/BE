@@ -267,6 +267,8 @@ class Music(models.Model):
 
 class Note(models.Model):
 
+    user = models.ForeignKey(
+        to=User, on_delete=models.CASCADE, related_name='notes_by_user', blank=True, null=True)
     write = models.ForeignKey(to=Write, on_delete=models.CASCADE,
                               related_name='notes_written', blank=True, null=True)
     visual_art = models.ForeignKey(
