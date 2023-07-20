@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Write, VisualArt, Movement, Music, Note, Welcome, Definition
+from .models import User, Write, VisualArt, Movement, Music, Welcome, Definition
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -162,17 +162,9 @@ class AllPromptsArchiveSerializer(serializers.ModelSerializer):
         ]
 
 
-class NoteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Note
-        fields = [
-            'id',
-            'text',
-            'write',
-            'visual_art',
-            'movement',
-            'music',
-        ]
+# class NoteUpdateSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model =
 
 
 class WelcomeSerializer(serializers.ModelSerializer):

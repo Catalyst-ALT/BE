@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
 from .models import User, Write, VisualArt, Movement, Music, Note, Welcome, Definition
-from .serializers import DefinitionInputSerializer, DefinitionOutputSerializer, WelcomeSerializer, NoteSerializer, AllPromptsArchiveSerializer, MusicInputSerializer, MusicOutputSerializer, WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
+from .serializers import DefinitionInputSerializer, DefinitionOutputSerializer, WelcomeSerializer, AllPromptsArchiveSerializer, MusicInputSerializer, MusicOutputSerializer, WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
 from catalyst.permissions import IsProfileOwnerOrReadOnly
 import time
 from rest_framework.response import Response
@@ -192,31 +192,31 @@ class AllMusicPromptViewSet(generics.ListAPIView):
     serializer_class = MusicOutputSerializer
 
 
-class NoteCreateViewSet(generics.CreateAPIView):
-    '''
-    METHODS: POST
-    Create Note instance
-    '''
-    queryset = Note.objects.all()
-    serializer_class = NoteSerializer
+# class NoteCreateViewSet(generics.CreateAPIView):
+#     '''
+#     METHODS: POST
+#     Create Note instance
+#     '''
+#     queryset = Note.objects.all()
+#     serializer_class = NoteSerializer
 
 
-class NoteRetrieveUpdateDestroyViewSet(generics.RetrieveUpdateDestroyAPIView):
-    '''
-    METHODS: GET, UPDATE, DELETE
-    Retrieve, update, and destroy a note instance
-    '''
-    queryset = Note.objects.all()
-    serializer_class = NoteSerializer
+# class NoteRetrieveUpdateDestroyViewSet(generics.RetrieveUpdateDestroyAPIView):
+#     '''
+#     METHODS: GET, UPDATE, DELETE
+#     Retrieve, update, and destroy a note instance
+#     '''
+#     queryset = Note.objects.all()
+#     serializer_class = NoteSerializer
 
 
-class NoteFoliosViewSet(generics.ListAPIView):
-    '''
-    METHODS: GET
-    Retrieve list of all user notes
-    '''
-    queryset = Note.objects.all()
-    serializer_class = NoteSerializer
+# class NoteFoliosViewSet(generics.ListAPIView):
+#     '''
+#     METHODS: GET
+#     Retrieve list of all user notes
+#     '''
+#     queryset = Note.objects.all()
+#     serializer_class = NoteSerializer
 
 
 class WelcomeInputViewSet(generics.CreateAPIView):

@@ -23,6 +23,16 @@ class User(AbstractUser):
         return self.username
 
 
+class Note(models.Model):
+
+    user = models.ForeignKey(
+        to=User, on_delete=models.CASCADE, related_name='notes_by_user', blank=True, null=True)
+    note = models.TextField(default="this is a note")
+
+    def __str__(self):
+        return str(self.id)
+
+
 class Welcome(models.Model):
     output_text = models.TextField(blank=True)
 
@@ -181,7 +191,6 @@ class Movement(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    note = models.TextField(default='take notes')
 
     def get_movement_length(self):
         if self.prompt_length == 'one word':
@@ -231,7 +240,8 @@ class Music(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    note = models.TextField(default='take notes')
+    note = models.ForeignKey(
+        to=Note, on_delete=models.CASCADE, related_name='music_notes', blank=True, null=True)
 
     def get_music_length(self):
         if self.prompt_length == 'one word':
@@ -260,23 +270,6 @@ class Music(models.Model):
         )
         self.output = response['choices'][0]['message']['content']
         self.save()
-
-    def __str__(self):
-        return str(self.id)
-
-
-class Note(models.Model):
-
-    user = models.ForeignKey(
-        to=User, on_delete=models.CASCADE, related_name='notes_by_user', blank=True, null=True)
-    write = models.ForeignKey(to=Write, on_delete=models.CASCADE,
-                              related_name='notes_written', blank=True, null=True)
-    visual_art = models.ForeignKey(
-        to=VisualArt, on_delete=models.CASCADE, related_name='notes_visual_arts', blank=True, null=True)
-    movement = models.ForeignKey(
-        to=Movement, on_delete=models.CASCADE, related_name='notes_movements', blank=True, null=True)
-    music = models.ForeignKey(to=Music, on_delete=models.CASCADE,
-                              related_name='notes_music', blank=True, null=True)
 
     def __str__(self):
         return str(self.id)

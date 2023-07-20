@@ -154,7 +154,8 @@ POST api/write/generate/
     "category": "relationships and love",
     "sentiment": "harmony",
     "emotion": "joy",
-    "prompt_length": "prompt", 
+    "prompt_length": "prompt",
+    "input_length": "Let the prompt be 20-25 words" 
     "user": 1
     }
 ```
