@@ -42,17 +42,10 @@ class Welcome(models.Model):
                     "content": "You are a helpful assistant"},
                 {"role": "user", "content": welcome_input}
             ],
-            temperature=0.5,
+            temperature=0.8,
         )
         self.output_text = response['choices'][0]['message']['content']
         self.save()
-
-
-class Note(models.Model):
-    text = models.TextField(blank=True)
-
-    def __str__(self):
-        return str(self.id)
 
 
 class Write(models.Model):
@@ -71,8 +64,6 @@ class Write(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    note = models.ForeignKey(to=Note, on_delete=models.CASCADE,
-                             related_name='writes_notes', blank=True, null=True)
 
     class WriteManager(models.Manager):
         def get_queryset(self):
@@ -127,8 +118,6 @@ class VisualArt(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    note = models.ForeignKey(to=Note, on_delete=models.CASCADE,
-                             related_name='visual_art_notes', blank=True, null=True)
 
     def get_visual_art_length(self):
         if self.prompt_length == 'one word':
@@ -177,8 +166,6 @@ class Movement(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    note = models.ForeignKey(to=Note, on_delete=models.CASCADE,
-                             related_name='movement_notes', blank=True, null=True)
 
     def get_movement_length(self):
         if self.prompt_length == 'one word':
@@ -228,8 +215,6 @@ class Music(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    note = models.ForeignKey(to=Note, on_delete=models.CASCADE,
-                             related_name='music_notes', blank=True, null=True)
 
     def get_music_length(self):
         if self.prompt_length == 'one word':
@@ -258,6 +243,22 @@ class Music(models.Model):
         )
         self.output = response['choices'][0]['message']['content']
         self.save()
+
+    def __str__(self):
+        return str(self.id)
+
+
+class Note(models.Model):
+
+    text = models.TextField(blank=True)
+    write = models.ForeignKey(to=Write, on_delete=models.CASCADE,
+                              related_name='notes_written', blank=True, null=True)
+    visual_art = models.ForeignKey(
+        to=VisualArt, on_delete=models.CASCADE, related_name='notes_visual_arts', blank=True, null=True)
+    movement = models.ForeignKey(
+        to=Movement, on_delete=models.CASCADE, related_name='notes_movements', blank=True, null=True)
+    music = models.ForeignKey(to=Music, on_delete=models.CASCADE,
+                              related_name='notes_music', blank=True, null=True)
 
     def __str__(self):
         return str(self.id)

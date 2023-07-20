@@ -5,55 +5,134 @@ from .models import User, Write, VisualArt, Movement, Music, Note, Welcome
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username']
+        fields = [
+            'username'
+        ]
 
 
 class WriteInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Write
-        fields = '__all__'
+        fields = [
+            'user',
+            'style',
+            'theme',
+            'category',
+            'sentiment',
+            'emotion',
+            'prompt_length',
+            'input_length',
+        ]
 
 
 class WriteOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Write
-        fields = '__all__'
+        fields = [
+            'user',
+            'style',
+            'theme',
+            'category',
+            'sentiment',
+            'emotion',
+            'prompt_length',
+            'input_length',
+            'created_at',
+            'output',
+            'note',
+        ]
 
 
 class VisualArtInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = VisualArt
-        fields = '__all__'
+        fields = [
+            'user',
+            'medium',
+            'theme',
+            'sentiment',
+            'emotion',
+            'prompt_length',
+            'input_length',
+        ]
 
 
 class VisualArtOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = VisualArt
-        fields = '__all__'
+        fields = [
+            'user',
+            'medium',
+            'theme',
+            'sentiment',
+            'emotion',
+            'prompt_length',
+            'created_at',
+            'output',
+            'note',
+        ]
 
 
 class MovementInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movement
-        fields = '__all__'
+        fields = [
+            'user',
+            'theme',
+            'somatic',
+            'sentiment',
+            'emotion',
+            'prompt_length',
+            'input_length',
+        ]
 
 
 class MovementOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movement
-        fields = '__all__'
+        fields = [
+            'user',
+            'theme',
+            'somatic',
+            'sentiment',
+            'emotion',
+            'prompt_length',
+            'input_length',
+            'created_at',
+            'output',
+            'note',
+        ]
 
 
 class MusicInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Music
-        fields = '__all__'
+        fields = [
+            'user',
+            'exploration',
+            'concept',
+            'element',
+            'emotion',
+            'prompt_length',
+            'input_length'
+        ]
 
 
 class MusicOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Music
-        fields = '__all__'
+        fields = [
+            'user',
+            'exploration',
+            'concept',
+            'element',
+            'emotion',
+            'prompt_length',
+            'input_length'
+            'created_at',
+            'output',
+            'note',
+        ]
 
 
 class AllPromptsArchiveSerializer(serializers.ModelSerializer):
@@ -64,16 +143,30 @@ class AllPromptsArchiveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'music', 'visual_arts', 'movements', 'writes']
+        fields = [
+            'username',
+            'music',
+            'visual_arts',
+            'movements',
+            'writes'
+        ]
 
 
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
-        fields = '__all__'
+        fields = [
+            'text',
+            'write',
+            'visual_art',
+            'movement',
+            'music',
+        ]
 
 
 class WelcomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Welcome
-        fields = '__all__'
+        fields = [
+            'output_text',
+        ]
