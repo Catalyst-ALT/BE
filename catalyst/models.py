@@ -64,6 +64,7 @@ class Write(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    note = models.TextField(default='take notes')
 
     class WriteManager(models.Manager):
         def get_queryset(self):
@@ -132,6 +133,7 @@ class VisualArt(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    note = models.TextField(default='take notes')
 
     def get_visual_art_length(self):
         if self.prompt_length == 'one word':
@@ -180,6 +182,7 @@ class Movement(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    note = models.TextField(default='take notes')
 
     def get_movement_length(self):
         if self.prompt_length == 'one word':
@@ -229,6 +232,7 @@ class Music(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    note = models.TextField(default='take notes')
 
     def get_music_length(self):
         if self.prompt_length == 'one word':
@@ -264,7 +268,6 @@ class Music(models.Model):
 
 class Note(models.Model):
 
-    text = models.TextField(blank=True)
     write = models.ForeignKey(to=Write, on_delete=models.CASCADE,
                               related_name='notes_written', blank=True, null=True)
     visual_art = models.ForeignKey(

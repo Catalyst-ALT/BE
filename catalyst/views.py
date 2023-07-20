@@ -37,12 +37,12 @@ class WriteInputViewSet(generics.CreateAPIView):
     serializer_class = WriteInputSerializer
 
     def perform_create(self, serializer):
-            word = serializer.save()
-            length = serializer.save()
+        word = serializer.save()
+        length = serializer.save()
 
-            length.get_write_length()
-            time.sleep(1)
-            word.send_write_prompt()
+        length.get_write_length()
+        time.sleep(1)
+        word.send_write_prompt()
 
 
 class WriteOutputViewSet(generics.RetrieveAPIView):
@@ -210,7 +210,7 @@ class NoteRetrieveUpdateDestroyViewSet(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = NoteSerializer
 
 
-class NoteArchiveViewSet(generics.ListAPIView):
+class NoteFoliosViewSet(generics.ListAPIView):
     '''
     METHODS: GET
     Retrieve list of all user notes

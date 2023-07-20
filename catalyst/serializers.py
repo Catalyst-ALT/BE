@@ -42,6 +42,7 @@ class WriteOutputSerializer(serializers.ModelSerializer):
             'input_length',
             'created_at',
             'output',
+            'note',
         ]
 
 
@@ -73,6 +74,7 @@ class VisualArtOutputSerializer(serializers.ModelSerializer):
             'prompt_length',
             'created_at',
             'output',
+            'note',
         ]
 
 
@@ -105,6 +107,7 @@ class MovementOutputSerializer(serializers.ModelSerializer):
             'input_length',
             'created_at',
             'output',
+            'note',
         ]
 
 
@@ -137,6 +140,7 @@ class MusicOutputSerializer(serializers.ModelSerializer):
             'input_length',
             'created_at',
             'output',
+            'note',
         ]
 
 

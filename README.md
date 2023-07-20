@@ -187,7 +187,7 @@ Retrieves opeanai prompt output
     "output": "Write a story about two souls who find solace in each other's presence, navigating the complexities of their emotions and forging a bond that radiates harmony, joy, and profound love.",
     "created_at": "2023-07-19T21:49:42.927227Z",
     "user": 1,
-    "note": null
+    "note": ""
     }
 ```
 </br>
@@ -218,7 +218,7 @@ Retrieves list of user write prompts
 	"output": "",
 	"created_at": "2022-08-07T00:00:00Z",
 	"user": 1,
-	"note": null
+	"note": ""
 	},
 	{
 	"id": 80,
@@ -232,7 +232,7 @@ Retrieves list of user write prompts
 	"output": "Explore the captivating tale of two souls intertwined, braving the trials of life together, where profound connections overcome all obstacles, paving the way for boundless euphoria.",
 	"created_at": "2023-07-19T00:48:55.149209Z",
 	"user": 1,
-	"note": null
+	"note": ""
 	},
     ]
 ```
@@ -285,7 +285,7 @@ Retrieves output/prompt from openai api
 	"output": "Burst",
 	"created_at": "2023-07-19T21:59:42.298361Z",
 	"user": 1,
-	"note": null
+	"note": ""
 }
 ```
 </br>
@@ -314,7 +314,7 @@ Retrieves list of user visual art prompts
 	"output": "Create a vibrant masterpiece that captures the essence of growth and happiness through the interplay of various tactile elements.",
 	"created_at": "2023-07-19T21:59:29.054715Z",
 	"user": 1,
-	"note": null
+	"note": ""
 	},
 	{
 	"id": 70,
@@ -327,7 +327,7 @@ Retrieves list of user visual art prompts
 	"output": "Burst",
 	"created_at": "2023-07-19T21:59:42.298361Z",
 	"user": 1,
-	"note": null
+	"note": ""
 	}
     ]
 ```
@@ -348,7 +348,8 @@ POST api/movement/generate/
     "somatic": "breath and movement",
     "sentiment": "harmony",
     "emotion": "joy",
-    "prompt_length": "one word", 
+    "prompt_length": "one word",
+    "input_length": "Let the prompt be only 1 word", 
     "user": 1
     }
 ```
@@ -409,7 +410,7 @@ Retrieve list of user's movement prompts
 	"output": "Explore the limitless expanse within, unleashing a symphony of fluidity and grace, as you dance with boundless delight, embracing the interconnectedness of body and space.",
 	"created_at": "2023-07-19T22:02:15.049638Z",
 	"user": 1,
-	"note": null
+	"note": ""
 	},
 	{
 	"id": 9,
@@ -422,7 +423,7 @@ Retrieve list of user's movement prompts
 	"output": "Flow",
 	"created_at": "2023-07-19T22:02:43.640107Z",
 	"user": 1,
-	"note": null
+	"note": ""
 	}
     ]
 ```
@@ -475,7 +476,7 @@ Output from openai api
     "output": "Ignite",
     "created_at": "2023-07-19T22:04:30.480555Z",
     "user": 1,
-    "note": null
+    "note": ""
     }
 ```
 </br>
@@ -504,7 +505,7 @@ Retrieves list of all user music prompts
     "output": "Create an electrifying sonic journey that seamlessly blends diverse genres, igniting the listener's spirit with bold dynamics and invoking a sense of fearless passion.",
     "created_at": "2023-07-19T22:08:35.122715Z",
     "user": 1,
-    "note": null
+    "note": ""
     },
     {
     "id": 29,
@@ -517,7 +518,7 @@ Retrieves list of all user music prompts
     "output": "Ignite",
     "created_at": "2023-08-07T00:00:00Z",
     "user": 1,
-    "note": null
+    "note": ""
     },
 ]
 ```
@@ -550,7 +551,8 @@ Retrieves list of all user prompts (write, music, visual art, movement)
 	"prompt_length": "prompt",
 	"input_length": "Let the prompt be 20-25 words",
 	"output": "Journey through melodic epochs fuelled by celebratory rhythms, kindling a passionate storm. Create harmonies that transport listeners through a timeless musical dimension.",
-        "user": 1
+        "user": 1,
+        "note": ""
 	},
     ],
     "visual_arts": [
@@ -563,7 +565,8 @@ Retrieves list of all user prompts (write, music, visual art, movement)
 	"prompt_length": "prompt",
 	"input_length": "Let the prompt be 20-25 words",
 	"output": "Create a vibrant masterpiece capturing the essence of transformation and delight, where layered brushstrokes evoke both tactile and emotional sensations.",
-	"user": 1
+	"user": 1,
+    "note": "", 
 	},
     ],
     "movements": [
@@ -576,7 +579,8 @@ Retrieves list of all user prompts (write, music, visual art, movement)
 	"prompt_length": "prompt",
 	"input_length": "Let the prompt be 20-25 words",
 	"output": "Create a dynamic dance piece that explores the seamless interplay of bodies in space, flowing breath, and expressive movements, evoking a sense of pure and radiant bliss.",
-	"user": 1
+	"user": 1,
+    "note": ""
         },	
     ],
     "writes": [
@@ -590,7 +594,8 @@ Retrieves list of all user prompts (write, music, visual art, movement)
         "prompt_length": "one word",
         "input_length": "Let the prompt be only 1 word",
         "output": "Spark",
-        "user": 1
+        "user": 1,
+        "note": ""
         },
     ]
 ]
@@ -647,6 +652,19 @@ DESTROY api/note/id
 </br>
 </br>
 
+**RETRIEVE ALL NOTES**
+</br>
+
+https://catalyst-x226.onrender.com/note/folios/
+```json
+GET api/note/folios/
+```
+```json
+Retrieve all user notes
+```
+```json
+```
+
 **WELCOME PROMPT GENERATE**
 </br>
 
@@ -693,6 +711,7 @@ POST api/definition/generate/
 
 **RETRIEVE DEFINITION**
 </br>
+
 https://catalyst-x226.onrender.com/api/definition/id
 ```json
 GET api/definition/id

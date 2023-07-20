@@ -1,4 +1,4 @@
-from catalyst.views import DefinitionOutputViewSet, DefinitionInputViewSet, WelcomeOutputViewSet, WelcomeInputViewSet, NoteRetrieveUpdateDestroyViewSet, NoteArchiveViewSet, AllMusicPromptViewSet, AllWritePromptViewSet, AllMovementPromptViewSet, AllVisualArtPromptViewSet, AllPromptsArchiveViewSet, MusicInputViewSet, MusicOutputViewSet, MovementInputViewSet, MovementOutputViewSet, WriteInputViewSet, ProfileViewSet, WriteOutputViewSet, VisualArtInputViewSet, VisualArtOutputViewSet
+from catalyst.views import DefinitionOutputViewSet, DefinitionInputViewSet, WelcomeOutputViewSet, WelcomeInputViewSet, NoteRetrieveUpdateDestroyViewSet, NoteFoliosViewSet, AllMusicPromptViewSet, AllWritePromptViewSet, AllMovementPromptViewSet, AllVisualArtPromptViewSet, AllPromptsArchiveViewSet, MusicInputViewSet, MusicOutputViewSet, MovementInputViewSet, MovementOutputViewSet, WriteInputViewSet, ProfileViewSet, WriteOutputViewSet, VisualArtInputViewSet, VisualArtOutputViewSet
 from django.urls import path
 from catalyst import views
 
@@ -32,7 +32,7 @@ urlpatterns = [
     # note
     path('api/note/create/', views.NoteCreateViewSet.as_view()),
     path('api/note/<int:pk>', views.NoteRetrieveUpdateDestroyViewSet.as_view()),
-    path('api/note/archive/', views.NoteArchiveViewSet.as_view()),
+    path('api/note/folios/', views.NoteFoliosViewSet.as_view()),
 
     # all user prompts
     path('api/prompt/archive/',
