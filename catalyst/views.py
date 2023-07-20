@@ -32,17 +32,17 @@ class WriteInputViewSet(generics.CreateAPIView):
     Calls send_write_prompt() function to connect call openai's api
     Asynch - 1 second delay between calling the 2 functions
     '''
+
     queryset = Write.objects.all()
     serializer_class = WriteInputSerializer
 
     def perform_create(self, serializer):
+            word = serializer.save()
+            length = serializer.save()
 
-        word = serializer.save()
-        length = serializer.save()
-
-        length.get_write_length()
-        time.sleep(1)
-        word.send_write_prompt()
+            length.get_write_length()
+            time.sleep(1)
+            word.send_write_prompt()
 
 
 class WriteOutputViewSet(generics.RetrieveAPIView):
