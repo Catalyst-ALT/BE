@@ -95,23 +95,22 @@ class Write(models.Model):
                 {"role": "user", "content": write_input}
             ],
             temperature=0.5,
-            stream=True,
         )
-        collect_chunks = []
-        collect_messages = []
-        for chunk in response:
-            collect_chunks.append(chunk)
-            chunk_message = chunk['choices'][0]['delta']
-            collect_messages.append(chunk_message)
-            full_reply_content = ''.join(
-                [message.get('content', '') for message in collect_messages])
-            print(full_reply_content)
-            self.output = full_reply_content
-            self.save()
+        self.output = response['choices'][0]['message']['content']
+        self.save()
+        # collect_chunks = []
+        # collect_messages = []
+        # for chunk in response:
+        #     collect_chunks.append(chunk)
+        #     chunk_message = chunk['choices'][0]['delta']
+        #     collect_messages.append(chunk_message)
+        #     full_reply_content = ''.join(
+        #         [message.get('content', '') for message in collect_messages])
+        #     print(full_reply_content)
+        #     self.output = full_reply_content
 
-            # self.output = response['choices'][0]['delta']
-            # print(self.output)
-            self.save()
+        # self.output = response['choices'][0]['delta']
+        # print(self.output)
 
     def __str__(self):
         return str(self.id)
