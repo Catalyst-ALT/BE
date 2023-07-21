@@ -120,7 +120,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-USE_S3 = os.getenv('USE_S3') == "TRUE"
+# USE_S3 = os.getenv('USE_S3') == "TRUE"
 
 
 AWS_STORAGE_BUCKET_NAME = "catalystbucket"
