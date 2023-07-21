@@ -6,7 +6,8 @@ from .models import (
     Movement,
     Music,
     Welcome,
-    Definition
+    Definition,
+    Upload,
 )
 
 
@@ -195,4 +196,18 @@ class DefinitionOutputSerializer(serializers.ModelSerializer):
             'id',
             'word',
             'definition'
+        ]
+
+
+class UploadFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Upload
+        fields = [
+            'id',
+            'user',
+            'file',
+            'write',
+            'visual_art',
+            'movement',
+            'music',
         ]
