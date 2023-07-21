@@ -30,10 +30,17 @@ class IsVisualArtOwnerOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         return obj.visual_arts == request.user
-    
+
 
 class IsMovementOwnerOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
             return True
         return obj.movements == request.user
+
+
+class IsUserMediaOrReadOnly(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return obj.uploads_by_user == request.user

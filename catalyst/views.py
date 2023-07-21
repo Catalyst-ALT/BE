@@ -15,6 +15,7 @@ from .models import (
     Music,
     Welcome,
     Definition,
+    Upload,
 )
 
 from .serializers import (
@@ -31,6 +32,7 @@ from .serializers import (
     VisualArtOutputSerializer,
     MovementInputSerializer,
     MovementOutputSerializer,
+    UploadFileSerializer,
 )
 
 
@@ -274,3 +276,21 @@ class DefinitionInputViewSet(generics.CreateAPIView):
 class DefinitionOutputViewSet(generics.RetrieveAPIView):
     queryset = Definition.objects.all()
     serializer_class = DefinitionOutputSerializer
+
+
+class PostUploadViewSet(generics.CreateAPIView):
+    queryset = Upload.objects.all()
+    serializer_class = UploadFileSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class RetrieveUpdateDestroyUploadViewSet(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Upload.objects.all()
+    serializer_class = UploadFileSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class ListUploadsViewSet(generics.ListAPIView):
+    queryset = Upload.objects.all()
+    serializer_class = UploadFileSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
