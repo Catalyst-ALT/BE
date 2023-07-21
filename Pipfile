@@ -16,6 +16,7 @@ openai = "*"
 django-rest-multiple-models = "*"
 django-model-mixins = "*"
 sentry-sdk = "*"
+tenacity = "*"
 
 [dev-packages]
 
