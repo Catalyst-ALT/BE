@@ -50,10 +50,10 @@ HTTP_201_created
 
 https://catalyst-x226.onrender.com/auth/token/login/
 
+
+**Token Create**
+
 *request*
-```json
-token create
-```
 ```json
 POST auth/token/login/
 ```
@@ -82,10 +82,10 @@ HTTP_200_OK
 
 https://catalyst-x226.onrender.com/auth/token/logout/
 
+**Token Destroy**
+
 *request*
-```json
-token destroy
-```
+
 ```json
 POST auth/token/logout/
 ```
@@ -139,7 +139,7 @@ HTTP_204_NO_CONTENT
 </br>
 </br>
 
-**WRITE PROMPT GENERATE**
+**WRITE INSTANCE CREATE**
 </br>
 
 https://catalyst-x226.onrender.com/api/write/generate/
@@ -147,6 +147,16 @@ https://catalyst-x226.onrender.com/api/write/generate/
 ```json
 POST api/write/generate/
 ```
+**Purpose:**
+* Creates Write instance
+* Generates opeanai **prompt output**
+* Sends info to DB for **call to openai**
+* Creates a **note** associated with this instance with empty string as default 
+* Creates an **id** for this instance
+* Auto adds **'created_at'** date/time
+* Adds field 'input_length' for call to api
+
+
 ```json
     {
     "style": "poetry",
@@ -155,26 +165,27 @@ POST api/write/generate/
     "sentiment": "harmony",
     "emotion": "joy",
     "prompt_length": "prompt",
-    "input_length": "Let the prompt be 20-25 words" 
-    "user": 1
     }
 ```
+*Required Fields: 'style', 'theme', 'category', 'sentiment', 'emotion', 'prompt_length'*
+
 </br>
 </br>
 
-**WRITE PROMPT RETRIEVE**
+**WRITE SINGLE INSTANCE RETRIEVE**
 </br>
 
 https://catalyst-x226.onrender.com/api/response/write/id
 ```json
 GET api/response/write/id
 ```
-```json
-Retrieves Write instance
-```
-```json
-Retrieves opeanai prompt output
-```
+**Purpose:**
+* Retrieves single Write instance
+* Retrieves the **id** for this instance
+* Retrieves the **note** associated with this instance
+* Retrieves from DB opeanai prompt **output**
+* Retrieves **'created_at'** date/time for this instance
+
 ```json
     {
     "id": 104,
@@ -191,19 +202,33 @@ Retrieves opeanai prompt output
     "note": ""
     }
 ```
+*New Fields: 'id', 'input_length', 'output', 'user', 'note', 'created_at'*
 </br>
 </br>
 
-**RETRIEVE ALL WRITE PROMPTS**
+**WRITE INSTANCE UPDATE**
+</br>
+https://catalyst-x226.onrender.com/api/response/write/id
+```json
+PATCH api/response/write/id
+```
+
+**Purpose**
+* Allows user to **update their note** associated with this instance
+</br>
 </br>
 
-https://catalyst-x226.onrender.com/write/prompts/
+**RETRIEVE ALL WRITE INSTANCES**
+</br>
+
+https://catalyst-x226.onrender.com/write/
 ```json
-GET api/write/prompts
+GET api/write/
 ```
-```json
-Retrieves list of user write prompts
-```
+**Purpose**
+* Retrieves **list** of user Write instances
+* Retrieves all openai **outputs** for the collection of user Write instances
+* Retrieves all **notes** for the collection of user Write instances
 
 ```json
     [
@@ -240,40 +265,48 @@ Retrieves list of user write prompts
 </br>
 </br>
 
-**VISUAL ART PROMPT GENERATE**
+**VISUAL ART INSTANCE CREATE**
 </br>
 
 https://catalyst-x226.onrender.com/api/visual_art/generate/
 ```json
 POST api/visual_art/generate/
 ```
+**Purpose:**
+* Creates VisualArt Instance
+* Generates opeanai **prompt output**
+* Sends info to DB for **call to openai**
+* Creates a **note** associated with this instance with empty string as default 
+* Creates an **id** for this instance
+* Auto adds **'created_at'** date/time
+* Adds 'input_length" for call to api
+
 ```json
     {
     "medium": "painting",
     "theme": "texture",
     "sentiment": "renewal",
     "emotion": "joy",
-    "temperature": "0.8",
     "prompt_length": "one word", 
-    "user": 1
     }
 ```
+*Required Fields: 'medium', 'theme', 'sentiment', 'emotion', 'prompt_length'*
 </br>
 </br>
 
-**VISUAL ART PROMPT RETRIEVE**
+**VISUAL ART SINGLE INSTANCE RETRIEVE**
 </br>
 
 https://catalyst-x226.onrender.com/api/response/visual_art/id
 ```json
 GET api/response/visual_art/id
 ```
-```json
-Retrieve Visual Art instance
-```
-```json
-Retrieves output/prompt from openai api
-```
+**Purpose:**
+* Retrieves single VisualArt instance
+* Retrieves the **id** for this instance
+* Retrieves the **note** associated with this instance
+* Retrieves opeanai prompt **output**
+* Retrieves **'created_at'** date/time for this instance
 ```json
     {
 	"id": 70,
@@ -289,19 +322,33 @@ Retrieves output/prompt from openai api
 	"note": ""
 }
 ```
+*New Fields: 'id', 'input_length', 'output', 'user', 'note', 'created_at'*
 </br>
 </br>
 
-**RETRIEVE ALL VISUAL ART PROMPTS**
+**VISUAL ART INSTANCE UPDATE**
+</br>
+https://catalyst-x226.onrender.com/api/response/visual_art/id
+```json
+PATCH api/response/visual_art/id
+```
+
+**Purpose**
+* Allows user to **update their note** associated with this instance
+</br>
 </br>
 
-https://catalyst-x226.onrender.com/visual_art/prompts/
+**RETRIEVE ALL VISUAL ART INSTANCES**
+</br>
+
+https://catalyst-x226.onrender.com/visual_art/
 ```json
-GET api/visual_art/prompts
+GET api/visual_art/
 ```
-```json
-Retrieves list of user visual art prompts
-```
+**Purpose**
+* Retrieves **list** of user Visual Art instances
+* Retrieves all openai **outputs** for the collection of user Visual Art instances
+* Retrieves all **notes** for the collection of user Visual Art instances
 ```json
     ]
         {
@@ -335,7 +382,7 @@ Retrieves list of user visual art prompts
 </br>
 </br>
 
-**MOVEMENT PROMPT GENERATE**
+**MOVEMENT INSTANCE CREATE**
 </br>
 
 https://catalyst-x226.onrender.com/api/movement/generate/
@@ -343,6 +390,15 @@ https://catalyst-x226.onrender.com/api/movement/generate/
 ```json
 POST api/movement/generate/
 ```
+**Purpose:**
+* Creates Movement instance
+* Generates opeanai **prompt output**
+* Sends info to DB for **call to openai**
+* Creates a **note** associated with this instance with empty string as default 
+* Creates an **id** for this instance
+* Auto adds **'created_at'** date/time
+* Adds 'input_length" for call to api
+
 ```json
     {
     "theme": "spatial awareness",
@@ -350,26 +406,25 @@ POST api/movement/generate/
     "sentiment": "harmony",
     "emotion": "joy",
     "prompt_length": "one word",
-    "input_length": "Let the prompt be only 1 word", 
-    "user": 1
     }
 ```
+*Required Fields: 'theme', 'somatic', 'emotion', 'prompt_length'*
 </br>
 </br>
 
-**MOVEMENT PROMPT RETREIVE**
+**MOVEMENT SINGLE INSTANCE RETREIVE**
 </br>
 
 https://catalyst-x226.onrender.com/api/response/movement/id
 ```json
 GET api/response/movement/id
 ```
-```json
-Retrieve Movement instance
-```
-```json
-Retrieves output/ prompt from openai api
-```
+**Purpose:**
+* Retrieves single Movement instance
+* Retrieves the **id** for this instance
+* Retrieves the **note** associated with this instance
+* Retrieves opeanai prompt **output**
+* Retrieves **'created_at'** date/time for this instance
 ```json
     {
     "id": 9,
@@ -382,22 +437,36 @@ Retrieves output/ prompt from openai api
     "output": "Flow",
     "created_at": "2023-07-19T22:02:43.640107Z",
     "user": 1,
-    "note": null
+    "note": ""
     }
 ```
+*New Fields: 'id', 'input_length', 'output', 'user', 'note', 'created_at'*
 </br>
 </br>
 
-**RETRIEVE ALL MOVEMENT PROMPTS**
+**MOVEMENT INSTANCE UPDATE**
+</br>
+https://catalyst-x226.onrender.com/api/response/movement/id
+```json
+PATCH api/response/movement/id
+```
+
+**Purpose**
+* Allows user to **update their note** associated with this instance
+</br>
 </br>
 
-https://catalyst-x226.onrender.com/movement/prompts/
+**RETRIEVE ALL MOVEMENT INSTANCES**
+</br>
+
+https://catalyst-x226.onrender.com/movement/
 ```json
-GET api/movement/prompts/
+GET api/movement/
 ```
-```json
-Retrieve list of user's movement prompts
-```
+**Purpose**
+* Retrieves **list** of user Movement instances
+* Retrieves all openai **outputs** for the collection of user Write instances
+* Retrieves all **notes** for the collection of user Write instances
 ```json
     [
         {
@@ -431,40 +500,47 @@ Retrieve list of user's movement prompts
 </br>
 </br>
 
-**MUSIC PROMPT GENERATE**
+**MUSIC CREATE INSTANCE**
 </br>
 
 https://catalyst-x226.onrender.com/api/music/generate/
 ```json
 POST api/music/generate/
 ```
+**Purpose:**
+* Create Music instance
+* Generates opeanai **prompt output**
+* Sends info to DB for **call to openai**
+* Creates a **note** associated with this instance with empty string as default 
+* Creates an **id** for this instance
+* Auto adds **'created_at'** date/time
+* Adds 'input_length" for call to api
 ```json
     {
     "exploration": "genre fusion",
     "concept": "dynamics",
     "element": "fire",
     "emotion": "courage",
-    "length": "prompt",
     "prompt_length": "one word",
-    "user": 1
     }
 ```
+*Required Fields: 'exploration', 'concept', 'emotion', 'element', 'prompt_length'*
 </br>
 </br>
 
-**MUSIC PROMPT RETRIEVE**
+**MUSIC SINGLE INSTANCE RETRIEVE**
 </br>
 
 https://catalyst-x226.onrender.com/api/response/music/id
 ```json
 GET api/response/music/id
 ```
-```json
-Retrieve Music instance
-```
-```json
-Output from openai api
-```
+**Purpose:**
+* Retrieves a single Music instance
+* Retrieves the **id** for this instance
+* Retrieves the **note** associated with this instance
+* Retrieves opeanai prompt **output**
+* Retrieves **'created_at'** date/time for this instance
 ```json
     {
     "id": 30,
@@ -480,19 +556,33 @@ Output from openai api
     "note": ""
     }
 ```
+*New Fields: 'id', 'input_length', 'output', 'user'(user_id), 'note', 'created_at'*
 </br>
 </br>
 
-**RETRIEVE ALL MUSIC PROMPTS**
+**MUSIC INSTANCE UPDATE**
+</br>
+https://catalyst-x226.onrender.com/api/response/music/id
+```json
+PATCH api/response/music/id
+```
+
+**Purpose**
+* Allows user to **update their note** associated with this instance
+</br>
 </br>
 
-https://catalyst-x226.onrender.com/music/prompts/
+**RETRIEVE ALL MUSIC INSTANCES**
+</br>
+
+https://catalyst-x226.onrender.com/music/
 ```json
-GET api/music/prompts/
+GET api/music/
 ```
-```json
-Retrieves list of all user music prompts
-```
+**Purpose**
+* Retrieves **list** of user Music instances
+* Retrieves all openai **outputs** for the collection of user Music instances
+* Retrieves all **notes** for the collection of user Music instances
 ```json
 [
     {
@@ -506,7 +596,7 @@ Retrieves list of all user music prompts
     "output": "Create an electrifying sonic journey that seamlessly blends diverse genres, igniting the listener's spirit with bold dynamics and invoking a sense of fearless passion.",
     "created_at": "2023-07-19T22:08:35.122715Z",
     "user": 1,
-    "note": ""
+    "note": "Art is life"
     },
     {
     "id": 29,
@@ -519,23 +609,24 @@ Retrieves list of all user music prompts
     "output": "Ignite",
     "created_at": "2023-08-07T00:00:00Z",
     "user": 1,
-    "note": ""
+    "note": "I love this app"
     },
 ]
 ```
 </br>
 </br>
 
-**USER PROMPT ARCHIVE LIST**
+**FOLIOS**
 </br>
 
-https://catalyst-x226.onrender.com/api/prompt/archive/
+https://catalyst-x226.onrender.com/api/folios/
 ```json
-GET api/prompt/archive/
+GET api/folios/
 ```
-```
-Retrieves list of all user prompts (write, music, visual art, movement)
-```
+**Purpose**
+* Retrieves **list** of all instances (Write, Music, VisualArt, Movement) associated with user
+* Retrieves list of **notes** associated with user (Write notes, Music notes, VisualArt notes, Movement notes), **including any notes the user has updated**
+* Retrieves **list** of all openai api **prompt outputs** (Write output, Music output, VisualArt output, Movement output)
 
 ```json
 [
@@ -601,70 +692,7 @@ Retrieves list of all user prompts (write, music, visual art, movement)
     ]
 ]
 ```
-</br>
-</br>
 
-**CREATE NOTE**
-</br>
-
-https://catalyst-x226.onrender.com/api/note/create/
-```json
-POST api/note/create/
-```
-</br>
-</br>
-
-**RETRIEVE NOTE**
-</br>
-
-https://catalyst-x226.onrender.com/api/note/id
-```json
-GET api/note/id
-```
-```json
-Retrieve Note instance
-```
-```json
-    {
-    "id": 9,
-    "text": "This is a new note"
-    }
-```
-</br>
-</br>
-
-**UPDATE NOTE**
-</br>
-
-https://catalyst-x226.onrender.com/api/note/id
-```json
-PATCH api/note/id
-```
-</br>
-</br>
-
-**DELETE NOTE**
-</br>
-
-https://catalyst-x226.onrender.com/note/id
-```json
-DESTROY api/note/id
-```
-</br>
-</br>
-
-**RETRIEVE ALL NOTES**
-</br>
-
-https://catalyst-x226.onrender.com/note/folios/
-```json
-GET api/note/folios/
-```
-```json
-Retrieve all user notes
-```
-```json
-```
 
 **WELCOME PROMPT GENERATE**
 </br>
@@ -673,25 +701,31 @@ https://catalyst-x226.onrender.com/api/welcome/generate/
 ```json
 POST api/welcome/generate/
 ```
+
+**Purpose:**
+* Triggers call to openai's api to generate welcome message
+
+*Required Fields: none"*
+
 </br>
 </br>
 
-**RETRIEVE WELCOME PROMPT**
+**RETRIEVE WELCOME MESSAGE**
 </br>
 
 https://catalyst-x226.onrender.com/api/welcome/id
 ```json
 GET api/welcome/id
 ```
-```json
-Retrieve Welcome instance
-```
+**Purpose:**
+* Retrieves welcome output/message from DB
 ```json
     {
     "id": 3,
     "output_text": "Welcome to the app! How can I assist you today?"
     }
 ```
+*New Fields: 'id', 'output_text"*
 </br>
 </br>
 
@@ -702,11 +736,16 @@ https://catalyst-x226.onrender.com/api/definition/generate/
 ```json
 POST api/definition/generate/
 ```
+
+**Purpose:**
+* Sends word (to be defined) to DB for call to openai's api
+
 ```json
     {
     "word": "gracious"
     }
 ```
+*Required Field: "word"*
 </br>
 </br>
 
@@ -717,6 +756,10 @@ https://catalyst-x226.onrender.com/api/definition/id
 ```json
 GET api/definition/id
 ```
+
+**Purpose**
+* Retrieves output/definition from DB
+
 ```json
     {
     "id": 7,
@@ -724,3 +767,4 @@ GET api/definition/id
     "definition": "Gracious means being kind, polite, and showing good manners towards others. It is when someone behaves in a considerate and generous way, making others feel valued and respected."
     }
 ```
+*New Fields: 'id', 'definition'*
