@@ -48,12 +48,7 @@ urlpatterns = [
     path('api/response/music/<int:pk>', views.MusicOutputViewSet.as_view()),
     path('api/music/', views.AllMusicViewSet.as_view()),
 
-    # note
-    # path('api/note/create/', views.NoteCreateViewSet.as_view()),
-    # path('api/note/<int:pk>', views.NoteRetrieveUpdateDestroyViewSet.as_view()),
-    # path('api/note/folios/', views.NoteFoliosViewSet.as_view()),
-
-    # all user prompts
+    # all user prompts/notes
     path('api/folios/',
          views.AllMediumsViewSet.as_view()),
 
