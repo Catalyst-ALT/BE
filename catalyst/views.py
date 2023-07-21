@@ -1,15 +1,31 @@
 from rest_framework import generics, permissions
-from .models import User, Write, VisualArt, Movement, Music, Note, Welcome, Definition
-from .serializers import DefinitionInputSerializer, DefinitionOutputSerializer, WelcomeSerializer, AllPromptsArchiveSerializer, MusicInputSerializer, MusicOutputSerializer, WriteInputSerializer, ProfileSerializer, WriteOutputSerializer, VisualArtInputSerializer, VisualArtOutputSerializer, MovementInputSerializer, MovementOutputSerializer
 from catalyst.permissions import IsProfileOwnerOrReadOnly
 import time
-from rest_framework.response import Response
-from rest_framework import status
-from drf_multiple_model.views import ObjectMultipleModelAPIView
-from rest_framework.serializers import Serializer
-from rest_framework import request
-from rest_framework.views import APIView
-from rest_framework.decorators import action
+from .models import (
+    User,
+    Write,
+    VisualArt,
+    Movement,
+    Music,
+    Welcome,
+    Definition,
+)
+
+from .serializers import (
+    DefinitionInputSerializer,
+    DefinitionOutputSerializer,
+    WelcomeSerializer,
+    AllMediumsSerializer,
+    MusicInputSerializer,
+    MusicOutputSerializer,
+    WriteInputSerializer,
+    ProfileSerializer,
+    WriteOutputSerializer,
+    VisualArtInputSerializer,
+    VisualArtOutputSerializer,
+    MovementInputSerializer,
+    MovementOutputSerializer,
+)
 
 
 class ProfileViewSet(generics.RetrieveUpdateDestroyAPIView):
@@ -45,10 +61,9 @@ class WriteInputViewSet(generics.CreateAPIView):
         word.send_write_prompt()
 
 
-class WriteOutputViewSet(generics.RetrieveAPIView):
+class WriteOutputViewSet(generics.RetrieveUpdateDestroyAPIView):
     '''
-    METHODS: GET
-    Retrieves Write instance from the database (including 'output' which has now been supplied by openai's api)
+    METHODS: GET, PATCH, DELETE
     '''
     queryset = Write.objects.all()
     serializer_class = WriteOutputSerializer
@@ -74,10 +89,9 @@ class VisualArtInputViewSet(generics.CreateAPIView):
         visualart.send_visual_art_prompt()
 
 
-class VisualArtOutputViewSet(generics.RetrieveAPIView):
+class VisualArtOutputViewSet(generics.RetrieveUpdateDestroyAPIView):
     '''
-    METHODS: GET
-    Retrieves VisualArt instance from the database (including 'output' which has now been supplied by openai's api)
+    METHODS: GET, PATCH, DELETE
     '''
     queryset = VisualArt.objects.all()
     serializer_class = VisualArtOutputSerializer
@@ -103,10 +117,9 @@ class MovementInputViewSet(generics.CreateAPIView):
         movement.send_movement_prompt()
 
 
-class MovementOutputViewSet(generics.RetrieveAPIView):
+class MovementOutputViewSet(generics.RetrieveUpdateDestroyAPIView):
     '''
-    METHODS: GET
-    Retrieves Movement instance from the database (including 'output' which has now been supplied by openai's api)
+    METHODS: GET, PATCH, DELETE
     '''
     queryset = Movement.objects.all()
     serializer_class = MovementOutputSerializer
@@ -132,22 +145,22 @@ class MusicInputViewSet(generics.CreateAPIView):
         music.send_music_prompt()
 
 
-class MusicOutputViewSet(generics.RetrieveAPIView):
+class MusicOutputViewSet(generics.RetrieveUpdateDestroyAPIView):
     '''
-    METHODS: GET
-    Retrieves Music instance from the database (including 'output' which has now been supplied by openai's api)
+    METHODS: GET, PATCH, DELETE
     '''
     queryset = Music.objects.all()
     serializer_class = MusicOutputSerializer
 
 
-class AllPromptsArchiveViewSet(generics.ListAPIView):
+class AllMediumsViewSet(generics.ListAPIView):
     '''
-    METHODS: GET 
-    List of all outputs/prompts user has received
+    METHODS: GET
+    List of all user mediums (Write, VisualArt,
+    Movement, Music) and their attributes (prompts, notes, id, etc) 
     '''
     queryset = User.objects.all()
-    serializer_class = AllPromptsArchiveSerializer
+    serializer_class = AllMediumsSerializer
 
     def perform_create(self, serializer):
         serializer.save(writes=self.request.user)
@@ -156,67 +169,40 @@ class AllPromptsArchiveViewSet(generics.ListAPIView):
         serializer.save(music=self.request.user)
 
 
-class AllWritePromptViewSet(generics.ListAPIView):
+class AllWriteViewSet(generics.ListAPIView):
     '''
     METHODS: GET
-    List all write outputs/prompts user has received
+    List all write instances including opeanai output and note
     '''
     queryset = Write.objects.all()
     serializer_class = WriteOutputSerializer
 
 
-class AllVisualArtPromptViewSet(generics.ListAPIView):
+class AllVisualArtViewSet(generics.ListAPIView):
     '''
     METHODS: GET
-    List all visual art outputs/prompts user has received
+    List all visual art instances including opeanai output and note
     '''
     queryset = VisualArt.objects.all()
     serializer_class = VisualArtOutputSerializer
 
 
-class AllMovementPromptViewSet(generics.ListAPIView):
+class AllMovementViewSet(generics.ListAPIView):
     '''
     METHODS: GET
-    List all movement outputs/prompts user has received
+    List all movement instances including opeanai output and note
     '''
     queryset = Movement.objects.all()
     serializer_class = MovementOutputSerializer
 
 
-class AllMusicPromptViewSet(generics.ListAPIView):
+class AllMusicViewSet(generics.ListAPIView):
     '''
     METHODS: GET
-    List all music outputs/prompts user has received
+    List all movement instances including opeanai output and note
     '''
     queryset = Music.objects.all()
     serializer_class = MusicOutputSerializer
-
-
-# class NoteCreateViewSet(generics.CreateAPIView):
-#     '''
-#     METHODS: POST
-#     Create Note instance
-#     '''
-#     queryset = Note.objects.all()
-#     serializer_class = NoteSerializer
-
-
-# class NoteRetrieveUpdateDestroyViewSet(generics.RetrieveUpdateDestroyAPIView):
-#     '''
-#     METHODS: GET, UPDATE, DELETE
-#     Retrieve, update, and destroy a note instance
-#     '''
-#     queryset = Note.objects.all()
-#     serializer_class = NoteSerializer
-
-
-# class NoteFoliosViewSet(generics.ListAPIView):
-#     '''
-#     METHODS: GET
-#     Retrieve list of all user notes
-#     '''
-#     queryset = Note.objects.all()
-#     serializer_class = NoteSerializer
 
 
 class WelcomeInputViewSet(generics.CreateAPIView):

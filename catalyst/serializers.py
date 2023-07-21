@@ -1,5 +1,13 @@
 from rest_framework import serializers
-from .models import User, Write, VisualArt, Movement, Music, Welcome, Definition
+from .models import (
+    User,
+    Write,
+    VisualArt,
+    Movement,
+    Music,
+    Welcome,
+    Definition
+)
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -144,7 +152,7 @@ class MusicOutputSerializer(serializers.ModelSerializer):
         ]
 
 
-class AllPromptsArchiveSerializer(serializers.ModelSerializer):
+class AllMediumsSerializer(serializers.ModelSerializer):
     music = MusicOutputSerializer(many=True, read_only=True)
     visual_arts = VisualArtOutputSerializer(many=True, read_only=True)
     movements = MovementOutputSerializer(many=True, read_only=True)
@@ -160,11 +168,6 @@ class AllPromptsArchiveSerializer(serializers.ModelSerializer):
             'movements',
             'writes'
         ]
-
-
-# class NoteUpdateSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model =
 
 
 class WelcomeSerializer(serializers.ModelSerializer):
