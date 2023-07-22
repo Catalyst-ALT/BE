@@ -175,6 +175,8 @@ class Movement(models.Model):
         max_length=50, blank=True)
     emotion = models.CharField(
         max_length=50, blank=True)
+    user = user = models.ForeignKey(
+        to=User, on_delete=models.CASCADE, related_name='movements', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
