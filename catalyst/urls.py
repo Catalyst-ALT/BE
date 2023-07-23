@@ -20,6 +20,7 @@ from catalyst.views import (
     PostUploadViewSet,
     RetrieveUpdateDestroyUploadViewSet,
     ListUploadsViewSet,
+    AllNotesViewSet
 
 )
 from django.urls import path
@@ -55,6 +56,12 @@ urlpatterns = [
     # all user prompts/notes
     path('api/folios/',
          views.AllMediumsViewSet.as_view()),
+
+    # user saved for later prompts (that they haven't worked on yet)
+    path('api/prompts/saved/', views.SavePromptViewSet.as_view()),
+
+    # all user prompts with written notes (exludes note='' prompts)
+    path('api/notebook/', views.AllNotesViewSet.as_view()),
 
     # welcome
     path('api/welcome/generate/', views.WelcomeInputViewSet.as_view()),

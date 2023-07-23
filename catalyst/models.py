@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 import openai
 import environ
-import time
-from django.core.exceptions import ValidationError
+from upload_validator import FileTypeValidator
+
 
 ONE_WORD = 'one word'
 THREE_WORDS = 'three words'
@@ -64,7 +64,8 @@ class Write(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    note = models.TextField(default='take notes')
+    note = models.TextField(default='')
+    save_prompt = models.BooleanField(default=False)
 
     class WriteManager(models.Manager):
         def get_queryset(self):
@@ -132,7 +133,8 @@ class VisualArt(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    note = models.TextField(default='take notes')
+    note = models.TextField(default='')
+    save_prompt = models.BooleanField(default=False)
 
     def get_visual_art_length(self):
         if self.prompt_length == 'one word':
@@ -181,7 +183,8 @@ class Movement(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    note = models.TextField(default='take notes')
+    note = models.TextField(default='')
+    save_prompt = models.BooleanField(default=False)
 
     def get_movement_length(self):
         if self.prompt_length == 'one word':
@@ -231,7 +234,8 @@ class Music(models.Model):
     input_length = models.CharField(blank=True, max_length=300)
     output = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    note = models.TextField(default='take notes')
+    note = models.TextField(default='')
+    save_prompt = models.BooleanField(default=False)
 
     def get_music_length(self):
         if self.prompt_length == 'one word':
@@ -302,7 +306,8 @@ class Upload(models.Model):
     music = models.ForeignKey(
         to=Music, on_delete=models.CASCADE, related_name='uploads_music', blank=True, null=True)
     text = models.CharField(blank=True, max_length=300)
-    file = models.FileField(upload_to='uploads/')
+    file = models.FileField(
+        upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
 
     def __str__(self):
         return str(self.id)

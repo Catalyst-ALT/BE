@@ -1,10 +1,12 @@
 from rest_framework import generics, permissions
+from drf_multiple_model.views import ObjectMultipleModelAPIView
 from catalyst.permissions import (
     IsProfileOwnerOrReadOnly,
     IsWriteOwnerOrReadOnly,
     IsMusicOwnerOrReadOnly,
     IsVisualArtOwnerOrReadOnly,
     IsMovementOwnerOrReadOnly,
+    IsUserMediaOrReadOnly,
 )
 import time
 from .models import (
@@ -59,6 +61,7 @@ class WriteInputViewSet(generics.CreateAPIView):
 
     queryset = Write.objects.all()
     serializer_class = WriteInputSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         word = serializer.save()
@@ -91,6 +94,7 @@ class VisualArtInputViewSet(generics.CreateAPIView):
     '''
     queryset = VisualArt.objects.all()
     serializer_class = VisualArtInputSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         visualart = serializer.save()
@@ -123,6 +127,7 @@ class MovementInputViewSet(generics.CreateAPIView):
     '''
     queryset = Movement.objects.all()
     serializer_class = MovementInputSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         movement = serializer.save()
@@ -156,6 +161,7 @@ class MusicInputViewSet(generics.CreateAPIView):
     '''
     queryset = Music.objects.all()
     serializer_class = MusicInputSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         music = serializer.save()
@@ -187,6 +193,7 @@ class AllMediumsViewSet(generics.ListAPIView):
     '''
     queryset = User.objects.all()
     serializer_class = AllMediumsSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(writes=self.request.user)
@@ -250,6 +257,34 @@ class AllMusicViewSet(generics.ListAPIView):
     # permission_classes = [permissions.IsAuthenticated, IsMusicOwnerOrReadOnly]
 
 
+class SavePromptViewSet(ObjectMultipleModelAPIView):
+    querylist = [
+        {'queryset': Write.objects.filter(
+            save_prompt=True), 'serializer_class': WriteOutputSerializer},
+        {'queryset': VisualArt.objects.filter(
+            save_prompt=True), 'serializer_class': VisualArtOutputSerializer},
+        {'queryset': Movement.objects.filter(
+            save_prompt=True), 'serializer_class': MovementOutputSerializer},
+        {'queryset': Music.objects.filter(
+            save_prompt=True), 'serializer_class': MusicOutputSerializer},
+    ]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class AllNotesViewSet(ObjectMultipleModelAPIView):
+    querylist = [
+        {'queryset': Write.objects.exclude(
+            note__exact=''), 'serializer_class': WriteOutputSerializer},
+        {'queryset': VisualArt.objects.exclude(
+            note__exact=''), 'serializer_class': VisualArtOutputSerializer},
+        {'queryset': Movement.objects.exclude(
+            note__exact=''), 'serializer_class': MovementOutputSerializer},
+        {'queryset': Music.objects.exclude(
+            note__exact=''), 'serializer_class': MusicOutputSerializer},
+    ]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
 class WelcomeInputViewSet(generics.CreateAPIView):
     querset = Welcome.objects.all()
     serializer_class = WelcomeSerializer
@@ -281,16 +316,16 @@ class DefinitionOutputViewSet(generics.RetrieveAPIView):
 class PostUploadViewSet(generics.CreateAPIView):
     queryset = Upload.objects.all()
     serializer_class = UploadFileSerializer
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserMediaOrReadOnly]
 
 
 class RetrieveUpdateDestroyUploadViewSet(generics.RetrieveUpdateDestroyAPIView):
     queryset = Upload.objects.all()
     serializer_class = UploadFileSerializer
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserMediaOrReadOnly]
 
 
 class ListUploadsViewSet(generics.ListAPIView):
     queryset = Upload.objects.all()
     serializer_class = UploadFileSerializer
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserMediaOrReadOnly]

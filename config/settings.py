@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'corsheaders',
     'storages',
+    'drf_multiple_model',
+    # 'django_upload_validator',
 ]
 
 MIDDLEWARE = [
