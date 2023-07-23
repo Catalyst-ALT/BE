@@ -777,7 +777,29 @@ https://catalyst-x226.onrender.com/api/notebook/
 ```json
 GET api/notebook/
 ```
+**Purpose**
 
+* Filters for a the prompts the user has written notes on 
+* Retrieves a list
+  
+```json
+    {
+    "id": 104,
+    "user": 1,
+    "style": "poetry",
+    "theme": "emotion",
+    "category": "relationships and love",
+    "sentiment": "harmony",
+    "emotion": "joy",
+    "prompt_length": "prompt",
+    "input_length": "Let the prompt be 20-25 words",
+    "created_at": "2023-07-19T21:49:42.927227Z",
+    "output": "Write a story about two souls who find solace in each other's presence, navigating the complexities of their emotions and forgin
+    a bond that radiates harmony, joy, and profound love.",
+    "note": "take notes",
+    "save": null
+    },
+```
 
 **USER SAVED PROMPTS**
 </br>
