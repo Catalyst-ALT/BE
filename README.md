@@ -779,7 +779,7 @@ GET api/notebook/
 ```
 **Purpose**
 
-* Filters for a the prompts the user has written notes on 
+* Filters for the prompts the user has written notes on 
 * Retrieves a list
   
 ```json
