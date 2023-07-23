@@ -768,3 +768,62 @@ GET api/definition/id
     }
 ```
 *New Fields: 'id', 'definition'*
+</br>
+</br>
+
+**USER NOTEBOOK (ALL PROMPTS W/ NOTES)**
+</br>
+https://catalyst-x226.onrender.com/api/notebook/
+```json
+GET api/notebook/
+```
+
+
+**USER SAVED PROMPTS**
+</br>
+https://catalyst-x226.onrender.com/api/prompts/saved/
+```json
+GET api/prompts/saved/
+```
+
+
+**USER UPLOAD FILE (IMAGE, ETC.)**
+</br>
+https://catalyst-x226.onrender.com/api/upload/create/
+```json
+POST api/upload/create/
+```
+
+**Purpose**
+* For user to upload files (images, videos, etc) to app
+
+</br>
+</br>
+
+**GET SINGLE USER FILE UPLOAD (IMAGE, ETC.)**
+</br>
+https://catalyst-x226.onrender.com/api/upload/id
+```json
+GET api/uploads/id
+```
+
+**Purpose**
+* To retrieve and display a single file the user has uploaded (for example an image to be diplayed in the folios section)
+  
+</br>
+</br>
+
+**GET A LIST OF USER FILE UPLOADS**
+</br>
+https://catalyst-x226.onrender.com/api/uploads/
+```json
+GET api/uploads/
+```
+
+**Purpose**
+* To retrieve and display a list of files the user had uploaded (for example a list of images to be displayed in the folios section)
+
+
+
+
+

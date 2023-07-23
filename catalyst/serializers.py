@@ -33,6 +33,7 @@ class WriteInputSerializer(serializers.ModelSerializer):
             'emotion',
             'prompt_length',
             'input_length',
+            'save',
         ]
 
 
@@ -52,10 +53,12 @@ class WriteOutputSerializer(serializers.ModelSerializer):
             'created_at',
             'output',
             'note',
+            'save',
         ]
 
 
 class VisualArtInputSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = VisualArt
         fields = [
@@ -81,9 +84,11 @@ class VisualArtOutputSerializer(serializers.ModelSerializer):
             'sentiment',
             'emotion',
             'prompt_length',
+            'input_length',
             'created_at',
             'output',
             'note',
+            'save',
         ]
 
 
@@ -99,6 +104,7 @@ class MovementInputSerializer(serializers.ModelSerializer):
             'emotion',
             'prompt_length',
             'input_length',
+            'save',
         ]
 
 
@@ -117,6 +123,7 @@ class MovementOutputSerializer(serializers.ModelSerializer):
             'created_at',
             'output',
             'note',
+            'save',
         ]
 
 
@@ -131,7 +138,8 @@ class MusicInputSerializer(serializers.ModelSerializer):
             'element',
             'emotion',
             'prompt_length',
-            'input_length'
+            'input_length',
+            'save',
         ]
 
 
@@ -150,6 +158,7 @@ class MusicOutputSerializer(serializers.ModelSerializer):
             'created_at',
             'output',
             'note',
+            'save',
         ]
 
 

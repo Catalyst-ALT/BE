@@ -19,6 +19,8 @@ sentry-sdk = "*"
 tenacity = "*"
 boto3 = "*"
 django-storages = "*"
+django-upload-validator = "*"
+python-magic = "*"
 
 [dev-packages]
 
