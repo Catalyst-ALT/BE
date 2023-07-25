@@ -209,6 +209,7 @@ class DefinitionOutputSerializer(serializers.ModelSerializer):
             'antonym',
             'sentence',
             'joke',
+            'color',
 
         ]
 
