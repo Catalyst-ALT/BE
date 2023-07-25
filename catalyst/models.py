@@ -298,9 +298,10 @@ class Definition(models.Model):
     antonym = models.CharField(blank=True)
     sentence = models.TextField(blank=True)
     joke = models.TextField(blank=True)
+    color = models.TextField(blank=True)
 
     def send_definition_prompt(self):
-        definition_input = f'Define the word {self.word}. Let the definition be 1 to 3 sentences. Use basic vocabulary.'
+        definition_input = f'Define the word {self.word}. Let the definition be 1 to 2 sentences.'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -317,7 +318,7 @@ class Definition(models.Model):
         self.save()
 
     def send_synonym_prompt(self):
-        synonym_input = f'Give a synonym for the word "{self.word}".'
+        synonym_input = f'Give 3 synonyms for the word "{self.word}". Do not define the synonyms. Do not number the words'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -334,7 +335,7 @@ class Definition(models.Model):
         self.save()
 
     def send_antonym_prompt(self):
-        antonym_input = f'Give 1 antonym for the word "{self.word}".'
+        antonym_input = f'Give 3 antonyms for the word "{self.word}". Do not define the antonyms. Do not return numbers or number the words.'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -382,6 +383,23 @@ class Definition(models.Model):
             temperature=0.5,
         )
         self.joke = response['choices'][0]['message']['content']
+        self.save()
+
+    def send_color_prompt(self):
+        color_input = f'What color is associated with the word "{self.word}". Describe in 1-2 sentences.'
+        env = environ.Env()
+        environ.Env.read_env()
+        MODEL = "gpt-3.5-turbo"
+        openai.api_key = env('OPENAI_API_KEY')
+        response = openai.ChatCompletion.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": "You are a comedian."},
+                {"role": "user", "content": color_input}
+            ],
+            temperature=0.5,
+        )
+        self.color = response['choices'][0]['message']['content']
         self.save()
 
     def __str__(self):

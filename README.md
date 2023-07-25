@@ -757,6 +757,8 @@ https://catalyst-x226.onrender.com/api/definition/id
 GET api/definition/id
 ```
 
+
+
 **Purpose**
 * Retrieves output/definition from DB
 
@@ -764,7 +766,12 @@ GET api/definition/id
     {
     "id": 7,
     "word": "gracious",
-    "definition": "Gracious means being kind, polite, and showing good manners towards others. It is when someone behaves in a considerate and generous way, making others feel valued and respected."
+    "definition": "Gracious means being kind, polite, and showing good manners towards others. It is when someone behaves in a considerate and generous way, making others feel valued and respected.",
+    "antonym": "An antonym for the word gracious is rude or ungracious.",
+    "synonym": "A synonym for the word gracious is courteous.",
+    "sentence": "The hostess greeted her guests with a gracious smile and warm welcome.",
+    "joke": "Why did the polite computer say gracious all the time? Because it had impeccable netiquette",
+    "color": "The color associated with the word gracious is a warm and inviting shade of golden yellow, reminiscent of a radiant sunset, exuding kindness and elegance."
     }
 ```
 *New Fields: 'id', 'definition'*

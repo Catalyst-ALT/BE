@@ -315,11 +315,13 @@ class DefinitionInputViewSet(generics.CreateAPIView):
         anto = serializer.save()
         sent = serializer.save()
         funny = serializer.save()
+        colour = serializer.save()
         define.send_definition_prompt()
         syno.send_synonym_prompt()
         anto.send_antonym_prompt()
         sent.send_sentence_prompt()
         funny.send_joke_prompt()
+        colour.send_color_prompt()
 
 
 class DefinitionOutputViewSet(generics.RetrieveAPIView):
