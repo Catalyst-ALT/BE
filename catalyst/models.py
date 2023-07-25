@@ -50,7 +50,6 @@ class Welcome(models.Model):
 
 class Write(models.Model):
 
-    style = models.CharField(max_length=50, blank=True)
     theme = models.CharField(max_length=50, blank=True)
     category = models.CharField(
         max_length=50, blank=True)
@@ -66,6 +65,8 @@ class Write(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
+    previous_prompt = models.TextField(blank=True)
+    new_instance = models.TextField(blank=True)
 
     class WriteManager(models.Manager):
         def get_queryset(self):
@@ -73,9 +74,9 @@ class Write(models.Model):
 
     def get_write_length(self):
         if self.prompt_length == 'one word':
-            words = "Let the prompt be only 1 word"
+            words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
         elif self.prompt_length == 'three words':
-            words = 'Let the prompt be only 3 words'
+            words = 'Let the prompt be 3 to 5 words. Capitalize with first letter of the prompt'
         elif self.prompt_length == 'prompt':
             words = "Let the prompt be 20-25 words"
 
@@ -83,7 +84,8 @@ class Write(models.Model):
         self.save()
 
     def send_write_prompt(self):
-        write_input = f'Give a writer a prompt for writing with the keywords: {self.theme}, {self.category}, {self.sentiment}, {self.emotion}. {self.input_length}. Do not use the keywords in the prompt. Return only text.'
+        write_input = f'Give a writer a prompt for writing with the keywords: "{self.theme}", "{self.category}", "{self.sentiment}", "{self.emotion}". {self.input_length}. Do not use the keywords in the prompt. Do not use the plural form of the keywords in the prompt. Return the prompt in quotations.'
+        print(write_input)
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -95,10 +97,30 @@ class Write(models.Model):
                     "content": "You are a helpful assistant"},
                 {"role": "user", "content": write_input}
             ],
-            temperature=0.5,
+            temperature=1.0,
         )
-        self.output = response['choices'][0]['message']['content']
+        raw_prompt = response['choices'][0]['message']['content']
+        self.output = str.capitalize(raw_prompt)
         self.save()
+
+    # def get_previous_output(self):
+    #     prior_prompt = self.output
+    #     self.previous_prompt = f'Do not use the word {prior_prompt}'
+    #     self.save()
+    #     # self.previous_prompt = f'Do not return the previous word {prior_prompt}'
+    #     # self.save()
+
+    # def create_or_update_instance(self, request):
+    #     previous_data = self.previous_prompt
+    #     existing_model = Write.objects.filter(previous_data).first()
+    #     if existing_model:
+    #         existing_model.previous_prompt = request.POST.get(
+    #             'previous_prompt')
+    #     else:
+    #         new_instance = Write(
+    #             previous_prompt=request.POST.get('previous_prompt')
+    #         )
+    #         new_instance.save
         # collect_chunks = []
         # collect_messages = []
         # for chunk in response:
@@ -272,6 +294,10 @@ class Music(models.Model):
 class Definition(models.Model):
     word = models.CharField(max_length=300)
     definition = models.TextField(blank=True)
+    synonym = models.CharField(blank=True)
+    antonym = models.CharField(blank=True)
+    sentence = models.TextField(blank=True)
+    joke = models.TextField(blank=True)
 
     def send_definition_prompt(self):
         definition_input = f'Define the word {self.word}. Let the definition be 1 to 3 sentences. Use basic vocabulary.'
@@ -282,12 +308,80 @@ class Definition(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "You are a dictionary."},
                 {"role": "user", "content": definition_input}
             ],
             temperature=0.5,
         )
         self.definition = response['choices'][0]['message']['content']
+        self.save()
+
+    def send_synonym_prompt(self):
+        synonym_input = f'Give a synonym for the word "{self.word}".'
+        env = environ.Env()
+        environ.Env.read_env()
+        MODEL = "gpt-3.5-turbo"
+        openai.api_key = env('OPENAI_API_KEY')
+        response = openai.ChatCompletion.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": "You are a thesaurus."},
+                {"role": "user", "content": synonym_input}
+            ],
+            temperature=0.5,
+        )
+        self.synonym = response['choices'][0]['message']['content']
+        self.save()
+
+    def send_antonym_prompt(self):
+        antonym_input = f'Give 1 antonym for the word "{self.word}".'
+        env = environ.Env()
+        environ.Env.read_env()
+        MODEL = "gpt-3.5-turbo"
+        openai.api_key = env('OPENAI_API_KEY')
+        response = openai.ChatCompletion.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": "You are a thesaurus."},
+                {"role": "user", "content": antonym_input}
+            ],
+            temperature=0.5,
+        )
+        self.antonym = response['choices'][0]['message']['content']
+        self.save()
+
+    def send_sentence_prompt(self):
+        sentence_input = f'Give a sentence with the word "{self.word}" in it.'
+        env = environ.Env()
+        environ.Env.read_env()
+        MODEL = "gpt-3.5-turbo"
+        openai.api_key = env('OPENAI_API_KEY')
+        response = openai.ChatCompletion.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": sentence_input}
+            ],
+            temperature=0.5,
+        )
+        self.sentence = response['choices'][0]['message']['content']
+        self.save()
+
+    def send_joke_prompt(self):
+        joke_input = f'Use the word "{self.word}" in a pun or a joke.'
+        env = environ.Env()
+        environ.Env.read_env()
+        MODEL = "gpt-3.5-turbo"
+        openai.api_key = env('OPENAI_API_KEY')
+        response = openai.ChatCompletion.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": "You are a comedian."},
+                {"role": "user", "content": joke_input}
+            ],
+            temperature=0.5,
+        )
+        self.joke = response['choices'][0]['message']['content']
         self.save()
 
     def __str__(self):

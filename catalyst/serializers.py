@@ -26,7 +26,6 @@ class WriteInputSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'user',
-            'style',
             'theme',
             'category',
             'sentiment',
@@ -34,6 +33,7 @@ class WriteInputSerializer(serializers.ModelSerializer):
             'prompt_length',
             'input_length',
             'save',
+            'previous_prompt',
         ]
 
 
@@ -43,7 +43,6 @@ class WriteOutputSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'user',
-            'style',
             'theme',
             'category',
             'sentiment',
@@ -54,6 +53,7 @@ class WriteOutputSerializer(serializers.ModelSerializer):
             'output',
             'note',
             'save',
+            'previous_prompt',
         ]
 
 
@@ -204,7 +204,12 @@ class DefinitionOutputSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'word',
-            'definition'
+            'definition',
+            'synonym',
+            'antonym',
+            'sentence',
+            'joke',
+
         ]
 
 
