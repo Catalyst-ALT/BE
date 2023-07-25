@@ -66,10 +66,16 @@ class WriteInputViewSet(generics.CreateAPIView):
     def perform_create(self, serializer):
         word = serializer.save()
         length = serializer.save()
+        previous = serializer.save()
+        new = serializer.save()
 
         length.get_write_length()
         time.sleep(1)
         word.send_write_prompt()
+        # time.sleep(7)
+        # previous.get_previous_output()
+        # time.sleep(1)
+        # new.create_or_update_instance()
 
 
 class WriteOutputViewSet(generics.RetrieveUpdateDestroyAPIView):
@@ -305,7 +311,15 @@ class DefinitionInputViewSet(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         define = serializer.save()
+        syno = serializer.save()
+        anto = serializer.save()
+        sent = serializer.save()
+        funny = serializer.save()
         define.send_definition_prompt()
+        syno.send_synonym_prompt()
+        anto.send_antonym_prompt()
+        sent.send_sentence_prompt()
+        funny.send_joke_prompt()
 
 
 class DefinitionOutputViewSet(generics.RetrieveAPIView):
