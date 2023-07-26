@@ -412,20 +412,20 @@ class Definition(models.Model):
         return str(self.id)
 
 
-class Upload(models.Model):
-    user = models.ForeignKey(
-        to=User, on_delete=models.CASCADE, related_name='uploads_by_user', blank=True, null=True)
-    write = models.ForeignKey(
-        to=Write, on_delete=models.CASCADE, related_name='uploads_writes', blank=True, null=True)
-    visual_art = models.ForeignKey(
-        to=VisualArt, on_delete=models.CASCADE, related_name='uploads_visual_arts', blank=True, null=True)
-    movement = models.ForeignKey(
-        to=Movement, on_delete=models.CASCADE, related_name='uploads_movements', blank=True, null=True)
-    music = models.ForeignKey(
-        to=Music, on_delete=models.CASCADE, related_name='uploads_music', blank=True, null=True)
-    text = models.CharField(blank=True, max_length=300)
-    file = models.FileField(
-        upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
+# class Upload(models.Model):
+#     user = models.ForeignKey(
+#         to=User, on_delete=models.CASCADE, related_name='uploads_by_user', blank=True, null=True)
+#     write = models.ForeignKey(
+#         to=Write, on_delete=models.CASCADE, related_name='uploads_writes', blank=True, null=True)
+#     visual_art = models.ForeignKey(
+#         to=VisualArt, on_delete=models.CASCADE, related_name='uploads_visual_arts', blank=True, null=True)
+#     movement = models.ForeignKey(
+#         to=Movement, on_delete=models.CASCADE, related_name='uploads_movements', blank=True, null=True)
+#     music = models.ForeignKey(
+#         to=Music, on_delete=models.CASCADE, related_name='uploads_music', blank=True, null=True)
+#     text = models.CharField(blank=True, max_length=300)
+#     file = models.FileField(
+#         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
 
-    def __str__(self):
-        return str(self.id)
+#     def __str__(self):
+#         return str(self.id)

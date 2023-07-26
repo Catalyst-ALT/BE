@@ -17,10 +17,7 @@ from catalyst.views import (
     WriteOutputViewSet,
     VisualArtInputViewSet,
     VisualArtOutputViewSet,
-    PostUploadViewSet,
-    RetrieveUpdateDestroyUploadViewSet,
-    ListUploadsViewSet,
-    AllNotesViewSet
+    AllNotesViewSet,
 
 )
 from django.urls import path
@@ -72,9 +69,9 @@ urlpatterns = [
     path('api/definition/<int:pk>', views.DefinitionOutputViewSet.as_view()),
 
     # upload file
-    path('api/upload/create/', views.PostUploadViewSet.as_view()),
-    path('api/upload/<int:pk>', views.RetrieveUpdateDestroyUploadViewSet.as_view()),
-    path('api/uploads/', views.ListUploadsViewSet.as_view()),
+    # path('api/upload/create/', views.PostUploadViewSet.as_view()),
+    # path('api/upload/<int:pk>', views.RetrieveUpdateDestroyUploadViewSet.as_view()),
+    # path('api/uploads/', views.ListUploadsViewSet.as_view()),
 
 ]
 # https://api.openai.com/v1/chat/completions

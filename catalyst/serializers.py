@@ -7,7 +7,7 @@ from .models import (
     Music,
     Welcome,
     Definition,
-    Upload,
+
 )
 
 
@@ -32,8 +32,7 @@ class WriteInputSerializer(serializers.ModelSerializer):
             'emotion',
             'prompt_length',
             'input_length',
-            'save',
-            'previous_prompt',
+            'save_prompt',
         ]
 
 
@@ -140,7 +139,7 @@ class MusicInputSerializer(serializers.ModelSerializer):
             'prompt_length',
             'input_length',
             'save_prompt',
-            'file',
+
         ]
 
 
@@ -160,7 +159,7 @@ class MusicOutputSerializer(serializers.ModelSerializer):
             'output',
             'note',
             'save_prompt',
-            'file',
+
         ]
 
 
@@ -216,15 +215,15 @@ class DefinitionOutputSerializer(serializers.ModelSerializer):
         ]
 
 
-class UploadFileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Upload
-        fields = [
-            'id',
-            'user',
-            'file',
-            'write',
-            'visual_art',
-            'movement',
-            'music',
-        ]
+# class UploadFileSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Upload
+#         fields = [
+#             'id',
+#             'user',
+#             'file',
+#             'write',
+#             'visual_art',
+#             'movement',
+#             'music',
+#         ]
