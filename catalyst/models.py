@@ -65,8 +65,8 @@ class Write(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
-    file = models.FileField(blank=True,
-                            upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
+    # file = models.FileField(blank=True,
+    #                         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
 
     class WriteManager(models.Manager):
         def get_queryset(self):
@@ -157,8 +157,8 @@ class VisualArt(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
-    file = models.FileField(blank=True,
-                            upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
+    # file = models.FileField(blank=True,
+    #                         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
 
     def get_visual_art_length(self):
         if self.prompt_length == 'one word':
@@ -209,8 +209,8 @@ class Movement(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
-    file = models.FileField(blank=True,
-                            upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
+    # file = models.FileField(blank=True,
+    #                         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
 
     def get_movement_length(self):
         if self.prompt_length == 'one word':
@@ -262,8 +262,8 @@ class Music(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
-    file = models.FileField(blank=True,
-                            upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
+    # file = models.FileField(blank=True,
+    #                         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
 
     def get_music_length(self):
         if self.prompt_length == 'one word':
