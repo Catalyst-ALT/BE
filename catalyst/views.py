@@ -66,8 +66,8 @@ class WriteInputViewSet(generics.CreateAPIView):
     def perform_create(self, serializer):
         word = serializer.save()
         length = serializer.save()
-        previous = serializer.save()
-        new = serializer.save()
+        # previous = serializer.save()
+        # new = serializer.save()
 
         length.get_write_length()
         time.sleep(1)
@@ -316,6 +316,7 @@ class DefinitionInputViewSet(generics.CreateAPIView):
         sent = serializer.save()
         funny = serializer.save()
         colour = serializer.save()
+
         define.send_definition_prompt()
         syno.send_synonym_prompt()
         anto.send_antonym_prompt()
