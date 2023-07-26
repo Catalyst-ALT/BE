@@ -211,7 +211,8 @@ class AllWriteViewSet(generics.ListAPIView):
     METHODS: GET
     List all write instances including opeanai output and note
     '''
-    queryset = Write.objects.all()
+    queryset = Write.objects.filter(
+        is_deleted=False)
     serializer_class = WriteOutputSerializer
     # def get_queryset(self):
     #     return self.request.user.writes
@@ -224,7 +225,8 @@ class AllVisualArtViewSet(generics.ListAPIView):
     METHODS: GET
     List all visual art instances including opeanai output and note
     '''
-    queryset = VisualArt.objects.all()
+    queryset = VisualArt.objects.filter(
+        is_deleted=False)
     serializer_class = VisualArtOutputSerializer
 
     # def get_queryset(self):
@@ -238,7 +240,8 @@ class AllMovementViewSet(generics.ListAPIView):
     METHODS: GET
     List all movement instances including opeanai output and note
     '''
-    queryset = Movement.objects.all()
+    queryset = Movement.objects.filter(
+        is_deleted=False)
     serializer_class = MovementOutputSerializer
 
     # def get_queryset(self):
@@ -252,7 +255,8 @@ class AllMusicViewSet(generics.ListAPIView):
     METHODS: GET
     List all movement instances including opeanai output and note
     '''
-    queryset = Music.objects.all()
+    queryset = Music.objects.filter(
+        is_deleted=False)
     serializer_class = MusicOutputSerializer
 
     # def get_queryset(self):

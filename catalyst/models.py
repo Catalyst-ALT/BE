@@ -65,6 +65,7 @@ class Write(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=True)
     # file = models.FileField(blank=True,
     #                         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
 
@@ -157,6 +158,7 @@ class VisualArt(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=False)
     # file = models.FileField(blank=True,
     #                         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
 
@@ -209,6 +211,7 @@ class Movement(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=True)
     # file = models.FileField(blank=True,
     #                         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
 
@@ -262,6 +265,7 @@ class Music(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=True)
     # file = models.FileField(blank=True,
     #                         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
 
