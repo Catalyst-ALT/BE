@@ -74,7 +74,7 @@ class Write(models.Model):
         if self.prompt_length == 'one word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
         elif self.prompt_length == 'three words':
-            words = 'Let the prompt be 4 to 5 words. Capitalize only the first letter of the first word of the content you return.'
+            words = 'Let the prompt be 4 to 5 words'
         elif self.prompt_length == 'prompt':
             words = "Let the prompt be 20-25 words"
 
@@ -137,7 +137,7 @@ class VisualArt(models.Model):
         self.save()
 
     def send_visual_art_prompt(self):
-        visual_art_input = f'Give an visual artist a prompt with the keywords: "{self.theme}", "{self.sentiment}", and "{self.emotion}". "{self.input_length}". Do not use the keywords in the prompt. Return only text. Do not use the word "prompt".'
+        visual_art_input = f'Give an visual artist a prompt with the keywords: "{self.theme}", "{self.sentiment}", and "{self.emotion}". "{self.input_length}". Do not use the keywords in the prompt. Return only text. Return the prompt in quotations. Do not use the word "prompt".'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -148,9 +148,10 @@ class VisualArt(models.Model):
                 {"role": "system", "content": "You are a visual artist that comes up with fun and creative idea for visual art."},
                 {"role": "user", "content": visual_art_input}
             ],
-            temperature=0.5,
+            temperature=1.0,
         )
-        self.output = response['choices'][0]['message']['content']
+        raw_prompt = response['choices'][0]['message']['content']
+        self.output = str.capitalize(raw_prompt)
         self.save()
 
     def __str__(self):
@@ -188,7 +189,7 @@ class Movement(models.Model):
         self.save()
 
     def send_movement_prompt(self):
-        movement_input = f'Give a movement artist a prompt with the keywords: "{self.theme}", "{self.somatic}", "{self.emotion}", "{self.sentiment}". {self.input_length}. Do not use the keywords in the prompt. Return only text.Do not use the word "prompt".'
+        movement_input = f'Give a movement artist a prompt with the keywords: "{self.theme}", "{self.somatic}", "{self.emotion}", "{self.sentiment}". {self.input_length}. Do not use the keywords in the prompt. Return only text. Return the prompt in quotations. Do not use the word "prompt".'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -199,9 +200,10 @@ class Movement(models.Model):
                 {"role": "system", "content": "You are a dancer who comes up with fun and creative ideas for movement."},
                 {"role": "user", "content": movement_input}
             ],
-            temperature=0.5,
+            temperature=1.0,
         )
-        self.output = response['choices'][0]['message']['content']
+        raw_prompt = response['choices'][0]['message']['content']
+        self.output = str.capitalize(raw_prompt)
         self.save()
 
     def __str__(self):
@@ -240,7 +242,7 @@ class Music(models.Model):
         self.save()
 
     def send_music_prompt(self):
-        music_input = f'Give a musician a prompt for creating music with the keywords: "{self.exploration}", "{self.concept}", "{self.emotion}", "{self.element}". {self.input_length}. Do not use the keywords in the prompt. Return only text. Do not use the word "prompt".'
+        music_input = f'Give a musician a prompt for creating music with the keywords: "{self.exploration}", "{self.concept}", "{self.emotion}", "{self.element}". {self.input_length}. Do not use the keywords in the prompt. Return only text. Return the prompt in quotations. Do not use the word "prompt".'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -251,9 +253,10 @@ class Music(models.Model):
                 {"role": "system", "content": "You are a musician who comes up with fun and creative ideas of music."},
                 {"role": "user", "content": music_input}
             ],
-            temperature=0.5,
+            temperature=1.0,
         )
-        self.output = response['choices'][0]['message']['content']
+        raw_prompt = response['choices'][0]['message']['content']
+        self.output = str.capitalize(raw_prompt)
         self.save()
 
     def __str__(self):
