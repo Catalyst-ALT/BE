@@ -139,7 +139,6 @@ class MusicInputSerializer(serializers.ModelSerializer):
             'prompt_length',
             'input_length',
             'save_prompt',
-
         ]
 
 
@@ -159,7 +158,6 @@ class MusicOutputSerializer(serializers.ModelSerializer):
             'output',
             'note',
             'save_prompt',
-
         ]
 
 
@@ -211,19 +209,4 @@ class DefinitionOutputSerializer(serializers.ModelSerializer):
             'sentence',
             'joke',
             'color',
-
         ]
-
-
-# class UploadFileSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Upload
-#         fields = [
-#             'id',
-#             'user',
-#             'file',
-#             'write',
-#             'visual_art',
-#             'movement',
-#             'music',
-#         ]

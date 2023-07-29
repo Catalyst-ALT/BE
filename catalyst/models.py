@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 import openai
 import environ
-from upload_validator import FileTypeValidator
+
 
 
 ONE_WORD = 'one word'
@@ -66,8 +66,7 @@ class Write(models.Model):
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-    # file = models.FileField(blank=True,
-    #                         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
+    
 
     class WriteManager(models.Manager):
         def get_queryset(self):
@@ -104,37 +103,6 @@ class Write(models.Model):
         self.output = str.capitalize(raw_prompt)
         self.save()
 
-    # def get_previous_output(self):
-    #     prior_prompt = self.output
-    #     self.previous_prompt = f'Do not use the word {prior_prompt}'
-    #     self.save()
-    #     # self.previous_prompt = f'Do not return the previous word {prior_prompt}'
-    #     # self.save()
-
-    # def create_or_update_instance(self, request):
-    #     previous_data = self.previous_prompt
-    #     existing_model = Write.objects.filter(previous_data).first()
-    #     if existing_model:
-    #         existing_model.previous_prompt = request.POST.get(
-    #             'previous_prompt')
-    #     else:
-    #         new_instance = Write(
-    #             previous_prompt=request.POST.get('previous_prompt')
-    #         )
-    #         new_instance.save
-        # collect_chunks = []
-        # collect_messages = []
-        # for chunk in response:
-        #     collect_chunks.append(chunk)
-        #     chunk_message = chunk['choices'][0]['delta']
-        #     collect_messages.append(chunk_message)
-        #     full_reply_content = ''.join(
-        #         [message.get('content', '') for message in collect_messages])
-        #     print(full_reply_content)
-        #     self.output = full_reply_content
-
-        # self.output = response['choices'][0]['delta']
-        # print(self.output)
 
     def __str__(self):
         return str(self.id)
@@ -159,8 +127,7 @@ class VisualArt(models.Model):
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-    # file = models.FileField(blank=True,
-    #                         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
+    
 
     def get_visual_art_length(self):
         if self.prompt_length == 'one word':
@@ -212,8 +179,7 @@ class Movement(models.Model):
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-    # file = models.FileField(blank=True,
-    #                         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
+    
 
     def get_movement_length(self):
         if self.prompt_length == 'one word':
@@ -266,8 +232,7 @@ class Music(models.Model):
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-    # file = models.FileField(blank=True,
-    #                         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
+    
 
     def get_music_length(self):
         if self.prompt_length == 'one word':
@@ -396,7 +361,7 @@ class Definition(models.Model):
         self.save()
 
     def send_color_prompt(self):
-        color_input = f'What color is associated with the word "{self.word}". Describe in 1-2 sentences.'
+        color_input = f'What color is associated with the word "{self.word}". Describe in 1-2 sentences. Send 1 hex color code that is the color you are talking about.'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -416,20 +381,4 @@ class Definition(models.Model):
         return str(self.id)
 
 
-# class Upload(models.Model):
-#     user = models.ForeignKey(
-#         to=User, on_delete=models.CASCADE, related_name='uploads_by_user', blank=True, null=True)
-#     write = models.ForeignKey(
-#         to=Write, on_delete=models.CASCADE, related_name='uploads_writes', blank=True, null=True)
-#     visual_art = models.ForeignKey(
-#         to=VisualArt, on_delete=models.CASCADE, related_name='uploads_visual_arts', blank=True, null=True)
-#     movement = models.ForeignKey(
-#         to=Movement, on_delete=models.CASCADE, related_name='uploads_movements', blank=True, null=True)
-#     music = models.ForeignKey(
-#         to=Music, on_delete=models.CASCADE, related_name='uploads_music', blank=True, null=True)
-#     text = models.CharField(blank=True, max_length=300)
-#     file = models.FileField(
-#         upload_to='uploads/', validators=[FileTypeValidator(allowed_types=['image/jpeg', 'image/png', 'video/mp4'])])
 
-#     def __str__(self):
-#         return str(self.id)

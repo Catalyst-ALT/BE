@@ -266,6 +266,10 @@ class AllMusicViewSet(generics.ListAPIView):
 
 
 class SavePromptViewSet(ObjectMultipleModelAPIView):
+    '''
+    METHODS: GET
+    Retrieves list of all prompts saved by user
+    '''
     querylist = [
         {'queryset': Write.objects.filter(
             save_prompt=True), 'serializer_class': WriteOutputSerializer},
@@ -280,6 +284,10 @@ class SavePromptViewSet(ObjectMultipleModelAPIView):
 
 
 class AllNotesViewSet(ObjectMultipleModelAPIView):
+    '''
+    METHODS: GET
+    Retrieves list of all notes written by user
+    '''
     querylist = [
         {'queryset': Write.objects.exclude(
             note__exact=''), 'serializer_class': WriteOutputSerializer},
@@ -294,6 +302,10 @@ class AllNotesViewSet(ObjectMultipleModelAPIView):
 
 
 class WelcomeInputViewSet(generics.CreateAPIView):
+    '''
+    METHODS: POST
+    Creates welcome instance
+    '''
     querset = Welcome.objects.all()
     serializer_class = WelcomeSerializer
 
@@ -303,11 +315,20 @@ class WelcomeInputViewSet(generics.CreateAPIView):
 
 
 class WelcomeOutputViewSet(generics.RetrieveAPIView):
+    '''
+    METHODS: GET
+    Retrieves openai generated welcome message
+    '''
     queryset = Welcome.objects.all()
     serializer_class = WelcomeSerializer
 
 
 class DefinitionInputViewSet(generics.CreateAPIView):
+    '''
+    METHODS: POST
+    Creates definition instance based off user input of word 
+    to be defined
+    '''
     queryset = Definition.objects.all()
     serializer_class = DefinitionInputSerializer
 
@@ -328,23 +349,11 @@ class DefinitionInputViewSet(generics.CreateAPIView):
 
 
 class DefinitionOutputViewSet(generics.RetrieveAPIView):
+    '''
+    METHODS: GET
+    Retrieves definition instance/openai generated fields
+    (definition, color, synonym, antonym, sentence, joke)
+    '''
     queryset = Definition.objects.all()
     serializer_class = DefinitionOutputSerializer
 
-
-# class PostUploadViewSet(generics.CreateAPIView):
-#     queryset = Upload.objects.all()
-#     serializer_class = UploadFileSerializer
-#     # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserMediaOrReadOnly]
-
-
-# class RetrieveUpdateDestroyUploadViewSet(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Upload.objects.all()
-#     serializer_class = UploadFileSerializer
-#     # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserMediaOrReadOnly]
-
-
-# class ListUploadsViewSet(generics.ListAPIView):
-#     queryset = Upload.objects.all()
-#     serializer_class = UploadFileSerializer
-#     # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserMediaOrReadOnly]
