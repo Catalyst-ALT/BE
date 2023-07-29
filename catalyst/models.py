@@ -82,7 +82,7 @@ class Write(models.Model):
         self.save()
 
     def send_write_prompt(self):
-        write_input = f'Give a writer a prompt for writing with the keywords: "{self.theme}", "{self.category}", "{self.sentiment}", "{self.emotion}". {self.input_length}. Do not use the keywords in the prompt. Do not use the plural form of the keywords in the prompt. Return the prompt in quotations.'
+        write_input = f'Give a writer a prompt for writing with the keywords: "{self.theme}", "{self.category}", "{self.sentiment}", "{self.emotion}". {self.input_length}. Do not use the keywords in the prompt. Do not use the plural form of the keywords in the prompt. Return the prompt in quotations. Do not use the word "prompt".'
         print(write_input)
         env = environ.Env()
         environ.Env.read_env()
@@ -92,7 +92,7 @@ class Write(models.Model):
             model=MODEL,
             messages=[
                 {"role": "system",
-                    "content": "You are a helpful assistant that comes up with fun and creative writing prompts"},
+                    "content": "You are a writer that comes up with fun and creative writing prompts"},
                 {"role": "user", "content": write_input}
             ],
             temperature=1.0,
@@ -137,7 +137,7 @@ class VisualArt(models.Model):
         self.save()
 
     def send_visual_art_prompt(self):
-        visual_art_input = f'Give an artist a {self.medium} prompt with the keywords: {self.theme}, {self.sentiment}, and {self.emotion}. {self.input_length}. Do not use the keywords in the prompt. Return only text.'
+        visual_art_input = f'Give an visual artist a prompt with the keywords: "{self.theme}", "{self.sentiment}", and "{self.emotion}". "{self.input_length}". Do not use the keywords in the prompt. Return only text. Do not use the word "prompt".'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -145,7 +145,7 @@ class VisualArt(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "You are a visual artist that comes up with fun and creative idea for visual art."},
                 {"role": "user", "content": visual_art_input}
             ],
             temperature=0.5,
@@ -188,7 +188,7 @@ class Movement(models.Model):
         self.save()
 
     def send_movement_prompt(self):
-        movement_input = f'Give a movement artist a prompt with the keywords: {self.theme}, {self.somatic}, {self.emotion}, {self.sentiment}. {self.input_length}. Do not use the keywords in the prompt. Return only text.'
+        movement_input = f'Give a movement artist a prompt with the keywords: "{self.theme}", "{self.somatic}", "{self.emotion}", "{self.sentiment}". {self.input_length}. Do not use the keywords in the prompt. Return only text.Do not use the word "prompt".'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -196,7 +196,7 @@ class Movement(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a dancer."},
+                {"role": "system", "content": "You are a dancer who comes up with fun and creative ideas for movement."},
                 {"role": "user", "content": movement_input}
             ],
             temperature=0.5,
@@ -240,7 +240,7 @@ class Music(models.Model):
         self.save()
 
     def send_music_prompt(self):
-        music_input = f'Give a musician a prompt for music with the keywords: "{self.exploration}", "{self.concept}", "{self.emotion}", "{self.element}". {self.input_length}. Do not use the keywords in the prompt. Return only text.'
+        music_input = f'Give a musician a prompt for creating music with the keywords: "{self.exploration}", "{self.concept}", "{self.emotion}", "{self.element}". {self.input_length}. Do not use the keywords in the prompt. Return only text. Do not use the word "prompt".'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -248,7 +248,7 @@ class Music(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a musician."},
+                {"role": "system", "content": "You are a musician who comes up with fun and creative ideas of music."},
                 {"role": "user", "content": music_input}
             ],
             temperature=0.5,
@@ -329,7 +329,7 @@ class Definition(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "You are a helpful assistant that enjoys making fun and creative sentences with dictionary words."},
                 {"role": "user", "content": sentence_input}
             ],
             temperature=0.5,
@@ -349,7 +349,7 @@ class Definition(models.Model):
                 {"role": "system", "content": "You are a comedian."},
                 {"role": "user", "content": joke_input}
             ],
-            temperature=0.5,
+            temperature=0.8,
         )
         self.joke = response['choices'][0]['message']['content']
         self.save()
@@ -366,7 +366,7 @@ class Definition(models.Model):
                 {"role": "system", "content": "You are an artist."},
                 {"role": "user", "content": color_input}
             ],
-            temperature=0.5,
+            temperature=0.8,
         )
         self.color = response['choices'][0]['message']['content']
         self.save()
