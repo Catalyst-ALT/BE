@@ -74,7 +74,7 @@ class Write(models.Model):
         if self.prompt_length == 'one word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
         elif self.prompt_length == 'three words':
-            words = 'Let the prompt be 3 to 5 words. Capitalize only the first letter of the first word of the content you return.'
+            words = 'Let the prompt be 4 to 5 words. Capitalize only the first letter of the first word of the content you return.'
         elif self.prompt_length == 'prompt':
             words = "Let the prompt be 20-25 words"
 
@@ -129,7 +129,7 @@ class VisualArt(models.Model):
         if self.prompt_length == 'one word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
         elif self.prompt_length == 'three words':
-            words = 'Let the prompt be 3-5 words. Capitalize only the first letter of the first word of the content you return.'
+            words = 'Let the prompt be 4-5 words. Capitalize only the first letter of the first word of the content you return.'
         elif self.prompt_length == 'prompt':
             words = "Let the prompt be 20-25 words"
 
@@ -180,7 +180,7 @@ class Movement(models.Model):
         if self.prompt_length == 'one word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords "
         elif self.prompt_length == 'three words':
-            words = 'Let the prompt be only 3-5 words. Capitalize only the first letter of the first word of the content you return.'
+            words = 'Let the prompt be 4-5 words. Capitalize only the first letter of the first word of the content you return.'
         elif self.prompt_length == 'prompt':
             words = "Let the prompt be 20-25 words"
 
@@ -232,7 +232,7 @@ class Music(models.Model):
         if self.prompt_length == 'one word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
         elif self.prompt_length == 'three words':
-            words = 'Let the prompt be 3-5 words. Capitalize only the first letter of the first word of the content you return.'
+            words = 'Let the prompt be 4-5 words. Capitalize only the first letter of the first word of the content you return.'
         elif self.prompt_length == 'prompt':
             words = "Let the prompt be 20-25 words"
 
