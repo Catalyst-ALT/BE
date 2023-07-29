@@ -4,7 +4,6 @@ import openai
 import environ
 
 
-
 ONE_WORD = 'one word'
 THREE_WORDS = 'three words'
 PROMPT = 'prompt'
@@ -30,7 +29,7 @@ class Welcome(models.Model):
         return self.id
 
     def send_welcome_prompt(self):
-        welcome_input = f'Give the user a welcome statement. Put a robot emoji. This is an app call catalyst. The app is for creatives and artist. Let the statement be 20-25 words long.'
+        welcome_input = f'Give the user a welcome statement. This is an app call catalyst. This app is for creatives and artist. Let the statement be 20-25 words long.'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -66,7 +65,6 @@ class Write(models.Model):
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-    
 
     class WriteManager(models.Manager):
         def get_queryset(self):
@@ -76,7 +74,7 @@ class Write(models.Model):
         if self.prompt_length == 'one word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
         elif self.prompt_length == 'three words':
-            words = 'Let the prompt be 3 to 5 words. Capitalize with first letter of the prompt'
+            words = 'Let the prompt be 3 to 5 words. Capitalize only the first letter of the first word of the content you return.'
         elif self.prompt_length == 'prompt':
             words = "Let the prompt be 20-25 words"
 
@@ -94,7 +92,7 @@ class Write(models.Model):
             model=MODEL,
             messages=[
                 {"role": "system",
-                    "content": "You are a helpful assistant"},
+                    "content": "You are a helpful assistant that comes up with fun and creative writing prompts"},
                 {"role": "user", "content": write_input}
             ],
             temperature=1.0,
@@ -102,7 +100,6 @@ class Write(models.Model):
         raw_prompt = response['choices'][0]['message']['content']
         self.output = str.capitalize(raw_prompt)
         self.save()
-
 
     def __str__(self):
         return str(self.id)
@@ -127,13 +124,12 @@ class VisualArt(models.Model):
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-    
 
     def get_visual_art_length(self):
         if self.prompt_length == 'one word':
-            words = "Let the prompt be only 1 word"
+            words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
         elif self.prompt_length == 'three words':
-            words = 'Let the prompt be only 3 words'
+            words = 'Let the prompt be 3-5 words. Capitalize only the first letter of the first word of the content you return.'
         elif self.prompt_length == 'prompt':
             words = "Let the prompt be 20-25 words"
 
@@ -179,13 +175,12 @@ class Movement(models.Model):
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-    
 
     def get_movement_length(self):
         if self.prompt_length == 'one word':
-            words = "Let the prompt be only 1 word"
+            words = "Let the prompt be only 1 word. Let the prompt represent the keywords "
         elif self.prompt_length == 'three words':
-            words = 'Let the prompt be only 3 words'
+            words = 'Let the prompt be only 3-5 words. Capitalize only the first letter of the first word of the content you return.'
         elif self.prompt_length == 'prompt':
             words = "Let the prompt be 20-25 words"
 
@@ -201,7 +196,7 @@ class Movement(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "You are a dancer."},
                 {"role": "user", "content": movement_input}
             ],
             temperature=0.5,
@@ -232,13 +227,12 @@ class Music(models.Model):
     note = models.TextField(default='')
     save_prompt = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-    
 
     def get_music_length(self):
         if self.prompt_length == 'one word':
-            words = "Let the prompt be only 1 word"
+            words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
         elif self.prompt_length == 'three words':
-            words = 'Let the prompt be only 3 words'
+            words = 'Let the prompt be 3-5 words. Capitalize only the first letter of the first word of the content you return.'
         elif self.prompt_length == 'prompt':
             words = "Let the prompt be 20-25 words"
 
@@ -254,7 +248,7 @@ class Music(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "You are a musician."},
                 {"role": "user", "content": music_input}
             ],
             temperature=0.5,
@@ -369,7 +363,7 @@ class Definition(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a comedian."},
+                {"role": "system", "content": "You are an artist."},
                 {"role": "user", "content": color_input}
             ],
             temperature=0.5,
@@ -379,6 +373,3 @@ class Definition(models.Model):
 
     def __str__(self):
         return str(self.id)
-
-
-
