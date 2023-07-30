@@ -5,13 +5,13 @@ import environ
 
 
 ONE_WORD = 'one word'
-THREE_WORDS = 'three words'
-PROMPT = 'prompt'
+THREE_WORDS = 'a few words'
+PROMPT = 'a sentence or two'
 
 LENGTH_CHOICES = [
     (ONE_WORD, 'one word'),
-    (THREE_WORDS, 'three words'),
-    (PROMPT, 'prompt'),
+    (THREE_WORDS, 'a few words'),
+    (PROMPT, 'a sentence or two'),
 ]
 
 
@@ -73,9 +73,9 @@ class Write(models.Model):
     def get_write_length(self):
         if self.prompt_length == 'one word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
-        elif self.prompt_length == 'three words':
+        elif self.prompt_length == 'a few words':
             words = 'Let the prompt be 4 to 5 words'
-        elif self.prompt_length == 'prompt':
+        elif self.prompt_length == 'a sentence or two':
             words = "Let the prompt be 20-25 words"
 
         self.input_length = words
@@ -128,16 +128,16 @@ class VisualArt(models.Model):
     def get_visual_art_length(self):
         if self.prompt_length == 'one word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
-        elif self.prompt_length == 'three words':
-            words = 'Let the prompt be 4-5 words. Capitalize only the first letter of the first word of the content you return.'
-        elif self.prompt_length == 'prompt':
+        elif self.prompt_length == 'a few words':
+            words = 'Let the prompt be 4-5 words'
+        elif self.prompt_length == 'a sentence or two':
             words = "Let the prompt be 20-25 words"
 
         self.input_length = words
         self.save()
 
     def send_visual_art_prompt(self):
-        visual_art_input = f'Give an visual artist a prompt with the keywords: "{self.theme}", "{self.sentiment}", and "{self.emotion}". "{self.input_length}". Do not use the keywords in the prompt. Return only text. Return the prompt in quotations. Do not use the word "prompt".'
+        visual_art_input = f'Give a visual artist a prompt with the keywords: "{self.theme}", "{self.sentiment}", and "{self.emotion}". "{self.input_length}". Do not use the keywords in the prompt. Do not use the plural form of the keywords in the prompt. Return only text. Return the prompt in quotations. Do not use the word "prompt".'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -145,7 +145,7 @@ class VisualArt(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a visual artist that comes up with fun and creative idea for visual art."},
+                {"role": "system", "content": "You are a visual artist's assistant that comes up with fun and creative ideas for visual art."},
                 {"role": "user", "content": visual_art_input}
             ],
             temperature=1.0,
@@ -180,16 +180,16 @@ class Movement(models.Model):
     def get_movement_length(self):
         if self.prompt_length == 'one word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords "
-        elif self.prompt_length == 'three words':
-            words = 'Let the prompt be 4-5 words. Capitalize only the first letter of the first word of the content you return.'
-        elif self.prompt_length == 'prompt':
+        elif self.prompt_length == 'a few words':
+            words = 'Let the prompt be 4-5 words'
+        elif self.prompt_length == 'a sentence or two':
             words = "Let the prompt be 20-25 words"
 
         self.input_length = words
         self.save()
 
     def send_movement_prompt(self):
-        movement_input = f'Give a movement artist a prompt with the keywords: "{self.theme}", "{self.somatic}", "{self.emotion}", "{self.sentiment}". {self.input_length}. Do not use the keywords in the prompt. Return only text. Return the prompt in quotations. Do not use the word "prompt".'
+        movement_input = f'Give a movement artist a prompt with the keywords: "{self.theme}", "{self.somatic}", "{self.emotion}", "{self.sentiment}". {self.input_length}. Do not use the keywords in the prompt. Do not use the plural form of the keywords in the prompt. Return only text. Return the prompt in quotations. Do not use the word "prompt".'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -197,7 +197,7 @@ class Movement(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a dancer who comes up with fun and creative ideas for movement."},
+                {"role": "system", "content": "You are a movement artist's muse who comes up with fun and creative ideas for movement."},
                 {"role": "user", "content": movement_input}
             ],
             temperature=1.0,
@@ -233,16 +233,16 @@ class Music(models.Model):
     def get_music_length(self):
         if self.prompt_length == 'one word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
-        elif self.prompt_length == 'three words':
-            words = 'Let the prompt be 4-5 words. Capitalize only the first letter of the first word of the content you return.'
-        elif self.prompt_length == 'prompt':
+        elif self.prompt_length == 'a few words':
+            words = 'Let the prompt be 4-5 words'
+        elif self.prompt_length == 'a sentence or two':
             words = "Let the prompt be 20-25 words"
 
         self.input_length = words
         self.save()
 
     def send_music_prompt(self):
-        music_input = f'Give a musician a prompt for creating music with the keywords: "{self.exploration}", "{self.concept}", "{self.emotion}", "{self.element}". {self.input_length}. Do not use the keywords in the prompt. Return only text. Return the prompt in quotations. Do not use the word "prompt".'
+        music_input = f'Give a musician a prompt for creating music with the keywords: "{self.exploration}", "{self.concept}", "{self.emotion}", "{self.element}". {self.input_length}. Do not use the keywords in the prompt. Do not use the plural form of the keywords in the prompt.  Return only text. Return the prompt in quotations. Do not use the word "prompt".'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -250,7 +250,7 @@ class Music(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a musician who comes up with fun and creative ideas of music."},
+                {"role": "system", "content": "You are a musician's assistant who comes up with fun and creative ideas for creating music."},
                 {"role": "user", "content": music_input}
             ],
             temperature=1.0,
@@ -290,7 +290,7 @@ class Definition(models.Model):
         self.save()
 
     def send_synonym_prompt(self):
-        synonym_input = f'Give 3 synonyms for the word "{self.word}". Do not define the synonyms. Do not number the words'
+        synonym_input = f'Give 3 synonyms for the word "{self.word}". Do not define the synonyms. Do not return numbers or number the words'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -332,7 +332,7 @@ class Definition(models.Model):
         response = openai.ChatCompletion.create(
             model=MODEL,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that enjoys making fun and creative sentences with dictionary words."},
+                {"role": "system", "content": "You are an artist's assistant that enjoys making fun and creative sentences with dictionary words."},
                 {"role": "user", "content": sentence_input}
             ],
             temperature=0.5,
@@ -341,7 +341,7 @@ class Definition(models.Model):
         self.save()
 
     def send_joke_prompt(self):
-        joke_input = f'Use the word "{self.word}" in a pun or a joke.'
+        joke_input = f'Use the word "{self.word}" in a pun or a joke. Let the joke be 1-2 sentences.'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
@@ -358,7 +358,7 @@ class Definition(models.Model):
         self.save()
 
     def send_color_prompt(self):
-        color_input = f'What color is associated with the word "{self.word}". Describe in 1-2 sentences. Send 1 hex color code that is the color you are talking about.'
+        color_input = f'What color is associated with the word "{self.word}". Describe in 1-2 sentences. Send 1 hex color code that represents the color you are describing.'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
