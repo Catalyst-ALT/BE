@@ -339,6 +339,7 @@ class DefinitionInputViewSet(generics.CreateAPIView):
         sent = serializer.save()
         funny = serializer.save()
         colour = serializer.save()
+        hex_num = serializer.save()
 
         define.send_definition_prompt()
         syno.send_synonym_prompt()
@@ -346,6 +347,7 @@ class DefinitionInputViewSet(generics.CreateAPIView):
         sent.send_sentence_prompt()
         funny.send_joke_prompt()
         colour.send_color_prompt()
+        hex_num.send_color_prompt()
 
 
 class DefinitionOutputViewSet(generics.RetrieveAPIView):
@@ -356,4 +358,3 @@ class DefinitionOutputViewSet(generics.RetrieveAPIView):
     '''
     queryset = Definition.objects.all()
     serializer_class = DefinitionOutputSerializer
-

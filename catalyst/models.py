@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 import openai
 import environ
+import re
 
 
 ONE_WORD = 'one word'
@@ -272,6 +273,7 @@ class Definition(models.Model):
     sentence = models.TextField(blank=True)
     joke = models.TextField(blank=True)
     color = models.TextField(blank=True)
+    hex = models.CharField(blank=True)
 
     def send_definition_prompt(self):
         definition_input = f'Define the word {self.word}. Let the definition be 1 to 2 sentences.'
@@ -374,6 +376,11 @@ class Definition(models.Model):
         )
         self.color = response['choices'][0]['message']['content']
         self.save()
+        raw_hex = re.split("#", self.color, 1)
+        split_hex = raw_hex[1]
+        self.hex = '#' + split_hex
+        self.save
+        print(self.hex)
 
     def __str__(self):
         return str(self.id)

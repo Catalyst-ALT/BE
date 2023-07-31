@@ -209,4 +209,5 @@ class DefinitionOutputSerializer(serializers.ModelSerializer):
             'sentence',
             'joke',
             'color',
+            'hex',
         ]
