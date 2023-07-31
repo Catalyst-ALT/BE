@@ -115,6 +115,7 @@ class VisualArt(models.Model):
         max_length=50, blank=True)
     emotion = models.CharField(
         max_length=50, blank=True)
+    element = models.CharField(max_length=50, blank=True)
     user = user = models.ForeignKey(
         to=User, on_delete=models.CASCADE, related_name='visual_arts', blank=True, null=True)
     prompt_length = models.CharField(choices=LENGTH_CHOICES)
@@ -358,7 +359,7 @@ class Definition(models.Model):
         self.save()
 
     def send_color_prompt(self):
-        color_input = f'What color is associated with the word "{self.word}". Describe in 1-2 sentences. Send 1 hex color code that represents the color you are describing.'
+        color_input = f'What color is associated with the word "{self.word}". Describe in 1-2 sentences. Send 1 hex color code that represents the color you are describing. Always send the hex code as the last line of content.'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
