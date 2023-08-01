@@ -5,14 +5,14 @@ import environ
 import re
 
 
-ONE_WORD = 'one word'
-THREE_WORDS = 'a few words'
-PROMPT = 'a sentence or two'
+ONE_WORD = 'One word'
+THREE_WORDS = 'A few words'
+PROMPT = 'A sentence or two'
 
 LENGTH_CHOICES = [
-    (ONE_WORD, 'one word'),
-    (THREE_WORDS, 'a few words'),
-    (PROMPT, 'a sentence or two'),
+    (ONE_WORD, 'One word'),
+    (THREE_WORDS, 'A few words'),
+    (PROMPT, 'A sentence or two'),
 ]
 
 
@@ -72,11 +72,11 @@ class Write(models.Model):
             return super().get_queryset().order_by('-date')
 
     def get_write_length(self):
-        if self.prompt_length == 'one word':
+        if self.prompt_length == 'One word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
-        elif self.prompt_length == 'a few words':
+        elif self.prompt_length == 'A few words':
             words = 'Let the prompt be 4 to 5 words'
-        elif self.prompt_length == 'a sentence or two':
+        elif self.prompt_length == 'A sentence or two':
             words = "Let the prompt be 20-25 words"
 
         self.input_length = words
@@ -128,11 +128,11 @@ class VisualArt(models.Model):
     is_deleted = models.BooleanField(default=False)
 
     def get_visual_art_length(self):
-        if self.prompt_length == 'one word':
+        if self.prompt_length == 'One word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
-        elif self.prompt_length == 'a few words':
+        elif self.prompt_length == 'A few words':
             words = 'Let the prompt be 4-5 words'
-        elif self.prompt_length == 'a sentence or two':
+        elif self.prompt_length == 'A sentence or two':
             words = "Let the prompt be 20-25 words"
 
         self.input_length = words
@@ -180,11 +180,11 @@ class Movement(models.Model):
     is_deleted = models.BooleanField(default=False)
 
     def get_movement_length(self):
-        if self.prompt_length == 'one word':
+        if self.prompt_length == 'One word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords "
-        elif self.prompt_length == 'a few words':
+        elif self.prompt_length == 'A few words':
             words = 'Let the prompt be 4-5 words'
-        elif self.prompt_length == 'a sentence or two':
+        elif self.prompt_length == 'A sentence or two':
             words = "Let the prompt be 20-25 words"
 
         self.input_length = words
@@ -233,11 +233,11 @@ class Music(models.Model):
     is_deleted = models.BooleanField(default=False)
 
     def get_music_length(self):
-        if self.prompt_length == 'one word':
+        if self.prompt_length == 'One word':
             words = "Let the prompt be only 1 word. Let the prompt represent the keywords"
-        elif self.prompt_length == 'a few words':
+        elif self.prompt_length == 'A few words':
             words = 'Let the prompt be 4-5 words'
-        elif self.prompt_length == 'a sentence or two':
+        elif self.prompt_length == 'A sentence or two':
             words = "Let the prompt be 20-25 words"
 
         self.input_length = words
