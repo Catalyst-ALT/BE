@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'storages',
     'drf_multiple_model',
+    'djoser',
     # 'django_upload_validator',
 ]
 
@@ -174,6 +175,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'catalyst.User'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 
 CORS_ALLOW_ALL_ORIGINS = True
 

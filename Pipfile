@@ -21,6 +21,7 @@ boto3 = "*"
 django-storages = "*"
 django-upload-validator = "*"
 python-magic = "*"
+djoser = "*"
 
 [dev-packages]
 

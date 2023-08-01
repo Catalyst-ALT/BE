@@ -139,7 +139,7 @@ class VisualArt(models.Model):
         self.save()
 
     def send_visual_art_prompt(self):
-        visual_art_input = f'Give a visual artist a prompt with the keywords: "{self.theme}", "{self.sentiment}", and "{self.emotion}". "{self.input_length}". Do not use the keywords in the prompt. Do not use the plural form of the keywords in the prompt. Return only text. Return the prompt in quotations. Do not use the word "prompt".'
+        visual_art_input = f'Give a visual artist a prompt with the keywords: "{self.theme}", "{self.sentiment}", "{self.element}" and "{self.emotion}". "{self.input_length}". Do not use the keywords in the prompt. Do not use the plural form of the keywords in the prompt. Return only text. Return the prompt in quotations. Do not use the word "prompt".'
         env = environ.Env()
         environ.Env.read_env()
         MODEL = "gpt-3.5-turbo"
