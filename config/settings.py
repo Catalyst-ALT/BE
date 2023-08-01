@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'storages',
     'drf_multiple_model',
+    'rest_framework.authtoken',
     'djoser',
     # 'django_upload_validator',
 ]
