@@ -77,9 +77,9 @@ class WriteOutputViewSet(generics.RetrieveUpdateDestroyAPIView):
     queryset = Write.objects.all()
     serializer_class = WriteOutputSerializer
 
-    def get_queryset(self):
-        return self.request.user.writes
-    serializer_class = WriteOutputSerializer
+    # def get_queryset(self):
+    #     return self.request.user.writes
+    # serializer_class = WriteOutputSerializer
     # permission_classes = [permissions.IsAuthenticated, IsWriteOwnerOrReadOnly]
 
 
