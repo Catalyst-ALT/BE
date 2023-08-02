@@ -44,8 +44,8 @@ class ProfileViewSet(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = ProfileSerializer
     lookup_field = "username"
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly, IsProfileOwnerOrReadOnly]
+    # permission_classes = [
+    #     permissions.IsAuthenticatedOrReadOnly, IsProfileOwnerOrReadOnly]
 
 
 class WriteInputViewSet(generics.CreateAPIView):
@@ -59,7 +59,7 @@ class WriteInputViewSet(generics.CreateAPIView):
 
     queryset = Write.objects.all()
     serializer_class = WriteInputSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         word = serializer.save()
@@ -80,7 +80,7 @@ class WriteOutputViewSet(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return self.request.user.writes
     serializer_class = WriteOutputSerializer
-    permission_classes = [permissions.IsAuthenticated, IsWriteOwnerOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticated, IsWriteOwnerOrReadOnly]
 
 
 class VisualArtInputViewSet(generics.CreateAPIView):
@@ -93,7 +93,7 @@ class VisualArtInputViewSet(generics.CreateAPIView):
     '''
     queryset = VisualArt.objects.all()
     serializer_class = VisualArtInputSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         visualart = serializer.save()
@@ -114,8 +114,8 @@ class VisualArtOutputViewSet(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return self.request.user.visual_arts
     serializer_class = VisualArtOutputSerializer
-    permission_classes = [
-        permissions.IsAuthenticated, IsVisualArtOwnerOrReadOnly]
+    # permission_classes = [
+    #     permissions.IsAuthenticated, IsVisualArtOwnerOrReadOnly]
 
 
 class MovementInputViewSet(generics.CreateAPIView):
@@ -128,7 +128,7 @@ class MovementInputViewSet(generics.CreateAPIView):
     '''
     queryset = Movement.objects.all()
     serializer_class = MovementInputSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         movement = serializer.save()
@@ -149,8 +149,8 @@ class MovementOutputViewSet(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return self.request.user.movements
     serializer_class = MovementOutputSerializer
-    permission_classes = [
-        permissions.IsAuthenticated, IsMovementOwnerOrReadOnly]
+    # permission_classes = [
+    #     permissions.IsAuthenticated, IsMovementOwnerOrReadOnly]
 
 
 class MusicInputViewSet(generics.CreateAPIView):
@@ -163,7 +163,7 @@ class MusicInputViewSet(generics.CreateAPIView):
     '''
     queryset = Music.objects.all()
     serializer_class = MusicInputSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         music = serializer.save()
@@ -184,7 +184,7 @@ class MusicOutputViewSet(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return self.request.user.music
     serializer_class = MusicOutputSerializer
-    permission_classes = [permissions.IsAuthenticated, IsMusicOwnerOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticated, IsMusicOwnerOrReadOnly]
 
 
 class AllMediumsViewSet(generics.ListAPIView):
@@ -195,7 +195,7 @@ class AllMediumsViewSet(generics.ListAPIView):
     '''
     queryset = User.objects.all()
     serializer_class = AllMediumsSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(writes=self.request.user)
@@ -216,7 +216,7 @@ class AllWriteViewSet(generics.ListAPIView):
     def get_queryset(self):
         return self.request.user.writes
     serializer_class = WriteOutputSerializer
-    permission_classes = [permissions.IsAuthenticated, IsWriteOwnerOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticated, IsWriteOwnerOrReadOnly]
 
 
 class AllVisualArtViewSet(generics.ListAPIView):
@@ -231,8 +231,8 @@ class AllVisualArtViewSet(generics.ListAPIView):
     def get_queryset(self):
         return self.request.user.visual_arts
     serializer_class = VisualArtOutputSerializer
-    permission_classes = [
-        permissions.IsAuthenticated, IsVisualArtOwnerOrReadOnly]
+    # permission_classes = [
+    #     permissions.IsAuthenticated, IsVisualArtOwnerOrReadOnly]
 
 
 class AllMovementViewSet(generics.ListAPIView):
@@ -247,8 +247,8 @@ class AllMovementViewSet(generics.ListAPIView):
     def get_queryset(self):
         return self.request.user.movements
     serializer_class = MovementOutputSerializer
-    permission_classes = [
-        permissions.IsAuthenticated, IsMovementOwnerOrReadOnly]
+    # permission_classes = [
+    #     permissions.IsAuthenticated, IsMovementOwnerOrReadOnly]
 
 
 class AllMusicViewSet(generics.ListAPIView):
@@ -263,7 +263,7 @@ class AllMusicViewSet(generics.ListAPIView):
     def get_queryset(self):
         return self.request.user.music
     serializer_class = MusicOutputSerializer
-    permission_classes = [permissions.IsAuthenticated, IsMusicOwnerOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticated, IsMusicOwnerOrReadOnly]
 
 
 class SavePromptViewSet(ObjectMultipleModelAPIView):
@@ -281,7 +281,7 @@ class SavePromptViewSet(ObjectMultipleModelAPIView):
         {'queryset': Music.objects.filter(
             save_prompt=True), 'serializer_class': MusicOutputSerializer},
     ]
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class AllNotesViewSet(ObjectMultipleModelAPIView):
@@ -299,7 +299,7 @@ class AllNotesViewSet(ObjectMultipleModelAPIView):
         {'queryset': Music.objects.exclude(
             note__exact=''), 'serializer_class': MusicOutputSerializer},
     ]
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class WelcomeInputViewSet(generics.CreateAPIView):
