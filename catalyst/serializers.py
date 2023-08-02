@@ -74,6 +74,7 @@ class VisualArtInputSerializer(serializers.ModelSerializer):
 
 
 class VisualArtOutputSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = VisualArt
         fields = [
