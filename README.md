@@ -1,8 +1,15 @@
-# Catalyst BE ReadME 
+# Catalyst OpenAI Integration Project BE README 
 
+https://catalyst-alt.netlify.app/
+</br>
+**Project Summary**
+https://catalyst-alt.github.io/catalyst-project-summary/
 
-https://catalyst-x226.onrender.com
+**Framework**
+* Django Rest-Framework
 
+**Database**
+* Postgresql@14
 
 **Token Authentication System**
 * Djoser
@@ -10,11 +17,34 @@ https://catalyst-x226.onrender.com
   
 **Deployment**
 * Render
-* Database: Postgresql@14
 * Docs: https://render.com/docs/deploy-django
 </br>
-</br>
 
+
+# Run Locally
+Clone the project: 
+> git clone https://github.com/Catalyst-ALT/Catalyst-AI-BE.git
+
+Navigate to the project directory: 
+> cd Catalyst-AI-BE
+
+Install a virtual environment: 
+> pip install pipenv
+
+Run the virtual environment: 
+> pipenv shell
+
+Install dependencies: 
+> pipenv install
+
+Set up a local database: 
+> python manage.py migrate
+
+Start the local server:
+> python manage.py runserver
+
+
+# Endpoints
 
 **CREATE USER**
 </br>
